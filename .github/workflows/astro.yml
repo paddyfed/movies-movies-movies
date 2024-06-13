@@ -27,13 +27,14 @@ concurrency:
 env:
   BUILD_PATH: "." # default value when not using subfolders
   # BUILD_PATH: subfolder
-  API_URL: ${{ vars.API_URL }}
-  API_KEY: ${{ secrets.API_KEY }}
-  API_ACCESS_TOKEN: ${{ secrets.API_ACCESS_TOKEN }}
 
 jobs:
   build:
     name: Build
+    env:
+      PUBLIC_API_URL: ${{ secrets.PUBLIC_API_URL }}
+      SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
+      SECRET_API_ACCESS_TOKEN: ${{ secrets.SECRET_API_ACCESS_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

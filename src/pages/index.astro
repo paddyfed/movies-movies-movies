@@ -1,18 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const api = import.meta.env.API_KEY;
+const api = import.meta.env.PUBLIC_API_KEY;
 
 const options = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: import.meta.env.API_ACCESS_TOKEN,
+    Authorization: import.meta.env.SECRET_API_ACCESS_TOKEN,
   },
 };
 
 const response = await fetch(
-  `${import.meta.env.API_URL}discover/movie`,
+  `${import.meta.env.PUBLIC_API_URL}discover/movie`,
   options
 );
 const data = await response.json();
