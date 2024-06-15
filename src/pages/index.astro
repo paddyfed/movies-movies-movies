@@ -4,26 +4,26 @@ import Layout from "../layouts/Layout.astro";
 // const api = import.meta.env.SECRET_API_KEY;
 const hello = import.meta.env.PUBLIC_API_URL;
 
-// const options = {
-//   method: "GET",
-//   headers: {
-//     accept: "application/json",
-//     Authorization: import.meta.env.SECRET_API_ACCESS_TOKEN,
-//   },
-// };
+const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: import.meta.env.SECRET_API_ACCESS_TOKEN,
+  },
+};
 
-// const response = await fetch(
-//   `${import.meta.env.PUBLIC_API_URL}discover/movie`,
-//   options
-// );
-// const data = await response.json();
-// const movies = data.results;
+const response = await fetch(
+  `${import.meta.env.PUBLIC_API_URL}discover/movie`,
+  options
+);
+const data = await response.json();
+const movies = data.results;
 ---
 
 <Layout title="Movies Movies Movies">
   <main>
     <ul>
-      <!-- {movies.map((skill) => <li>{skill.title}</li>)} -->
+      {movies.map((skill) => <li>{skill.title}</li>)}
       <li>{hello}</li>
     </ul>
   </main>
