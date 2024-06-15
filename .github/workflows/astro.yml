@@ -27,6 +27,9 @@ concurrency:
 env:
   BUILD_PATH: "." # default value when not using subfolders
   # BUILD_PATH: subfolder
+  PUBLIC_API_URL: ${{ secrets.PUBLIC_API_URL }}
+  SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
+  SECRET_API_ACCESS_TOKEN: ${{ secrets.SECRET_API_ACCESS_TOKEN }}
 
 jobs:
   build:
@@ -72,10 +75,6 @@ jobs:
             --site "${{ steps.pages.outputs.origin }}" \
             --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
-        env:
-          PUBLIC_API_URL: ${{ secrets.PUBLIC_API_URL }}
-          SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
-          SECRET_API_ACCESS_TOKEN: ${{ secrets.SECRET_API_ACCESS_TOKEN }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
