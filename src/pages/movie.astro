@@ -4,13 +4,68 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Movie">
   <h1>Hello</h1>
-  <div id="params"></div>
+
   <a href="/movies-movies-movies">Back</a>
+  <div id="params"></div>
+  <div id="videoList"></div>
 </Layout>
+
 <script>
   const urlParams = new URLSearchParams(window.location.search);
   const myParam = urlParams.get("movieId");
-  console.log("params", myParam);
   const message = document.querySelector("#params");
   message.innerHTML = myParam;
+
+  getJsonAPI(myParam).catch((error) => console.error(error));
+  function displayVideos(data) {
+    let outputHtml = "";
+
+    outputHtml += "<ul>";
+
+    data.results
+      .filter((element) => {
+        return element.official === true && element.type === "Trailer";
+      })
+      .forEach((element) => {
+        outputHtml += `<li><iframe
+      id="ytplayer"
+      type="text/html"
+      width="480"
+      height="270"
+      title="${element.name}"
+      src="https://www.youtube.com/embed/${element.key}"
+      frameborder="0"
+      allowfullscreen
+    ></iframe></li>`;
+      });
+
+    outputHtml += `</ul>`;
+
+    return outputHtml;
+  }
+
+  const videoList = document.querySelector("#videoList");
+
+  async function getJsonAPI(movieId) {
+    const token = import.meta.env.PUBLIC_API_ACCESS_TOKEN;
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: token,
+      },
+    };
+
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
+      options
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTPerror:${response.status}`);
+    }
+
+    const data = await response.json();
+    videoList.innerHTML = displayVideos(data);
+  }
 </script>
