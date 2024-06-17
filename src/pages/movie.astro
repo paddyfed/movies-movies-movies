@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Movie">
+  <h1>Hello</h1>
+  <div id="params"></div>
+  <a href="/movies-movies-movies">Back</a>
+</Layout>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const myParam = urlParams.get("movieId");
+  console.log("params", myParam);
+  const message = document.querySelector("#params");
+  message.innerHTML = myParam;
+</script>

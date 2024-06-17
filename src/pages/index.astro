@@ -4,6 +4,9 @@ import Layout from "../layouts/Layout.astro";
 // const api = import.meta.env.SECRET_API_KEY;
 const hello = import.meta.env.PUBLIC_API_URL;
 
+const imgPosterUrl = "http://image.tmdb.org/t/p/";
+const imgPosterSize = "w185/";
+
 const options = {
   method: "GET",
   headers: {
@@ -20,11 +23,47 @@ const data = await response.json();
 const movies = data.results;
 ---
 
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  img {
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+  }
+
+  img:hover {
+    opacity: 0.5;
+  }
+</style>
 <Layout title="Movies Movies Movies">
   <main>
     <ul>
-      {movies.map((skill) => <li>{skill.title}</li>)}
-      <li>{hello}</li>
+      {
+        movies.map((skill) => (
+          <li>
+            <a href={"movies-movies-movies/movie?movieId=" + skill.id}>
+              <img
+                src={imgPosterUrl + imgPosterSize + skill.poster_path}
+                alt={skill.title}
+                title={skill.title}
+              />
+            </a>
+          </li>
+        ))
+      }
     </ul>
+    <div>The current URL is {Astro.url}</div>
+    <div id="params"></div>
   </main>
 </Layout>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const myParam = urlParams.get("myParam");
+  console.log("params", myParam);
+  const message = document.querySelector("#params");
+  message.innerHTML = myParam;
+</script>
