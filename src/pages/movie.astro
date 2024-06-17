@@ -5,7 +5,7 @@ import Layout from "../layouts/Layout.astro";
 <Layout title="Movie">
   <h1>Hello</h1>
 
-  <a href="/movies-movies-movies">Back</a>
+  <a href={import.meta.env.BASE_URL}>Back</a>
   <div id="params"></div>
   <div id="videoList"></div>
 </Layout>
