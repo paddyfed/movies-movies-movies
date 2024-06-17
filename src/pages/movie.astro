@@ -14,15 +14,24 @@ import Layout from "../layouts/Layout.astro";
   const urlParams = new URLSearchParams(window.location.search);
   const myParam = urlParams.get("movieId");
   const message = document.querySelector("#params");
+  const imgPosterUrl = "http://image.tmdb.org/t/p/";
+  const imgPosterSize = "w342/";
+  const imgBackgroundSize = "w1280/";
   message.innerHTML = myParam;
 
   getJsonAPI(myParam).catch((error) => console.error(error));
-  function displayVideos(data) {
+  function displayVideos(data, videos) {
+    console.log("data", data);
+    console.log("videos", videos);
     let outputHtml = "";
 
     outputHtml += "<ul>";
+    outputHtml += `<li>${data.title}</li>`;
+    outputHtml += `<li>${data.overview}</li>`;
+    outputHtml += `<li><img src="${imgPosterUrl + imgPosterSize + data.poster_path}" alt="${data.title + "Poster"}" /></li>`;
+    outputHtml += `<li><img src="${imgPosterUrl + imgBackgroundSize + data.backdrop_path}" alt="${data.title + "Poster"}" /></li>`;
 
-    data.results
+    videos.results
       .filter((element) => {
         return element.official === true && element.type === "Trailer";
       })
@@ -30,6 +39,7 @@ import Layout from "../layouts/Layout.astro";
         outputHtml += `<li><iframe
       id="ytplayer"
       type="text/html"
+      loading="lazy"
       width="480"
       height="270"
       title="${element.name}"
@@ -57,7 +67,7 @@ import Layout from "../layouts/Layout.astro";
     };
 
     const response = await fetch(
-      `${import.meta.env.PUBLIC_API_URL}movie/${movieId}/videos?language=en-US`,
+      `${import.meta.env.PUBLIC_API_URL}movie/${movieId}`,
       options
     );
 
@@ -65,7 +75,17 @@ import Layout from "../layouts/Layout.astro";
       throw new Error(`HTTPerror:${response.status}`);
     }
 
+    const videoResponse = await fetch(
+      `${import.meta.env.PUBLIC_API_URL}movie/${movieId}/videos?language=en-US`,
+      options
+    );
+
+    if (!videoResponse.ok) {
+      throw new Error(`HTTPerror:${response.status}`);
+    }
+
     const data = await response.json();
-    videoList.innerHTML = displayVideos(data);
+    const videos = await videoResponse.json();
+    videoList.innerHTML = displayVideos(data, videos);
   }
 </script>
