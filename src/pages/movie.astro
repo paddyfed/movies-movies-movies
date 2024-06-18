@@ -29,7 +29,8 @@ import Layout from "../layouts/Layout.astro";
     outputHtml += `<li>${data.title}</li>`;
     outputHtml += `<li>${data.overview}</li>`;
     outputHtml += `<li><img src="${imgPosterUrl + imgPosterSize + data.poster_path}" alt="${data.title + "Poster"}" /></li>`;
-    outputHtml += `<li><img src="${imgPosterUrl + imgBackgroundSize + data.backdrop_path}" alt="${data.title + "Poster"}" /></li>`;
+    outputHtml += `<li>Release Date: ${new Date(Date.parse(data.release_date)).toLocaleDateString()}</li>`;
+    // outputHtml += `<li><img src="${imgPosterUrl + imgBackgroundSize + data.backdrop_path}" alt="${data.title + "Poster"}" /></li>`;
 
     videos.results
       .filter((element) => {
