@@ -1,10 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import TestSvelte from "../components/TestSvelte.svelte";
 ---
 
 <Layout title="Movie">
   <a href={import.meta.env.BASE_URL}>Back</a>
   <div id="videoList"></div>
+  <TestSvelte client:only />
 </Layout>
 
 <script>
