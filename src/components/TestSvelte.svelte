@@ -1,6 +1,4 @@
 <script>
-  import { onMount } from "svelte";
-
   let name = "Svelte";
   const urlParams = new URLSearchParams(window.location.search);
   const myParam = urlParams.get("movieId");
