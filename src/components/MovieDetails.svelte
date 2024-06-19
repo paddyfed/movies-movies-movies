@@ -1,5 +1,5 @@
 <script>
-  import { log10 } from "chart.js/helpers";
+  import MovieTrailers from "./MovieTrailers.svelte";
 
   const movieIdParam = new URLSearchParams(window.location.search).get(
     "movieId"
@@ -12,7 +12,7 @@
       Authorization: token,
     },
   };
-  const imgPosterUrl = "http://image.tmdb.org/t/p/";
+  const imgPosterUrl = "https://image.tmdb.org/t/p/";
   const imgPosterSize = "w342/";
 
   let promise = fetch(
@@ -36,6 +36,7 @@
   <p>
     Release Date: {new Date(Date.parse(data.release_date)).toLocaleDateString()}
   </p>
+  <MovieTrailers movieId={movieIdParam} />
 {:catch error}
   {console.log(error)}
 {/await}
