@@ -23,28 +23,41 @@
   {#if data.results.filter((element) => {
     return element.official === true && element.type === "Trailer";
   }).length !== 0}
-    <ul>
-      {#each data.results.filter((element) => {
-        return element.official === true && element.type === "Trailer";
-      }) as video}
-        <li>
-          <iframe
-            id="ytplayer"
-            type="text/html"
-            loading="lazy"
-            width="480"
-            height="270"
-            title={video.name}
-            src="https://www.youtube.com/embed/{video.key}"
-            frameborder="0"
-            allowfullscreen
-          ></iframe>
-        </li>
-      {/each}
-    </ul>
+    <section>
+      <ul>
+        {#each data.results.filter((element) => {
+          return element.official === true && element.type === "Trailer";
+        }) as video}
+          <li>
+            <iframe
+              id="ytplayer"
+              type="text/html"
+              loading="lazy"
+              width="480"
+              height="270"
+              title={video.name}
+              src="https://www.youtube.com/embed/{video.key}"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </li>
+        {/each}
+      </ul>
+    </section>
   {:else}
     <p>No Trailers Available</p>
   {/if}
 {:catch error}
   {error}
 {/await}
+
+<style>
+  section {
+    overflow-y: auto;
+  }
+
+  ul {
+    display: flex;
+    gap: 0.5em;
+  }
+</style>

@@ -1,59 +1,25 @@
 ---
-import MovieScroll from "../components/MovieScroll.astro";
+import MovieScroll from "../components/MovieScroll.svelte";
 import Layout from "../layouts/Layout.astro";
-
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: import.meta.env.SECRET_API_ACCESS_TOKEN,
-  },
-};
-
-const popularResponse = await fetch(
-  `${import.meta.env.PUBLIC_API_URL}/movie/popular?language=en-US&page=1`,
-  options
-);
-const popularData = await popularResponse.json();
-const popularMovies = popularData.results;
-
-const nowPlayingResponse = await fetch(
-  `${import.meta.env.PUBLIC_API_URL}/movie/now_playing?language=en-US&page=1`,
-  options
-);
-const nowPlayingData = await nowPlayingResponse.json();
-const nowPlayingMovies = nowPlayingData.results;
-
-const topRatedResponse = await fetch(
-  `${import.meta.env.PUBLIC_API_URL}/movie/top_rated?language=en-US&page=1`,
-  options
-);
-const topRatedData = await topRatedResponse.json();
-const topRatedMovies = topRatedData.results;
 ---
 
-<style>
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 0.5em;
-  }
-
-  img {
-    transition: 0.3s ease-in-out;
-    cursor: pointer;
-  }
-
-  img:hover {
-    opacity: 0.5;
-  }
-</style>
 <Layout title="Movies Movies Movies">
   <main>
-    <MovieScroll scrollTitle="Popular Movies" scrollMovieList={popularMovies} />
-    <MovieScroll scrollTitle="Now Playing" scrollMovieList={nowPlayingMovies} />
-    <MovieScroll scrollTitle="Top Rated" scrollMovieList={topRatedMovies} />
+    <h1>Movies Movies Movies</h1>
+    <MovieScroll
+      scrollTitle="Popular Movies"
+      fetchUrl=`${import.meta.env.PUBLIC_API_URL}/movie/popular?language=en-US&page=1`
+      client:only="svelte"
+    />
+    <MovieScroll
+      scrollTitle="Now Playing Movies"
+      fetchUrl=`${import.meta.env.PUBLIC_API_URL}/movie/now_playing?language=en-US&page=1`
+      client:only="svelte"
+    />
+    <MovieScroll
+      scrollTitle="Top Rated Movies"
+      fetchUrl=`${import.meta.env.PUBLIC_API_URL}/movie/top_rated?language=en-US&page=1`
+      client:only="svelte"
+    />
   </main>
 </Layout>
