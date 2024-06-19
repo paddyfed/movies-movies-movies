@@ -42,6 +42,7 @@
 <style>
   section {
     overflow-y: auto;
+    scrollbar-color: white #13151a;
   }
   ul {
     display: flex;
