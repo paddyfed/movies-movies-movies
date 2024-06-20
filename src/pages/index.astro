@@ -8,17 +8,17 @@ import Layout from "../layouts/Layout.astro";
     <h1>Movies Movies Movies</h1>
     <MovieScroll
       scrollTitle="Popular Movies"
-      fetchUrl=`${import.meta.env.PUBLIC_API_URL}/movie/popular?language=en-US&page=1`
+      fetchUrl=`${import.meta.env.PUBLIC_API_URL}/movie/popular?language=en-US`
       client:only="svelte"
     />
     <MovieScroll
       scrollTitle="Now Playing Movies"
-      fetchUrl=`${import.meta.env.PUBLIC_API_URL}/movie/now_playing?language=en-US&page=1`
+      fetchUrl=`${import.meta.env.PUBLIC_API_URL}/movie/now_playing?language=en-US`
       client:only="svelte"
     />
     <MovieScroll
       scrollTitle="Top Rated Movies"
-      fetchUrl=`${import.meta.env.PUBLIC_API_URL}/movie/top_rated?language=en-US&page=1`
+      fetchUrl=`${import.meta.env.PUBLIC_API_URL}/movie/top_rated?language=en-US`
       client:only="svelte"
     />
   </main>

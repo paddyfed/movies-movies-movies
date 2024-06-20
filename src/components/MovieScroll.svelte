@@ -4,6 +4,7 @@
 
   const imgPosterUrl = "http://image.tmdb.org/t/p/";
   const imgPosterSize = "w185/";
+  let page = 1;
 
   const options = {
     method: "GET",
@@ -13,7 +14,18 @@
     },
   };
 
-  let promise = fetch(fetchUrl, options).then((x) => x.json());
+  let promise = fetch(`${fetchUrl}&page=${page}`, options).then((x) =>
+    x.json()
+  );
+
+  function increment() {
+    page += 1;
+    promise = fetch(`${fetchUrl}&page=${page}`, options).then((x) => x.json());
+  }
+  function decrement() {
+    page -= 1;
+    promise = fetch(`${fetchUrl}&page=${page}`, options).then((x) => x.json());
+  }
 </script>
 
 <h2>{scrollTitle}</h2>
@@ -34,6 +46,9 @@
         </li>
       {/each}
     </ul>
+    <p>{page} of {data.total_pages}</p>
+    <button on:click={decrement}>Previous Page</button>
+    <button on:click={increment}>Next Page</button>
   </section>
 {:catch error}
   {error}
