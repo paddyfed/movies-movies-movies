@@ -1,4 +1,6 @@
 <script>
+  import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
+
   export let scrollTitle;
   export let fetchUrl;
 
@@ -30,7 +32,8 @@
 
 <h2>{scrollTitle}</h2>
 {#await promise}
-  <p>Loading...</p>
+  <!-- While API is MovieScrollLoadingSpinner, show placeholder images -->
+  <MovieScrollLoadingSpinner />
 {:then data}
   <section>
     <ul>
@@ -39,17 +42,23 @@
           <a href={import.meta.env.BASE_URL + "/movie?movieId=" + movie.id}>
             <img
               src={imgPosterUrl + imgPosterSize + movie.poster_path}
-              alt={movie.title}
+              alt={movie.title + " Poster"}
               title={movie.title}
+              height="278"
+              width="185"
             />
           </a>
         </li>
       {/each}
     </ul>
-    <p>{page} of {data.total_pages}</p>
-    <button on:click={decrement}>Previous Page</button>
-    <button on:click={increment}>Next Page</button>
   </section>
+  <p>{page} of {data.total_pages}</p>
+  {#if page !== 1}
+    <button on:click={decrement}>Previous Page</button>
+  {/if}
+  {#if page !== data.total_pages}
+    <button on:click={increment}>Next Page</button>
+  {/if}
 {:catch error}
   {error}
 {/await}
