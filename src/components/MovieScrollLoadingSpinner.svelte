@@ -5,13 +5,6 @@
     {/each}
   </ul>
 </section>
-<p>Loading...</p>
-<button type="button" class="btn btn-primary">
-  <i class="fas fa-fw fa-spinner fa-spin"></i>
-</button>
-<button type="button" class="btn btn-primary">
-  <i class="fas fa-fw fa-spinner fa-spin"></i>
-</button>
 
 <style>
   ul {

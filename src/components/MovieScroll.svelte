@@ -8,7 +8,7 @@
   const imgPosterUrl = "https://image.tmdb.org/t/p/";
   const imgPosterSize = "w185/";
   let page = 1;
-  const maxPages = 5;
+  export let maxPages = 5;
 
   const options = {
     method: "GET",
@@ -23,8 +23,19 @@
   );
 
   function paginationClicked(event) {
+    console.log(event);
     if (!Number.isNaN(parseInt(event.target.textContent))) {
       page = parseInt(event.target.textContent);
+      const list = event.target.parentNode.parentNode.childNodes;
+      list.forEach((element) => {
+        if (element.classList !== undefined) {
+          console.log(element.classList);
+
+          element.classList.remove("active");
+        }
+      });
+      console.log(list);
+      event.target.parentNode.classList.add("active");
     }
 
     if (event.target.ariaLabel !== null) {
@@ -37,7 +48,7 @@
 
       if (event.target.ariaLabel === "Next") {
         page += 1;
-        if (page > maxPages) {
+        if (page > maxPages && maxPages !== 0) {
           page = maxPages;
         }
       }
@@ -69,10 +80,10 @@
       {/each}
     </ul>
   </section>
-  <MovieScrollPagination on:click={paginationClicked} />
 {:catch error}
   {error}
 {/await}
+<MovieScrollPagination on:click={paginationClicked} {maxPages} />
 
 <style>
   section {
