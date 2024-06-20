@@ -1,5 +1,6 @@
 <script>
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
+  import MovieScrollPagination from "./MovieScrollPagination.svelte";
 
   export let scrollTitle;
   export let fetchUrl;
@@ -21,25 +22,27 @@
     x.json()
   );
 
-  function increment(event) {
-    event.preventDefault();
-    page += 1;
-    if (page > maxPages) {
-      page = maxPages;
+  function paginationClicked(event) {
+    if (!Number.isNaN(parseInt(event.target.textContent))) {
+      page = parseInt(event.target.textContent);
     }
-    promise = fetch(`${fetchUrl}&page=${page}`, options).then((x) => x.json());
-  }
-  function decrement(event) {
-    event.preventDefault();
-    page -= 1;
-    if (page < 1) {
-      page = 1;
+
+    if (event.target.ariaLabel !== null) {
+      if (event.target.ariaLabel === "Previous") {
+        page -= 1;
+        if (page < 1) {
+          page = 1;
+        }
+      }
+
+      if (event.target.ariaLabel === "Next") {
+        page += 1;
+        if (page > maxPages) {
+          page = maxPages;
+        }
+      }
     }
-    promise = fetch(`${fetchUrl}&page=${page}`, options).then((x) => x.json());
-  }
-  function navigate(event) {
-    event.preventDefault();
-    page = parseInt(event.target.textContent);
+
     promise = fetch(`${fetchUrl}&page=${page}`, options).then((x) => x.json());
   }
 </script>
@@ -66,66 +69,7 @@
       {/each}
     </ul>
   </section>
-  <nav aria-label="Movie Scroll Pagination">
-    <ul class="pagination pagination-sm">
-      <li class="page-item">
-        <a
-          class="page-link bg-dark text-light"
-          aria-label="Previous"
-          href="#"
-          on:click={decrement}
-        >
-          <i class="fa fa-fw fa-caret-left"></i>
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link bg-dark text-light" href="#" on:click={navigate}>
-          1
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link bg-dark text-light" href="#" on:click={navigate}>
-          2
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link bg-dark text-light" href="#" on:click={navigate}>
-          3
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link bg-dark text-light" href="#" on:click={navigate}>
-          4
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link bg-dark text-light" href="#" on:click={navigate}>
-          5
-        </a>
-      </li>
-      <li class="page-item">
-        <a
-          class="page-link bg-dark text-light"
-          arai-label="Next"
-          href="#"
-          on:click={increment}
-        >
-          <i class="fa fa-fw fa-caret-right"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <!-- <p>{page} of {maxPages}</p> -->
-  <!-- {#if page !== 1}
-    <button type="button" class="btn btn-primary" on:click={decrement}>
-      <i class="fa fa-fw fa-caret-left"></i>
-    </button>
-  {/if}
-  {#if page !== maxPages}
-    <button type="button" class="btn btn-primary" on:click={increment}>
-      <i class="fa fa-fw fa-caret-right"></i>
-    </button>
-  {/if} -->
+  <MovieScrollPagination on:click={paginationClicked} />
 {:catch error}
   {error}
 {/await}
