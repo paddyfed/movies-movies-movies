@@ -54,10 +54,14 @@
   </section>
   <p>{page} of {data.total_pages}</p>
   {#if page !== 1}
-    <button on:click={decrement}>Previous Page</button>
+    <button type="button" class="btn btn-primary" on:click={decrement}>
+      <i class="fa fa-fw fa-caret-left"></i>
+    </button>
   {/if}
   {#if page !== data.total_pages}
-    <button on:click={increment}>Next Page</button>
+    <button type="button" class="btn btn-primary" on:click={increment}>
+      <i class="fa fa-fw fa-caret-right"></i>
+    </button>
   {/if}
 {:catch error}
   {error}

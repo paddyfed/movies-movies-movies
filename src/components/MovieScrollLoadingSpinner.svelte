@@ -1,13 +1,17 @@
 <section>
   <ul>
-    {#each Array(20) as movie}
-      <li>Loading...</li>
+    {#each Array(20) as _}
+      <li><i class="fas fa-fw fa-spinner fa-spin"></i></li>
     {/each}
   </ul>
 </section>
 <p>Loading...</p>
-<button>Loading...</button>
-<button>Loading...</button>
+<button type="button" class="btn btn-primary">
+  <i class="fas fa-fw fa-spinner fa-spin"></i>
+</button>
+<button type="button" class="btn btn-primary">
+  <i class="fas fa-fw fa-spinner fa-spin"></i>
+</button>
 
 <style>
   ul {
@@ -17,20 +21,11 @@
 
   li {
     min-width: 185px;
-    height: 282px;
+    height: 278px;
     background-color: gray;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  img {
-    transition: 0.3s ease-in-out;
-    cursor: pointer;
-  }
-
-  img:hover {
-    opacity: 0.5;
   }
 
   section {
