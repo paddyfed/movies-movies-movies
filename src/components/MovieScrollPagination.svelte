@@ -1,12 +1,13 @@
 <script>
   export let maxPages = 5;
+  export let currentPage;
 </script>
 
 <nav aria-label="Movie Scroll Pagination">
   <ul class="pagination pagination-sm">
     <li class="page-item">
       <a
-        class="page-link bg-dark text-light"
+        class="page-link bg-dark text-primary"
         aria-label="Previous"
         href="#"
         on:click|preventDefault
@@ -16,9 +17,9 @@
     </li>
     {#if maxPages > 0}
       {#each Array(maxPages) as _, index}
-        <li class="page-item">
+        <li class="page-item{currentPage === index + 1 ? ' active' : ''}">
           <a
-            class="page-link bg-dark text-light"
+            class="page-link bg-dark text-primary"
             href="#"
             on:click|preventDefault
           >
@@ -29,7 +30,7 @@
     {/if}
     <li class="page-item">
       <a
-        class="page-link bg-dark text-light"
+        class="page-link bg-dark text-primary"
         aria-label="Next"
         href="#"
         on:click|preventDefault

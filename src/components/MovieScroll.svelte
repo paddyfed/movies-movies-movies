@@ -7,7 +7,7 @@
 
   const imgPosterUrl = "https://image.tmdb.org/t/p/";
   const imgPosterSize = "w185/";
-  let page = 1;
+  let currentPage = 1;
   export let maxPages = 5;
 
   const options = {
@@ -18,43 +18,35 @@
     },
   };
 
-  let promise = fetch(`${fetchUrl}&page=${page}`, options).then((x) =>
+  let promise = fetch(`${fetchUrl}&page=${currentPage}`, options).then((x) =>
     x.json()
   );
 
   function paginationClicked(event) {
     console.log(event);
     if (!Number.isNaN(parseInt(event.target.textContent))) {
-      page = parseInt(event.target.textContent);
-      const list = event.target.parentNode.parentNode.childNodes;
-      list.forEach((element) => {
-        if (element.classList !== undefined) {
-          console.log(element.classList);
-
-          element.classList.remove("active");
-        }
-      });
-      console.log(list);
-      event.target.parentNode.classList.add("active");
+      currentPage = parseInt(event.target.textContent);
     }
 
     if (event.target.ariaLabel !== null) {
       if (event.target.ariaLabel === "Previous") {
-        page -= 1;
-        if (page < 1) {
-          page = 1;
+        currentPage -= 1;
+        if (currentPage < 1) {
+          currentPage = 1;
         }
       }
 
       if (event.target.ariaLabel === "Next") {
-        page += 1;
-        if (page > maxPages && maxPages !== 0) {
-          page = maxPages;
+        currentPage += 1;
+        if (currentPage > maxPages && maxPages !== 0) {
+          currentPage = maxPages;
         }
       }
     }
 
-    promise = fetch(`${fetchUrl}&page=${page}`, options).then((x) => x.json());
+    promise = fetch(`${fetchUrl}&page=${currentPage}`, options).then((x) =>
+      x.json()
+    );
   }
 </script>
 
@@ -83,7 +75,7 @@
 {:catch error}
   {error}
 {/await}
-<MovieScrollPagination on:click={paginationClicked} {maxPages} />
+<MovieScrollPagination on:click={paginationClicked} {maxPages} {currentPage} />
 
 <style>
   section {
