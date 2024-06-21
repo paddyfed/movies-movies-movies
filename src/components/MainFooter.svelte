@@ -13,7 +13,7 @@
           href="https://www.themoviedb.org/"
         >
           <img
-            src="/movies-movies-movies/TmDb_Logo.svg"
+            src="{import.meta.env.BASE_URL}/TmDb_Logo.svg"
             alt="themoviedb.org"
             title="themoviedb.org"
             width="80"
