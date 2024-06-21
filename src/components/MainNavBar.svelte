@@ -1,3 +1,8 @@
+<script>
+  let value = "";
+  let searchValue = null;
+</script>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href={import.meta.env.BASE_URL}
@@ -47,15 +52,30 @@
           </a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
+      <form
+        class="d-flex"
+        role="search"
+        on:submit|preventDefault={() => (searchValue = value)}
+      >
         <input
           class="form-control me-2"
           type="search"
           placeholder="Search"
           aria-label="Search"
+          bind:value
         />
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button
+          class="btn btn-outline-success"
+          on:click={() => console.log("button clicked")}>Search</button
+        >
       </form>
     </div>
   </div>
 </nav>
+{#if searchValue != null}
+  <div class="ms-3">
+    URL = https://api.themoviedb.org/3/search/movie?query={encodeURIComponent(
+      searchValue
+    )}&include_adult=false&language=en-US&page=1
+  </div>
+{/if}
