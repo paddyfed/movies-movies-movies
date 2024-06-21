@@ -5,38 +5,39 @@
 
 <nav aria-label="Movie Scroll Pagination">
   <ul class="pagination pagination-sm">
-    <li class="page-item">
-      <a
-        class="page-link bg-dark text-primary"
+    <li class="page-item {currentPage === 1 ? 'disabled' : ''}">
+      <button
+        class="page-link {currentPage === 1
+          ? 'bg-dark-subtle text-primary-emphasis'
+          : 'bg-dark text-primary'}"
         aria-label="Previous"
-        href="#"
         on:click|preventDefault
       >
         <i class="fa fa-fw fa-caret-left" aria-label="Previous"></i>
-      </a>
+      </button>
     </li>
     {#if maxPages > 0}
       {#each Array(maxPages) as _, index}
-        <li class="page-item{currentPage === index + 1 ? ' active' : ''}">
-          <a
+        <li class="page-item {currentPage === index + 1 ? 'active' : ''}">
+          <button
             class="page-link bg-dark text-primary"
-            href="#"
             on:click|preventDefault
           >
             {index + 1}
-          </a>
+          </button>
         </li>
       {/each}
     {/if}
-    <li class="page-item">
-      <a
-        class="page-link bg-dark text-primary"
+    <li class="page-item {currentPage === maxPages ? 'disabled' : ''}">
+      <button
+        class="page-link {currentPage === maxPages
+          ? 'bg-dark-subtle text-primary-emphasis'
+          : 'bg-dark text-primary'}"
         aria-label="Next"
-        href="#"
         on:click|preventDefault
       >
         <i class="fa fa-fw fa-caret-right" aria-label="Next"></i>
-      </a>
+      </button>
     </li>
   </ul>
 </nav>
