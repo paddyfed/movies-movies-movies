@@ -1,6 +1,19 @@
 <script>
   let value = "";
   let searchValue = null;
+
+  function key(e) {
+    console.log(e);
+    switch (e.keyCode) {
+      case 13:
+        e.preventDefault();
+        searchValue = value;
+        window.location.href = `${import.meta.env.BASE_URL}/search?query=${encodeURIComponent(
+          searchValue
+        )}`;
+        break;
+    }
+  }
 </script>
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -52,30 +65,31 @@
           </a>
         </li>
       </ul>
-      <form
-        class="d-flex"
-        role="search"
-        on:submit|preventDefault={() => (searchValue = value)}
-      >
+      <form class="d-flex" role="search" id="searchForm" name="searchForm">
         <input
           class="form-control me-2"
           type="search"
           placeholder="Search"
           aria-label="Search"
           bind:value
+          on:submit|preventDefault
+          on:keydown={key}
         />
-        <button
+        <a
           class="btn btn-outline-success"
-          on:click={() => console.log("button clicked")}>Search</button
+          href="{import.meta.env.BASE_URL}/search?query={encodeURIComponent(
+            searchValue
+          )}"
+          on:click={() => (searchValue = value)}>Search</a
         >
       </form>
     </div>
   </div>
 </nav>
-{#if searchValue != null}
+<!-- {#if searchValue != null}
   <div class="ms-3">
     URL = https://api.themoviedb.org/3/search/movie?query={encodeURIComponent(
       searchValue
     )}&include_adult=false&language=en-US&page=1
   </div>
-{/if}
+{/if} -->
