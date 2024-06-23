@@ -59,6 +59,7 @@
     <div class="d-flex mb-3">
       <div class="flex-shrink-0">
         <img
+          onerror="this.onerror=null;this.src='https://placehold.co/185x278'"
           src="https://image.tmdb.org/t/p/w185/{result.poster_path}"
           alt="{result.title} poster"
           title={result.title}

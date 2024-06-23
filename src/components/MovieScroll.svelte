@@ -60,6 +60,7 @@
         <li>
           <a href={import.meta.env.BASE_URL + "/movie?movieId=" + movie.id}>
             <img
+              onerror="this.onerror=null;this.src='https://placehold.co/185x278'"
               src={imgPosterUrl + imgPosterSize + movie.poster_path}
               alt={movie.title + " Poster"}
               title={movie.title}
