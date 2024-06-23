@@ -23,7 +23,6 @@
   );
 
   function paginationClicked(event) {
-    console.log(event);
     if (!Number.isNaN(parseInt(event.target.textContent))) {
       currentPage = parseInt(event.target.textContent);
     }
