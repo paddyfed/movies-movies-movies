@@ -68,7 +68,7 @@
   <MovieScrollPagination
     on:click={paginationClicked}
     {currentPage}
-    maxPages={10}
+    maxPages={data.total_pages < maxPages ? data.total_pages : maxPages}
   />
 {:catch error}
   {console.log(error)}
