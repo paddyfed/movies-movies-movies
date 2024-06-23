@@ -3,4 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import SearchResults from "../components/SearchResults.svelte";
 ---
 
-<Layout title="Search Results"> <SearchResults client:only="svelte" /> </Layout>
+<Layout title="Search Results">
+  <main class="container-fluid">
+    <section class="row">
+      <section class="col-12">
+        <SearchResults client:only="svelte" />
+      </section>
+    </section>
+  </main>
+</Layout>

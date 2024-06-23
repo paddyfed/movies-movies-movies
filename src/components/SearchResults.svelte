@@ -56,15 +56,21 @@
 {:then data}
   <h1>{queryParam}</h1>
   {#each data.results as result}
-    <p>{result.title}</p>
-    <p>
-      <img
-        src="https://image.tmdb.org/t/p/w185/{result.poster_path}"
-        alt="{result.title} poster"
-      />
-    </p>
-    <p>{result.overview}</p>
+    <div class="d-flex mb-3">
+      <div class="flex-shrink-0">
+        <img
+          src="https://image.tmdb.org/t/p/w185/{result.poster_path}"
+          alt="{result.title} poster"
+          title={result.title}
+        />
+      </div>
+      <div class="flex-grow-1 ms-3">
+        <h2>{result.title}</h2>
+        <p>{result.overview}</p>
+      </div>
+    </div>
   {/each}
+
   <MovieScrollPagination
     on:click={paginationClicked}
     {currentPage}
