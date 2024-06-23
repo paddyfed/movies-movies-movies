@@ -5,6 +5,9 @@
   export let currentPage = 1;
   export let maxPages = 5;
 
+  const imgPosterUrl = "https://image.tmdb.org/t/p/";
+  const imgPosterSize = "w185/";
+
   const token = import.meta.env.PUBLIC_API_ACCESS_TOKEN;
   const options = {
     method: "GET",
@@ -54,15 +57,17 @@
 {#await promise}
   <div>Loading....</div>
 {:then data}
-  <h1>{queryParam}</h1>
+  <h1>Search results for "{queryParam}"</h1>
   {#each data.results as result}
     <div class="d-flex mb-3">
       <div class="flex-shrink-0">
         <img
           onerror="this.onerror=null;this.src='https://placehold.co/185x278'"
-          src="https://image.tmdb.org/t/p/w185/{result.poster_path}"
-          alt="{result.title} poster"
+          src={imgPosterUrl + imgPosterSize + result.poster_path}
+          alt="{result.title} Poster"
           title={result.title}
+          height="278"
+          width="185"
         />
       </div>
       <div class="flex-grow-1 ms-3">
