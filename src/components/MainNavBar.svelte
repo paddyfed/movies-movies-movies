@@ -1,10 +1,10 @@
 <script>
-  let value = "";
-  let searchValue = null;
+  let value = new URLSearchParams(window.location.search).get("query");
+  let searchValue;
 
   function key(e) {
-    console.log(e);
     switch (e.keyCode) {
+      // this is the enter key. This ensures pressing Enter will run the search
       case 13:
         e.preventDefault();
         searchValue = value;
@@ -86,10 +86,3 @@
     </div>
   </div>
 </nav>
-<!-- {#if searchValue != null}
-  <div class="ms-3">
-    URL = https://api.themoviedb.org/3/search/movie?query={encodeURIComponent(
-      searchValue
-    )}&include_adult=false&language=en-US&page=1
-  </div>
-{/if} -->
