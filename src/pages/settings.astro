@@ -1,0 +1,15 @@
+---
+import AppSettings from "../components/AppSettings.svelte";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Settings">
+  <main class="container-fluid">
+    <section class="row">
+      <section class="col">
+        <h1>Settings</h1>
+        <AppSettings client:only="svelte" />
+      </section>
+    </section>
+  </main>
+</Layout>
