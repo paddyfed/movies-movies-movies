@@ -1,6 +1,8 @@
 <script>
   import MovieTrailers from "./MovieTrailers.svelte";
 
+  const dateSetting = localStorage.getItem("dateSettingSelected") ?? "en-IE";
+
   const movieIdParam = new URLSearchParams(window.location.search).get(
     "movieId"
   );
@@ -34,7 +36,14 @@
     />
   </p>
   <p>
-    Release Date: {new Date(Date.parse(data.release_date)).toLocaleDateString()}
+    Release Date: {new Date(Date.parse(data.release_date)).toLocaleDateString(
+      dateSetting,
+      {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }
+    )}
   </p>
   <MovieTrailers movieId={movieIdParam} />
 {:catch error}
