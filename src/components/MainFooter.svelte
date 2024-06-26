@@ -1,5 +1,5 @@
 <div class="container">
-  <footer
+  <div
     class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
   >
     <div class="d-flex align-items-center">
@@ -22,5 +22,5 @@
         </a></span
       >
     </div>
-  </footer>
+  </div>
 </div>
