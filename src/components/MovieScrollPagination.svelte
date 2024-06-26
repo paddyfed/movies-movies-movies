@@ -4,7 +4,7 @@
 </script>
 
 <nav aria-label="Movie Scroll Pagination" class="mb-3">
-  <ul class="pagination pagination-sm">
+  <ul class="pagination">
     <li class="page-item {currentPage === 1 ? 'disabled' : ''}">
       <button
         class="page-link {currentPage === 1
