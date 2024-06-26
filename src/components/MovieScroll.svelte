@@ -49,12 +49,12 @@
   }
 </script>
 
-<h2>{scrollTitle}</h2>
+<h2 class="mb-3">{scrollTitle}</h2>
 {#await promise}
   <!-- While API is MovieScrollLoadingSpinner, show placeholder images -->
   <MovieScrollLoadingSpinner />
 {:then data}
-  <section>
+  <section class="mb-3">
     <ul>
       {#each data.results as movie}
         <li>

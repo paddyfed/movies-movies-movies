@@ -3,7 +3,7 @@
   export let currentPage;
 </script>
 
-<nav aria-label="Movie Scroll Pagination">
+<nav aria-label="Movie Scroll Pagination" class="mb-3">
   <ul class="pagination pagination-sm">
     <li class="page-item {currentPage === 1 ? 'disabled' : ''}">
       <button

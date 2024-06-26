@@ -39,30 +39,6 @@
             >Settings</a
           >
         </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#top"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#top">Action</a></li>
-            <li><a class="dropdown-item" href="#top">Another action</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <a class="dropdown-item" href="#top">Something else here</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true" href="#top">
-            Disabled
-          </a>
-        </li>
       </ul>
       <form class="d-flex" role="search" id="searchForm" name="searchForm">
         <input

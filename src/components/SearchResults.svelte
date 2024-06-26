@@ -57,7 +57,7 @@
 {#await promise}
   <div>Loading....</div>
 {:then data}
-  <h1>Search results for "{queryParam}"</h1>
+  <h1 class="mb-3">Search results for "{queryParam}"</h1>
   {#each data.results as result}
     <div class="d-flex mb-3">
       <div class="flex-shrink-0">
@@ -71,7 +71,7 @@
         />
       </div>
       <div class="flex-grow-1 ms-3">
-        <h2>{result.title}</h2>
+        <h2 class="mb-3">{result.title}</h2>
         <p>{result.overview}</p>
       </div>
     </div>
