@@ -1,4 +1,4 @@
-<section>
+<section class="mb-3">
   <ul>
     {#each Array(20) as _}
       <li><i class="fas fa-fw fa-spinner fa-spin"></i></li>
