@@ -31,7 +31,7 @@
   <div>Loading....</div>
 {:then data}
   <section
-    style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url({backdropUrl +
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url({backdropUrl +
       data.backdrop_path}); background-repeat: no-repeat; background-size: cover;"
     class="rounded p-3"
   >
