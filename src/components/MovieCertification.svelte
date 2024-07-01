@@ -1,5 +1,6 @@
 <script>
   import BbfcIcon from "./BbfcIcon.svelte";
+  import IfcoIcon from "./IfcoIcon.svelte";
 
   export let movieId;
 
@@ -26,6 +27,13 @@
   }) as cert}
     {#each cert.release_dates as release}
       <BbfcIcon certification={release.certification} />
+    {/each}
+  {/each}
+  {#each data.results.filter((element) => {
+    return element.iso_3166_1 === "IE";
+  }) as cert}
+    {#each cert.release_dates as release}
+      <IfcoIcon certification={release.certification} />
     {/each}
   {/each}
 {:catch error}
