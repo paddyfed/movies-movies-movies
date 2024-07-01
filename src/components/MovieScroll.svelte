@@ -51,7 +51,7 @@
 
 <h2 class="mb-3">{scrollTitle}</h2>
 {#await promise}
-  <!-- While API is MovieScrollLoadingSpinner, show placeholder images -->
+  <!-- While API is loading, show placeholder images -->
   <MovieScrollLoadingSpinner />
 {:then data}
   <section class="mb-3">
