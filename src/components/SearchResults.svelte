@@ -61,14 +61,16 @@
   {#each data.results as result}
     <div class="d-flex mb-3">
       <div class="flex-shrink-0">
-        <img
-          onerror="this.onerror=null;this.src='https://placehold.co/185x278'"
-          src={imgPosterUrl + imgPosterSize + result.poster_path}
-          alt="{result.title} Poster"
-          title={result.title}
-          height="278"
-          width="185"
-        />
+        <a href={import.meta.env.BASE_URL + "/movie?movieId=" + result.id}>
+          <img
+            onerror="this.onerror=null;this.src='https://placehold.co/185x278'"
+            src={imgPosterUrl + imgPosterSize + result.poster_path}
+            alt="{result.title} Poster"
+            title={result.title}
+            height="278"
+            width="185"
+          />
+        </a>
       </div>
       <div class="flex-grow-1 ms-3">
         <h2 class="mb-3">{result.title}</h2>
