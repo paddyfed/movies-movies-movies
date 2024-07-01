@@ -25,16 +25,12 @@
   {#each data.results.filter((element) => {
     return element.iso_3166_1 === "GB";
   }) as cert}
-    {#each cert.release_dates as release}
-      <BbfcIcon certification={release.certification} />
-    {/each}
+    <BbfcIcon certification={cert.release_dates[0].certification} />
   {/each}
   {#each data.results.filter((element) => {
     return element.iso_3166_1 === "IE";
   }) as cert}
-    {#each cert.release_dates as release}
-      <IfcoIcon certification={release.certification} />
-    {/each}
+    <IfcoIcon certification={cert.release_dates[0].certification} />
   {/each}
 {:catch error}
   {error}
