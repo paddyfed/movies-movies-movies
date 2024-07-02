@@ -80,9 +80,12 @@
       <p>
         <MovieCertification movieId={movieIdParam} />
       </p>
-      <p>
-        <MovieRating />
-      </p>
+      <!-- Hiding this from Production for now while this feature is worked on. Remove this if statement when releasing -->
+      {#if import.meta.env.DEV === true}
+        <p>
+          <MovieRating />
+        </p>
+      {/if}
     </div>
 
     <div>

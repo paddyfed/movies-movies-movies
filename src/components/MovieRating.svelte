@@ -1,11 +1,4 @@
-{#if import.meta.env.PROD === false}
-  Seen on DEV only
-{:else if import.meta.env.DEV === false}
-  Seen on PROD only
-{:else}
-  {import.meta.env.MODE}
-{/if}
-<!-- <div class="form-check">
+<div class="form-check">
   <input
     class="form-check-input"
     type="checkbox"
@@ -33,4 +26,4 @@
     checked
   />
   <label class="form-check-label" for="flexCheckChecked2"> Want to See </label>
-</div> -->
+</div>
