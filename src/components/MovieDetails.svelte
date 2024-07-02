@@ -29,7 +29,25 @@
 </script>
 
 {#await promise}
-  <div>Loading....</div>
+  <section
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)); background-repeat: no-repeat; background-size: cover;"
+    class="rounded p-3"
+  >
+    <h1 class="placeholder-glow mb-3">
+      <span class="placeholder col-12"></span>
+    </h1>
+    <div class="placeholder-glow poster">
+      <p class="poster-placeholder">
+        <i class="fas fa-fw fa-spinner fa-spin"></i>
+      </p>
+    </div>
+    <div class="placeholder-glow details">
+      <p class="placeholder col-12"></p>
+      <p class="placeholder col-12"></p>
+      <p class="placeholder col-12"></p>
+      <p class="placeholder col-3"></p>
+    </div>
+  </section>
 {:then data}
   <section
     style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url({backdropUrl +
@@ -42,6 +60,8 @@
         src={posterUrl + data.poster_path}
         alt={data.title + " Poster"}
         title={data.title}
+        width="342"
+        height="513"
       />
     </p>
     <div class="details">
@@ -96,6 +116,16 @@
 
   .details {
     grid-area: details;
+  }
+
+  .poster-placeholder {
+    width: 342px;
+    max-width: 100%;
+    height: 513px;
+    background-color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   @media screen and (max-width: 768px) {
