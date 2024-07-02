@@ -1,5 +1,6 @@
 <script>
   import MovieCertification from "./MovieCertification.svelte";
+  import MovieRating from "./MovieRating.svelte";
   import MovieTrailers from "./MovieTrailers.svelte";
 
   const dateSetting = localStorage.getItem("dateSettingSelected") ?? "en-IE";
@@ -76,7 +77,12 @@
           day: "numeric",
         })}
       </p>
-      <MovieCertification movieId={movieIdParam} />
+      <p>
+        <MovieCertification movieId={movieIdParam} />
+      </p>
+      <p>
+        <MovieRating />
+      </p>
     </div>
 
     <div>
