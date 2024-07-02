@@ -83,7 +83,7 @@
       <!-- Hiding this from Production for now while this feature is worked on. Remove this if statement when releasing -->
       {#if import.meta.env.DEV === true}
         <p>
-          <MovieRating />
+          <MovieRating movieId={movieIdParam} />
         </p>
       {/if}
     </div>

@@ -1,23 +1,36 @@
 <script>
-  let rating = localStorage.getItem("786892");
+  export let movieId;
+  let rating = localStorage.getItem(movieId);
   $: liked = rating === "liked" ? true : false;
   $: disliked = rating === "disliked" ? true : false;
   $: wishlist = rating === "wishlist" ? true : false;
 
   function likeMovie(event) {
     console.log(event.target);
-    localStorage.setItem("786892", "liked");
-    rating = localStorage.getItem("786892");
+    if (rating === "liked") {
+      localStorage.removeItem(movieId);
+    } else {
+      localStorage.setItem(movieId, "liked");
+    }
+    rating = localStorage.getItem(movieId);
   }
   function dislikeMovie(event) {
     console.log(event.target);
-    localStorage.setItem("786892", "disliked");
-    rating = localStorage.getItem("786892");
+    if (rating === "disliked") {
+      localStorage.removeItem(movieId);
+    } else {
+      localStorage.setItem(movieId, "disliked");
+    }
+    rating = localStorage.getItem(movieId);
   }
   function wantToSeeMovie(event) {
     console.log(event.target);
-    localStorage.setItem("786892", "wishlist");
-    rating = localStorage.getItem("786892");
+    if (rating === "wishlist") {
+      localStorage.removeItem(movieId);
+    } else {
+      localStorage.setItem(movieId, "wishlist");
+    }
+    rating = localStorage.getItem(movieId);
   }
 </script>
 
