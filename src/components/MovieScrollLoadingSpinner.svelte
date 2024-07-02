@@ -1,6 +1,10 @@
+<script>
+  export let numItems = 20;
+</script>
+
 <section class="mb-3">
   <ul>
-    {#each Array(20) as _}
+    {#each Array(numItems) as _}
       <li><i class="fas fa-fw fa-spinner fa-spin"></i></li>
     {/each}
   </ul>
@@ -13,8 +17,8 @@
   }
 
   li {
-    min-width: 185px;
-    height: 278px;
+    min-width: var(--min-width, 185px);
+    height: var(--height, 278px);
     background-color: gray;
     display: flex;
     align-items: center;

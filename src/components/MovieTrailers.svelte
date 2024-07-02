@@ -1,4 +1,6 @@
 <script>
+  import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
+
   export let movieId;
   const token = import.meta.env.PUBLIC_API_ACCESS_TOKEN;
   const options = {
@@ -15,11 +17,17 @@
   ).then((x) => x.json());
 </script>
 
-<h1>Trailers</h1>
-
 {#await promise}
-  <div>Loading....</div>
+  <h2 class="placeholder-glow">
+    <span class="placeholder col-12">Loading</span>
+  </h2>
+  <MovieScrollLoadingSpinner
+    numItems={5}
+    --min-width="480px"
+    --height="270px"
+  />
 {:then data}
+  <h2>Trailers</h2>
   {#if data.results.filter((element) => {
     return element.official === true && element.type === "Trailer";
   }).length !== 0}
@@ -45,7 +53,7 @@
       </ul>
     </section>
   {:else}
-    <p>No Trailers Available</p>
+    <div class="no-trailers-placeholder">No Trailers Available</div>
   {/if}
 {:catch error}
   {error}
@@ -60,5 +68,15 @@
   ul {
     display: flex;
     gap: 0.5em;
+  }
+
+  .no-trailers-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 480 / 270;
+    max-width: 100%;
+    background-color: gray;
+    color: black;
   }
 </style>

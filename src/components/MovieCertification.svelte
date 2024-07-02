@@ -20,7 +20,9 @@
 </script>
 
 {#await promise}
-  <div>Loading....</div>
+  <div class="placeholder-glow">
+    <span class="placeholder col-12">Loading</span>
+  </div>
 {:then data}
   {#each data.results.filter((element) => {
     return element.iso_3166_1 === "GB";
