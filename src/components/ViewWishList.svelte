@@ -23,15 +23,35 @@
   }
 </script>
 
-<h2>Liked</h2>
-{#each Object.entries(likedList) as [key, value]}
-  <Movie movieId={key} />
-{/each}
-<h2>Disliked</h2>
-{#each Object.entries(dislikedList) as [key, value]}
-  <Movie movieId={key} />
-{/each}
-<h2>Wishlist</h2>
-{#each Object.entries(wishlistList) as [key, value]}
-  <Movie movieId={key} />
-{/each}
+<h2 class="mb-3">Liked</h2>
+<ul class="mb-3">
+  {#each Object.entries(likedList) as [key, value]}
+    <li>
+      <Movie movieId={key} />
+    </li>
+  {/each}
+</ul>
+<h2 class="mb-3">Disliked</h2>
+<ul class="mb-3">
+  {#each Object.entries(dislikedList) as [key, value]}
+    <li>
+      <Movie movieId={key} />
+    </li>
+  {/each}
+</ul>
+<h2 class="mb-3">Wishlist</h2>
+<ul class="mb-3">
+  {#each Object.entries(wishlistList) as [key, value]}
+    <li>
+      <Movie movieId={key} />
+    </li>
+  {/each}
+</ul>
+
+<style>
+  ul {
+    display: flex;
+    gap: 0.5em;
+    flex-wrap: wrap;
+  }
+</style>

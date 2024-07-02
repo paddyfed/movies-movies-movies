@@ -3,7 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import ViewWishList from "../components/ViewWishList.svelte";
 ---
 
-<Layout title="Hi">
-  <h1>Hi</h1>
-  <ViewWishList client:only="svelte" />
+<Layout title="Wish List">
+  <main class="container-fluid">
+    <section class="row">
+      <section class="col">
+        <ViewWishList client:only="svelte" />
+      </section>
+    </section>
+  </main>
 </Layout>
