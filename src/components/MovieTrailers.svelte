@@ -75,6 +75,7 @@
     justify-content: center;
     align-items: center;
     aspect-ratio: 480 / 270;
+    width: 480px;
     max-width: 100%;
     background-color: gray;
     color: black;

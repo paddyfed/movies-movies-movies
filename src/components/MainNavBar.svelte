@@ -34,6 +34,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {#if import.meta.env.DEV === true}
+          <li class="nav-item">
+            <a class="nav-link" href="{import.meta.env.BASE_URL}/wishlist"
+              >Wish List</a
+            >
+          </li>
+        {/if}
         <li class="nav-item">
           <a class="nav-link" href="{import.meta.env.BASE_URL}/settings"
             >Settings</a
