@@ -7,7 +7,7 @@
   }
 
   function resetLocalStorage() {
-    localStorage.clear();
+    localStorage.removeItem("dateSettingSelected");
     dateSettingSelected = "en-IE";
   }
 </script>
