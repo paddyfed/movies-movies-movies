@@ -69,3 +69,13 @@
   />
   <label class="form-check-label" for="flexCheckChecked2"> Want to See </label>
 </div>
+
+<button class="btn btn-link" class:liked on:click|preventDefault={likeMovie}
+  ><i class="fa-solid fa-heart fa-4x"></i></button
+>
+
+<style>
+  .liked {
+    color: red;
+  }
+</style>
