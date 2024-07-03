@@ -5,49 +5,39 @@
   $: disliked = rating === "disliked" ? true : false;
   $: wishlist = rating === "wishlist" ? true : false;
 
-  function likeMovie(event) {
-    console.log(event.currentTarget);
-    if (rating === "liked") {
+  function processRatingClick(event) {
+    const buttonClicked = event.currentTarget.dataset.target;
+    if (rating === buttonClicked) {
       localStorage.removeItem(movieId);
     } else {
-      localStorage.setItem(movieId, "liked");
+      localStorage.setItem(movieId, buttonClicked);
     }
     rating = localStorage.getItem(movieId);
-  }
-  function dislikeMovie(event) {
-    console.log(event.currentTarget);
-    if (rating === "disliked") {
-      localStorage.removeItem(movieId);
-    } else {
-      localStorage.setItem(movieId, "disliked");
-    }
-    rating = localStorage.getItem(movieId);
-  }
-  function wantToSeeMovie(event) {
-    console.log(event.currentTarget);
-    if (rating === "wishlist") {
-      localStorage.removeItem(movieId);
-    } else {
-      localStorage.setItem(movieId, "wishlist");
-    }
-    rating = localStorage.getItem(movieId);
+    console.log({ ...localStorage });
   }
 </script>
 
-<button class:liked on:click|preventDefault={likeMovie} aria-label="Like">
+<button
+  class:liked
+  on:click|preventDefault={processRatingClick}
+  aria-label="Like"
+  data-target="liked"
+>
   <i class="fa-regular fa-thumbs-up fa-4x fa-fw"></i>
 </button>
 <button
   class:disliked
-  on:click|preventDefault={dislikeMovie}
+  on:click|preventDefault={processRatingClick}
   aria-label="Dislike"
+  data-target="disliked"
 >
   <i class="fa-regular fa-thumbs-down fa-flip-horizontal fa-4x fa-fw"></i>
 </button>
 <button
   class:wishlist
-  on:click|preventDefault={wantToSeeMovie}
+  on:click|preventDefault={processRatingClick}
   aria-label="Want to See"
+  data-target="wishlist"
 >
   <i class="fa-regular fa-heart fa-4x fa-fw"></i>
 </button>
