@@ -6,7 +6,7 @@
   $: wishlist = rating === "wishlist" ? true : false;
 
   function likeMovie(event) {
-    console.log(event.target);
+    console.log(event.currentTarget);
     if (rating === "liked") {
       localStorage.removeItem(movieId);
     } else {
@@ -15,7 +15,7 @@
     rating = localStorage.getItem(movieId);
   }
   function dislikeMovie(event) {
-    console.log(event.target);
+    console.log(event.currentTarget);
     if (rating === "disliked") {
       localStorage.removeItem(movieId);
     } else {
@@ -24,7 +24,7 @@
     rating = localStorage.getItem(movieId);
   }
   function wantToSeeMovie(event) {
-    console.log(event.target);
+    console.log(event.currentTarget);
     if (rating === "wishlist") {
       localStorage.removeItem(movieId);
     } else {
@@ -34,48 +34,51 @@
   }
 </script>
 
-{rating}
-
-<div class="form-check">
-  <input
-    class="form-check-input"
-    type="checkbox"
-    value=""
-    id="flexCheckDefault"
-    bind:checked={liked}
-    on:click={likeMovie}
-  />
-  <label class="form-check-label" for="flexCheckDefault"> Liked </label>
-</div>
-<div class="form-check">
-  <input
-    class="form-check-input"
-    type="checkbox"
-    value=""
-    id="flexCheckChecked"
-    bind:checked={disliked}
-    on:click={dislikeMovie}
-  />
-  <label class="form-check-label" for="flexCheckChecked"> Disliked </label>
-</div>
-<div class="form-check">
-  <input
-    class="form-check-input"
-    type="checkbox"
-    value=""
-    id="flexCheckChecked2"
-    bind:checked={wishlist}
-    on:click={wantToSeeMovie}
-  />
-  <label class="form-check-label" for="flexCheckChecked2"> Want to See </label>
-</div>
-
-<button class="btn btn-link" class:liked on:click|preventDefault={likeMovie}
-  ><i class="fa-solid fa-heart fa-4x"></i></button
+<button class:liked on:click|preventDefault={likeMovie} aria-label="Like">
+  <i class="fa-regular fa-thumbs-up fa-4x fa-fw"></i>
+</button>
+<button
+  class:disliked
+  on:click|preventDefault={dislikeMovie}
+  aria-label="Dislike"
 >
+  <i class="fa-regular fa-thumbs-down fa-flip-horizontal fa-4x fa-fw"></i>
+</button>
+<button
+  class:wishlist
+  on:click|preventDefault={wantToSeeMovie}
+  aria-label="Want to See"
+>
+  <i class="fa-regular fa-heart fa-4x fa-fw"></i>
+</button>
 
 <style>
   .liked {
-    color: red;
+    color: hsl(120, 100%, 40%);
+  }
+  .disliked {
+    color: hsl(0, 100%, 40%);
+  }
+  .wishlist {
+    color: hsl(240, 100%, 40%);
+  }
+  .liked:hover {
+    color: hsl(120, 100%, 60%);
+  }
+  .disliked:hover {
+    color: hsl(0, 100%, 60%);
+  }
+  .wishlist:hover {
+    color: hsl(240, 100%, 60%);
+  }
+
+  button {
+    border: 0;
+    background: none;
+    color: hsl(0, 0%, 40%);
+    transition: color 0.5s;
+  }
+  button:hover {
+    color: hsl(0, 0%, 60%);
   }
 </style>
