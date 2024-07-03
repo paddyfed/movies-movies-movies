@@ -18,9 +18,9 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href={import.meta.env.BASE_URL}
-      >Movies Movies Movies</a
-    >
+    <a class="navbar-brand" href={import.meta.env.BASE_URL}>
+      Movies Movies Movies
+    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -34,17 +34,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        {#if import.meta.env.DEV === true}
-          <li class="nav-item">
-            <a class="nav-link" href="{import.meta.env.BASE_URL}/wishlist"
-              >Wish List</a
-            >
-          </li>
-        {/if}
         <li class="nav-item">
-          <a class="nav-link" href="{import.meta.env.BASE_URL}/settings"
-            >Settings</a
-          >
+          <a class="nav-link" href="{import.meta.env.BASE_URL}/wishlist">
+            Wish List
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{import.meta.env.BASE_URL}/settings">
+            Settings
+          </a>
         </li>
       </ul>
       <form class="d-flex" role="search" id="searchForm" name="searchForm">

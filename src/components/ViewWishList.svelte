@@ -25,7 +25,7 @@
 
 <h2 class="mb-3">Liked</h2>
 <ul class="mb-3">
-  {#each Object.entries(likedList) as [key, value]}
+  {#each Object.entries(likedList) as [key]}
     <li>
       <Movie movieId={key} />
     </li>
@@ -33,7 +33,7 @@
 </ul>
 <h2 class="mb-3">Disliked</h2>
 <ul class="mb-3">
-  {#each Object.entries(dislikedList) as [key, value]}
+  {#each Object.entries(dislikedList) as [key]}
     <li>
       <Movie movieId={key} />
     </li>
@@ -41,7 +41,7 @@
 </ul>
 <h2 class="mb-3">Wishlist</h2>
 <ul class="mb-3">
-  {#each Object.entries(wishlistList) as [key, value]}
+  {#each Object.entries(wishlistList) as [key]}
     <li>
       <Movie movieId={key} />
     </li>
