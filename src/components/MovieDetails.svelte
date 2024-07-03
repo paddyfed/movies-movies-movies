@@ -58,6 +58,7 @@
     <h1 class="mb-3">{data.title}</h1>
     <p class="poster">
       <img
+        class="img-fluid"
         src={posterUrl + data.poster_path}
         alt={data.title + " Poster"}
         title={data.title}
