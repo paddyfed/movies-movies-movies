@@ -4,7 +4,7 @@
   let transform;
   let color;
 
-  switch (certification) {
+  switch (certification.trim()) {
     case "PG":
     case "U":
       iconClass = "fa-solid fa-play fa-rotate-270 fa-lg";
@@ -19,7 +19,7 @@
       break;
   }
 
-  switch (certification) {
+  switch (certification.trim()) {
     case "PG":
       color = "#fbad00";
       break;

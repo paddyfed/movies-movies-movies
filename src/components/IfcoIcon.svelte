@@ -4,7 +4,7 @@
   let transform;
   let color;
 
-  switch (certification) {
+  switch (certification.trim()) {
     case "PG":
     case "G":
     case "18":
@@ -18,7 +18,7 @@
       break;
   }
 
-  switch (certification) {
+  switch (certification.trim()) {
     case "PG":
       color = "#00ff00";
       break;
