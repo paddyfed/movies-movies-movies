@@ -6,24 +6,24 @@ import Layout from "../layouts/Layout.astro";
 <Layout title="Movies Movies Movies">
   <main class="container-fluid">
     <section class="row">
-      <section class="col-12">
+      <section class="col-12 mb-3">
+        <h2 class="mb-3">Popular Movies</h2>
         <MovieScroll
-          scrollTitle="Popular Movies"
-          fetchUrl=`${import.meta.env.PUBLIC_API_URL}/movie/popular?language=en-US`
+          fetchUrl=`/3/movie/popular?language=en-US`
           client:only="svelte"
         />
       </section>
-      <section class="col-12">
+      <section class="col-12 mb-3">
+        <h2 class="mb-3">Now Playing Movies</h2>
         <MovieScroll
-          scrollTitle="Now Playing Movies"
-          fetchUrl=`${import.meta.env.PUBLIC_API_URL}/movie/now_playing?language=en-US`
+          fetchUrl=`/3/movie/now_playing?language=en-US`
           client:only="svelte"
         />
       </section>
-      <section class="col-12">
+      <section class="col-12 mb-3">
+        <h2 class="mb-3">Top Rated Movies</h2>
         <MovieScroll
-          scrollTitle="Top Rated Movies"
-          fetchUrl=`${import.meta.env.PUBLIC_API_URL}/movie/top_rated?language=en-US`
+          fetchUrl=`/3/movie/top_rated?language=en-US`
           client:only="svelte"
         />
       </section>

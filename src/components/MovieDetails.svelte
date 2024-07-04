@@ -20,13 +20,15 @@
   const imgPosterSize = "w342";
   const backdropSize = "w1280";
 
+  const fullFetchUrl = new URL(
+    `/3/movie/${movieIdParam}`,
+    import.meta.env.PUBLIC_API_URL
+  );
+
   let backdropUrl = new URL(imgPosterUrl + backdropSize);
   let posterUrl = new URL(imgPosterUrl + imgPosterSize);
 
-  let promise = fetch(
-    `${import.meta.env.PUBLIC_API_URL}movie/${movieIdParam}`,
-    options
-  ).then((x) => x.json());
+  let promise = fetch(fullFetchUrl, options).then((x) => x.json());
 </script>
 
 {#await promise}
@@ -92,7 +94,7 @@
     </div>
   </section>
 {:catch error}
-  {console.log(error)}
+  {error}
 {/await}
 
 <style>

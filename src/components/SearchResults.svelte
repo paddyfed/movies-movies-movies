@@ -1,7 +1,9 @@
 <script>
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
 
-  const queryParam = new URLSearchParams(window.location.search).get("query");
+  const queryParam = encodeURIComponent(
+    new URLSearchParams(window.location.search).get("query")
+  );
   export let currentPage = 1;
   export let maxPages = 5;
 
@@ -17,12 +19,12 @@
     },
   };
 
-  let promise = fetch(
-    `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
-      queryParam
-    )}&include_adult=false&language=en-US&page=${currentPage}`,
-    options
-  ).then((x) => x.json());
+  let fullFetchUrl = new URL(
+    `/3/search/movie?query=${queryParam}&include_adult=false&language=en-US&page=${currentPage}`,
+    import.meta.env.PUBLIC_API_URL
+  );
+
+  let promise = fetch(fullFetchUrl, options).then((x) => x.json());
 
   function paginationClicked(event) {
     if (!Number.isNaN(parseInt(event.target.textContent))) {
@@ -44,13 +46,11 @@
         }
       }
     }
-
-    promise = fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
-        queryParam
-      )}&include_adult=false&language=en-US&page=${currentPage}`,
-      options
-    ).then((x) => x.json());
+    fullFetchUrl = new URL(
+      `/3/search/movie?query=${queryParam}&include_adult=false&language=en-US&page=${currentPage}`,
+      import.meta.env.PUBLIC_API_URL
+    );
+    promise = fetch(fullFetchUrl, options).then((x) => x.json());
   }
 </script>
 
@@ -85,5 +85,5 @@
     maxPages={data.total_pages < maxPages ? data.total_pages : maxPages}
   />
 {:catch error}
-  {console.log(error)}
+  {error}
 {/await}

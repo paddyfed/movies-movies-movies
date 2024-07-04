@@ -11,10 +11,11 @@
     },
   };
 
-  let promise = fetch(
-    `${import.meta.env.PUBLIC_API_URL}movie/${movieId}/videos?language=en-US`,
-    options
-  ).then((x) => x.json());
+  const fullFetchUrl = new URL(
+    `/3/movie/${movieId}/videos?language=en-US`,
+    import.meta.env.PUBLIC_API_URL
+  );
+  let promise = fetch(fullFetchUrl, options).then((x) => x.json());
 </script>
 
 {#await promise}

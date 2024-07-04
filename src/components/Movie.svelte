@@ -9,14 +9,16 @@
     },
   };
 
+  const fullFetchUrl = new URL(
+    `/3/movie/${movieId}`,
+    import.meta.env.PUBLIC_API_URL
+  );
+
   const imgPosterUrl = "https://image.tmdb.org/t/p/";
   const imgPosterSize = "w185";
   let posterUrl = new URL(imgPosterUrl + imgPosterSize);
 
-  let promise = fetch(
-    `${import.meta.env.PUBLIC_API_URL}movie/${movieId}`,
-    options
-  ).then((x) => x.json());
+  let promise = fetch(fullFetchUrl, options).then((x) => x.json());
 </script>
 
 {#await promise}
