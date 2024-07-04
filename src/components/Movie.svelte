@@ -20,7 +20,7 @@
 </script>
 
 {#await promise}
-  <div>loading...</div>
+  <div><i class="fa-solid fa-spinner fa-spin"></i></div>
 {:then data}
   <a href={import.meta.env.BASE_URL + "/movie?movieId=" + data.id}>
     <img
@@ -34,3 +34,14 @@
 {:catch error}
   {error}
 {/await}
+
+<style>
+  div {
+    height: 278px;
+    width: 185px;
+    background-color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

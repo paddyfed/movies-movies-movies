@@ -3,7 +3,7 @@
   export let currentPage;
 </script>
 
-<nav aria-label="Movie Scroll Pagination" class="mb-3">
+<nav aria-label="Pagination" class="mb-3">
   <ul class="pagination">
     <li class="page-item">
       <button
