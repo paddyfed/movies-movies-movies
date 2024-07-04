@@ -23,19 +23,19 @@
   );
 
   function paginationClicked(event) {
-    if (!Number.isNaN(parseInt(event.target.textContent))) {
-      currentPage = parseInt(event.target.textContent);
+    if (!Number.isNaN(parseInt(event.currentTarget.textContent))) {
+      currentPage = parseInt(event.currentTarget.textContent);
     }
 
-    if (event.target.ariaLabel !== null) {
-      if (event.target.ariaLabel === "Previous") {
+    if (event.currentTarget.ariaLabel !== null) {
+      if (event.currentTarget.ariaLabel === "Previous") {
         currentPage -= 1;
         if (currentPage < 1) {
           currentPage = 1;
         }
       }
 
-      if (event.target.ariaLabel === "Next") {
+      if (event.currentTarget.ariaLabel === "Next") {
         currentPage += 1;
         if (currentPage > maxPages && maxPages !== 0) {
           currentPage = maxPages;

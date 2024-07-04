@@ -5,7 +5,7 @@ interface Props {
 
 const { title } = Astro.props;
 import MainNavBar from "../components/MainNavBar.svelte";
-import MainFooter from "../components/MainFooter.svelte";
+import MainFooter from "../components/MainFooter.astro";
 ---
 
 <!doctype html>
@@ -47,7 +47,7 @@ import MainFooter from "../components/MainFooter.svelte";
       <MainNavBar client:only="svelte" />
     </header>
     <slot />
-    <footer class="mb-3"><MainFooter client:only="svelte" /></footer>
+    <footer class="mb-3"><MainFooter /></footer>
   </body>
 </html>
 <style is:global>
