@@ -1,11 +1,17 @@
+<!-- AppSettings.svelte component -->
+<!-- Purpose: Allows users to change some settings on the site -->
 <script>
+  // Load settings from localStorage
+  // If the item does not exist in localStorage, then set a default settins
   let dateSettingSelected =
     localStorage.getItem("dateSettingSelected") ?? "en-IE";
 
+  // When the date setting is changed, record it in localStorage
   function handleDateSettingChanged() {
     localStorage.setItem("dateSettingSelected", dateSettingSelected);
   }
 
+  // Reset all settings back to their defaults
   function resetLocalStorage() {
     localStorage.removeItem("dateSettingSelected");
     dateSettingSelected = "en-IE";

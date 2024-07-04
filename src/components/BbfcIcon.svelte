@@ -1,9 +1,14 @@
+<!-- BbfcIcon.svelte Component -->
+<!-- Purpose: Displays the certification of the movie from BBFC (British Board of Film Classification) if available -->
 <script>
   export let certification;
   let iconClass;
   let transform;
   let color;
 
+  // Pick the shape of the classification using FontAwesome icons
+  // U and PG have a triangular shape
+  // 18, 15, 12, and 12A have a circular shape
   switch (certification.trim()) {
     case "PG":
     case "U":
@@ -19,6 +24,8 @@
       break;
   }
 
+  // Pick the color of the classification
+  // Each classification has a different color (see https://www.bbfc.co.uk/)
   switch (certification.trim()) {
     case "PG":
       color = "#fbad00";
@@ -39,6 +46,7 @@
   }
 </script>
 
+<!-- Use FontAwesome layering to combine the classification icon with the classification text https://docs.fontawesome.com/web/style/layer -->
 <span
   class="fa-layers fa-fw fa-4x"
   title="BBFC Classification of {certification}"

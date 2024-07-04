@@ -1,9 +1,14 @@
+<!-- IfcoIcon.svelte Component -->
+<!-- Purpose: Displays the certification of the movie from IFCO (Irish Film Classification Office) if available -->
 <script>
   export let certification;
   let iconClass;
   let transform;
   let color;
 
+  // Pick the shape of the classification using FontAwesome icons
+  // All classifications have a cirrcular shape
+  // I have kept this switch statement in place for future changes if needed
   switch (certification.trim()) {
     case "PG":
     case "G":
@@ -18,6 +23,8 @@
       break;
   }
 
+  // Pick the color of the classification
+  // Each classification has a different color (see https://www.ifco.ie/)
   switch (certification.trim()) {
     case "PG":
       color = "#00ff00";
@@ -42,6 +49,7 @@
   }
 </script>
 
+<!-- Use FontAwesome layering to combine the classification icon with the classification text https://docs.fontawesome.com/web/style/layer -->
 <span
   class="fa-layers fa-fw fa-4x"
   title="IFCO Classification of {certification}"

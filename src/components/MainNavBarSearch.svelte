@@ -1,7 +1,11 @@
+<!-- MainNavBarSearch.svelte Component -->
+<!-- Purpose: Runs the search bar on the top nav bar -->
 <script>
   let value = new URLSearchParams(window.location.search).get("query");
   let searchValue;
 
+  // Added this event handler to capture keybaord events as there was an issue
+  // when the Enter key is pressed when entering a search query
   function key(e) {
     switch (e.keyCode) {
       // this is the enter key. This ensures pressing Enter will run the search

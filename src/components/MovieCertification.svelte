@@ -22,10 +22,12 @@
 </script>
 
 {#await promise}
+  <!-- While API is loading, show placeholder images -->
   <div class="placeholder-glow">
     <span class="placeholder col-12">Loading</span>
   </div>
 {:then data}
+  <!-- When data is loaded, display the film classifications from IFCo and BBFC -->
   {#each data.results.filter((element) => {
     return element.iso_3166_1 === "GB";
   }) as cert}
@@ -37,5 +39,6 @@
     <IfcoIcon certification={cert.release_dates[0].certification} />
   {/each}
 {:catch error}
+  <!-- Display the error if one occurs -->
   {error}
 {/await}

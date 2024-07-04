@@ -22,8 +22,10 @@
 </script>
 
 {#await promise}
+  <!-- While API is loading, show placeholder images -->
   <div><i class="fa-solid fa-spinner fa-spin"></i></div>
 {:then data}
+  <!-- When data is loaded, display the movie poster -->
   <a href={import.meta.env.BASE_URL + "/movie?movieId=" + data.id}>
     <img
       src={posterUrl + data.poster_path}
@@ -34,6 +36,7 @@
     />
   </a>
 {:catch error}
+  <!-- Display the error if one occurs -->
   {error}
 {/await}
 

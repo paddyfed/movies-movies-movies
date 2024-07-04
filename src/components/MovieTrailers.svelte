@@ -19,6 +19,7 @@
 </script>
 
 {#await promise}
+  <!-- While API is loading, show placeholder images -->
   <h2 class="placeholder-glow">
     <span class="placeholder col-12">Loading</span>
   </h2>
@@ -28,6 +29,7 @@
     --height="270px"
   />
 {:then data}
+  <!-- When data is loaded, display the movie trailers from YouTube -->
   <h2>Trailers</h2>
   {#if data.results.filter((element) => {
     return element.official === true && element.type === "Trailer";
@@ -57,6 +59,7 @@
     <div class="no-trailers-placeholder">No Trailers Available</div>
   {/if}
 {:catch error}
+  <!-- Display the error if one occurs -->
   {error}
 {/await}
 

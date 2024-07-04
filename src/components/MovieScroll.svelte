@@ -34,6 +34,7 @@
 
   let promise = fetch(fullFetchUrl, options).then((x) => x.json());
 
+  // When a pagination button is clicked, move the current page and re-run the fetch of data
   function paginationClicked(event) {
     currentPage = findCurrentPage(
       event.currentTarget.dataset.target,
@@ -51,6 +52,7 @@
   <!-- While API is loading, show placeholder images -->
   <MovieScrollLoadingSpinner />
 {:then data}
+  <!-- When data is loaded, display the movies in a list -->
   <ul class="mb-3">
     {#each data.results as movie}
       <li>
@@ -68,8 +70,10 @@
     {/each}
   </ul>
 {:catch error}
+  <!-- Display the error if one occurs -->
   {error}
 {/await}
+<!-- Include pagination -->
 <MovieScrollPagination on:click={paginationClicked} {maxPages} {currentPage} />
 
 <style>
