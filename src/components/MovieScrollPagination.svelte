@@ -5,13 +5,15 @@
 
 <nav aria-label="Movie Scroll Pagination" class="mb-3">
   <ul class="pagination">
-    <li class="page-item {currentPage === 1 ? 'disabled' : ''}">
+    <li class="page-item">
       <button
         class="page-link {currentPage === 1
           ? 'bg-dark-subtle text-primary-emphasis'
           : 'bg-dark text-primary'}"
         aria-label="Previous"
+        data-target="Previous"
         on:click|preventDefault
+        disabled={currentPage === 1}
       >
         <i class="fa fa-fw fa-caret-left" aria-label="Previous"></i>
       </button>
@@ -22,19 +24,23 @@
           <button
             class="page-link bg-dark text-primary"
             on:click|preventDefault
+            data-target={index + 1}
+            disabled={currentPage === index + 1}
           >
             {index + 1}
           </button>
         </li>
       {/each}
     {/if}
-    <li class="page-item {currentPage === maxPages ? 'disabled' : ''}">
+    <li class="page-item">
       <button
         class="page-link {currentPage === maxPages
           ? 'bg-dark-subtle text-primary-emphasis'
           : 'bg-dark text-primary'}"
         aria-label="Next"
+        data-target="Next"
         on:click|preventDefault
+        disabled={currentPage === maxPages}
       >
         <i class="fa fa-fw fa-caret-right" aria-label="Next"></i>
       </button>

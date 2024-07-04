@@ -23,26 +23,28 @@
   );
 
   function paginationClicked(event) {
-    if (!Number.isNaN(parseInt(event.currentTarget.textContent))) {
-      currentPage = parseInt(event.currentTarget.textContent);
-    }
+    const target = event.currentTarget.dataset.target;
+    console.log(target);
 
-    if (event.currentTarget.ariaLabel !== null) {
-      if (event.currentTarget.ariaLabel === "Previous") {
+    switch (target) {
+      case "Previous":
         currentPage -= 1;
-        if (currentPage < 1) {
-          currentPage = 1;
-        }
-      }
-
-      if (event.currentTarget.ariaLabel === "Next") {
+        break;
+      case "Next":
         currentPage += 1;
-        if (currentPage > maxPages && maxPages !== 0) {
-          currentPage = maxPages;
-        }
-      }
+        break;
     }
 
+    if (!Number.isNaN(parseInt(target))) {
+      currentPage = parseInt(target);
+    }
+
+    if (currentPage < 1) {
+      currentPage = 1;
+    }
+    if (currentPage > maxPages) {
+      currentPage = maxPages;
+    }
     promise = fetch(`${fetchUrl}&page=${currentPage}`, options).then((x) =>
       x.json()
     );
