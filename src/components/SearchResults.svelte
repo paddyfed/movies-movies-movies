@@ -1,9 +1,7 @@
 <script>
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
 
-  const queryParam = encodeURIComponent(
-    new URLSearchParams(window.location.search).get("query")
-  );
+  const queryParam = new URLSearchParams(window.location.search).get("query");
   export let currentPage = 1;
   export let maxPages = 5;
 
@@ -19,10 +17,20 @@
     },
   };
 
-  let fullFetchUrl = new URL(
-    `/3/search/movie?query=${queryParam}&include_adult=false&language=en-US&page=${currentPage}`,
-    import.meta.env.PUBLIC_API_URL
-  );
+  const fetchUrl = `/3/search/movie`;
+
+  const paramsObj = {
+    query: queryParam,
+    page: currentPage,
+    include_adult: false,
+    language: "en-US",
+  };
+
+  let fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
+
+  for (const key in paramsObj) {
+    fullFetchUrl.searchParams.append(key, paramsObj[key]);
+  }
 
   let promise = fetch(fullFetchUrl, options).then((x) => x.json());
 
@@ -46,10 +54,8 @@
         }
       }
     }
-    fullFetchUrl = new URL(
-      `/3/search/movie?query=${queryParam}&include_adult=false&language=en-US&page=${currentPage}`,
-      import.meta.env.PUBLIC_API_URL
-    );
+
+    fullFetchUrl.searchParams.set("page", currentPage);
     promise = fetch(fullFetchUrl, options).then((x) => x.json());
   }
 </script>
