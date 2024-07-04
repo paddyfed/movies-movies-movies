@@ -8,24 +8,15 @@ import Layout from "../layouts/Layout.astro";
     <section class="row">
       <section class="col-12 mb-3">
         <h2 class="mb-3">Popular Movies</h2>
-        <MovieScroll
-          fetchUrl=`/3/movie/popular?language=en-US`
-          client:only="svelte"
-        />
+        <MovieScroll movieList=`popular` client:only="svelte" />
       </section>
       <section class="col-12 mb-3">
         <h2 class="mb-3">Now Playing Movies</h2>
-        <MovieScroll
-          fetchUrl=`/3/movie/now_playing?language=en-US`
-          client:only="svelte"
-        />
+        <MovieScroll movieList=`now_playing` client:only="svelte" />
       </section>
       <section class="col-12 mb-3">
         <h2 class="mb-3">Top Rated Movies</h2>
-        <MovieScroll
-          fetchUrl=`/3/movie/top_rated?language=en-US`
-          client:only="svelte"
-        />
+        <MovieScroll movieList=`top_rated` client:only="svelte" />
       </section>
     </section>
   </main>

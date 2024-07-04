@@ -2,7 +2,7 @@
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
 
-  export let fetchUrl;
+  export let movieList;
 
   const imgPosterUrl = "https://image.tmdb.org/t/p/";
   const imgPosterSize = "w185/";
@@ -17,10 +17,19 @@
     },
   };
 
-  let fullFetchUrl = new URL(
-    `${fetchUrl}&page=${currentPage}`,
-    import.meta.env.PUBLIC_API_URL
-  );
+  const fetchUrl = "/3/movie/" + movieList;
+
+  let fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
+
+  const paramsObj = {
+    page: currentPage,
+    include_adult: false,
+    language: "en-US",
+  };
+
+  for (const key in paramsObj) {
+    fullFetchUrl.searchParams.append(key, paramsObj[key]);
+  }
 
   let promise = fetch(fullFetchUrl, options).then((x) => x.json());
 
@@ -46,10 +55,9 @@
     if (currentPage > maxPages) {
       currentPage = maxPages;
     }
-    fullFetchUrl = new URL(
-      `${fetchUrl}&page=${currentPage}`,
-      import.meta.env.PUBLIC_API_URL
-    );
+
+    fullFetchUrl.searchParams.set("page", currentPage);
+
     promise = fetch(fullFetchUrl, options).then((x) => x.json());
   }
 </script>
