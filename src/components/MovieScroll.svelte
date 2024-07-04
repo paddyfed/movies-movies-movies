@@ -1,4 +1,5 @@
 <script>
+  import { findCurrentPage } from "../js/pagination";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
 
@@ -34,27 +35,11 @@
   let promise = fetch(fullFetchUrl, options).then((x) => x.json());
 
   function paginationClicked(event) {
-    const target = event.currentTarget.dataset.target;
-
-    switch (target) {
-      case "Previous":
-        currentPage -= 1;
-        break;
-      case "Next":
-        currentPage += 1;
-        break;
-    }
-
-    if (!Number.isNaN(parseInt(target))) {
-      currentPage = parseInt(target);
-    }
-
-    if (currentPage < 1) {
-      currentPage = 1;
-    }
-    if (currentPage > maxPages) {
-      currentPage = maxPages;
-    }
+    currentPage = findCurrentPage(
+      event.currentTarget.dataset.target,
+      currentPage,
+      maxPages
+    );
 
     fullFetchUrl.searchParams.set("page", currentPage);
 
