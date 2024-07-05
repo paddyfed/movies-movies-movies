@@ -9,10 +9,9 @@
     },
   };
 
-  const fullFetchUrl = new URL(
-    `/3/movie/${movieId}`,
-    import.meta.env.PUBLIC_API_URL
-  );
+  const fetchUrl = `/3/movie/${movieId}`;
+
+  const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
 
   const imgPosterUrl = "https://image.tmdb.org/t/p/";
   const imgPosterSize = "w185";

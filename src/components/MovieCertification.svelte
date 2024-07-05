@@ -13,10 +13,9 @@
     },
   };
 
-  const fullFetchUrl = new URL(
-    `/3/movie/${movieId}/release_dates`,
-    import.meta.env.PUBLIC_API_URL
-  );
+  const fetchUrl = `/3/movie/${movieId}/release_dates`;
+
+  const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
 
   let promise = fetch(fullFetchUrl, options).then((x) => x.json());
 </script>

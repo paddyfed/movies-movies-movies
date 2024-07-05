@@ -11,16 +11,25 @@
     },
   };
 
-  const fullFetchUrl = new URL(
-    `/3/movie/${movieId}/videos?language=en-US`,
-    import.meta.env.PUBLIC_API_URL
-  );
+  const fetchUrl = `/3/movie/${movieId}/videos`;
+
+  const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
+
+  const paramsObj = {
+    include_adult: false,
+    language: "en-US",
+  };
+
+  for (const key in paramsObj) {
+    fullFetchUrl.searchParams.append(key, paramsObj[key]);
+  }
+
   let promise = fetch(fullFetchUrl, options).then((x) => x.json());
 </script>
 
 {#await promise}
   <!-- While API is loading, show placeholder images -->
-  <h2 class="placeholder-glow">
+  <h2 class="placeholder-glow mb-3">
     <span class="placeholder col-12">Loading</span>
   </h2>
   <MovieScrollLoadingSpinner
@@ -30,31 +39,29 @@
   />
 {:then data}
   <!-- When data is loaded, display the movie trailers from YouTube -->
-  <h2>Trailers</h2>
+  <h2 class="mb-3">Trailers</h2>
   {#if data.results.filter((element) => {
     return element.official === true && element.type === "Trailer";
   }).length !== 0}
-    <section>
-      <ul>
-        {#each data.results.filter((element) => {
-          return element.official === true && element.type === "Trailer";
-        }) as video}
-          <li>
-            <iframe
-              id="ytplayer"
-              type="text/html"
-              loading="lazy"
-              width="480"
-              height="270"
-              title={video.name}
-              src="https://www.youtube.com/embed/{video.key}"
-              frameborder="0"
-              allowfullscreen
-            ></iframe>
-          </li>
-        {/each}
-      </ul>
-    </section>
+    <ul>
+      {#each data.results.filter((element) => {
+        return element.official === true && element.type === "Trailer";
+      }) as video}
+        <li>
+          <iframe
+            id="ytplayer"
+            type="text/html"
+            loading="lazy"
+            width="480"
+            height="270"
+            title={video.name}
+            src="https://www.youtube.com/embed/{video.key}"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+        </li>
+      {/each}
+    </ul>
   {:else}
     <div class="no-trailers-placeholder">No Trailers Available</div>
   {/if}
@@ -64,14 +71,11 @@
 {/await}
 
 <style>
-  section {
-    overflow-y: auto;
-    scrollbar-color: white #13151a;
-  }
-
   ul {
     display: flex;
     gap: 0.5em;
+    overflow-y: auto;
+    scrollbar-color: white #13151a;
   }
 
   .no-trailers-placeholder {

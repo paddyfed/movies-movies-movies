@@ -20,10 +20,9 @@
   const imgPosterSize = "w342";
   const backdropSize = "w1280";
 
-  const fullFetchUrl = new URL(
-    `/3/movie/${movieIdParam}`,
-    import.meta.env.PUBLIC_API_URL
-  );
+  const fetchUrl = `/3/movie/${movieIdParam}`;
+
+  const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
 
   let backdropUrl = new URL(imgPosterUrl + backdropSize);
   let posterUrl = new URL(imgPosterUrl + imgPosterSize);
