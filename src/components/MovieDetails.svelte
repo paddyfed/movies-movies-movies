@@ -109,6 +109,7 @@
       "header header header"
       "poster details ."
       "footer footer footer";
+    color: var(--bs-light);
   }
 
   h1 {

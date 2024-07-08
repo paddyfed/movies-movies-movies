@@ -6,6 +6,7 @@ interface Props {
 const { title } = Astro.props;
 import MainNavBar from "../components/MainNavBar.astro";
 import MainFooter from "../components/MainFooter.astro";
+import "../styles/overwrite-bootstrap-colors.css";
 ---
 
 <!doctype html>
@@ -42,7 +43,7 @@ import MainFooter from "../components/MainFooter.astro";
       defer></script>
     <title>{title}</title>
   </head>
-  <body class="bg-dark text-light">
+  <body>
     <header class="mb-3">
       <MainNavBar />
     </header>

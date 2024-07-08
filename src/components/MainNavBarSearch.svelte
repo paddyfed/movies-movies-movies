@@ -31,7 +31,7 @@
     on:keydown={key}
   />
   <a
-    class="btn btn-outline-primary"
+    class="btn btn-primary"
     href="{import.meta.env.BASE_URL}/search?query={encodeURIComponent(
       searchValue
     )}"

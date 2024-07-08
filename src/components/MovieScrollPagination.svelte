@@ -7,9 +7,7 @@
   <ul class="pagination">
     <li class="page-item">
       <button
-        class="page-link {currentPage === 1
-          ? 'bg-dark-subtle text-primary-emphasis'
-          : 'bg-dark text-primary'}"
+        class="page-link"
         aria-label="Previous"
         data-target="Previous"
         on:click|preventDefault
@@ -22,7 +20,7 @@
       {#each Array(maxPages) as _, index}
         <li class="page-item {currentPage === index + 1 ? 'active' : ''}">
           <button
-            class="page-link bg-dark text-primary"
+            class="page-link"
             on:click|preventDefault
             data-target={index + 1}
             disabled={currentPage === index + 1}
@@ -34,9 +32,7 @@
     {/if}
     <li class="page-item">
       <button
-        class="page-link {currentPage === maxPages
-          ? 'bg-dark-subtle text-primary-emphasis'
-          : 'bg-dark text-primary'}"
+        class="page-link"
         aria-label="Next"
         data-target="Next"
         on:click|preventDefault
