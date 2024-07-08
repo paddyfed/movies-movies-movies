@@ -33,6 +33,11 @@
     rgba(255, 255, 255, 0)
   );
 
+  --bs-body-color: var(--bs-light);
+  --bs-body-color-rgb: 33, 37, 41;
+  --bs-body-bg: var(--bs-dark);
+  --bs-body-bg-rgb: 255, 255, 255;
+
   --bs-link-color: var(--bs-primary);
   --bs-link-color-rgb: rgb(from var(--bs-primary) r g b);
   --bs-link-decoration: underline;
