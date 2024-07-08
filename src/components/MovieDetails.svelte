@@ -82,6 +82,7 @@
           day: "numeric",
         })}
       </p>
+      <p>Runtime: {data.runtime} minutes</p>
 
       <MovieGenres genres={data.genres} />
       <p>
