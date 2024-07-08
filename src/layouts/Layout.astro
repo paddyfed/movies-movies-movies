@@ -47,7 +47,7 @@ import "../styles/overwrite-bootstrap-colors.css";
   <body>
     <header class="mb-3">
       <MainNavBar />
-      {URL.pathname}
+      {URL.pathname.split("/").toString()}
     </header>
     <slot />
     <footer class="mb-3"><MainFooter /></footer>

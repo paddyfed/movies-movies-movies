@@ -20,8 +20,8 @@
   }
 </script>
 
-{window.location.pathname}
-{#if window.location.pathname !== "/movies-movies-movies"}
+{window.location.pathname.split("/").toString()}
+{#if window.location.pathname.split("/")[2] !== ""}
   <form class="d-flex" role="search" id="searchForm" name="searchForm">
     <input
       class="form-control me-2"
