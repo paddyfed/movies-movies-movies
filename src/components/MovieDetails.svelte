@@ -1,5 +1,6 @@
 <script>
   import MovieCertification from "./MovieCertification.svelte";
+  import MovieGenres from "./MovieGenres.svelte";
   import MovieRating from "./MovieRating.svelte";
   import MovieTrailers from "./MovieTrailers.svelte";
 
@@ -81,6 +82,8 @@
           day: "numeric",
         })}
       </p>
+
+      <MovieGenres genres={data.genres} />
       <p>
         <MovieCertification movieId={movieIdParam} />
       </p>
