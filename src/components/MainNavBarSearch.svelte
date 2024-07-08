@@ -3,6 +3,7 @@
 <script>
   let value = new URLSearchParams(window.location.search).get("query");
   let searchValue;
+  export let URL;
 
   // Added this event handler to capture keybaord events as there was an issue
   // when the Enter key is pressed when entering a search query
@@ -20,8 +21,7 @@
   }
 </script>
 
-{window.location.pathname.split("/").toString()}
-{#if window.location.pathname.split("/")[2] !== ""}
+{#if URL != ""}
   <form class="d-flex" role="search" id="searchForm" name="searchForm">
     <input
       class="form-control me-2"

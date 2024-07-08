@@ -1,5 +1,6 @@
 ---
 import MainNavBarSearch from "./MainNavBarSearch.svelte";
+const URL = Astro.url.pathname.split("/")[2];
 ---
 
 <nav class="navbar navbar-expand-lg">
@@ -16,22 +17,30 @@ import MainNavBarSearch from "./MainNavBarSearch.svelte";
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+      <span class="fa-solid fa-bars"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href=`${import.meta.env.BASE_URL}/wishlist`>
+          <a
+            class="nav-link"
+            class:list={{ active: URL === "wishlist" }}
+            href=`${import.meta.env.BASE_URL}/wishlist`
+          >
             Wish List
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href=`${import.meta.env.BASE_URL}/settings`>
+          <a
+            class="nav-link"
+            class:list={{ active: URL === "settings" }}
+            href=`${import.meta.env.BASE_URL}/settings`
+          >
             Settings
           </a>
         </li>
       </ul>
-      <MainNavBarSearch client:only="svelte" />
+      <MainNavBarSearch client:only="svelte" URL={URL} />
     </div>
   </div>
 </nav>
