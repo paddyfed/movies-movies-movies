@@ -34,7 +34,7 @@
       <option value="de-DE">Germany</option>
       <option value="ko-KR">Korea</option>
     </select>
-    <div class="form-text text-light" aria-describedby="dateSetting">
+    <div class="form-text" aria-describedby="dateSetting">
       {new Date().toLocaleDateString(dateSettingSelected, {
         year: "numeric",
         month: "long",

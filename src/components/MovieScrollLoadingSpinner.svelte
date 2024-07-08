@@ -27,6 +27,5 @@
 
   section {
     overflow-y: auto;
-    scrollbar-color: white #13151a;
   }
 </style>
