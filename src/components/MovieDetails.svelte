@@ -99,6 +99,7 @@
       <p>Runtime: {data.runtime} minutes</p>
 
       <MovieGenres genres={data.genres} />
+      <MovieGenres genres={data.production_companies} />
       <p>
         <MovieCertification movieId={movieIdParam} />
       </p>
