@@ -37,7 +37,6 @@
     display: flex;
     gap: 0.5em;
     overflow-y: auto;
-    scrollbar-color: white #13151a;
   }
 
   .no-trailers-placeholder {

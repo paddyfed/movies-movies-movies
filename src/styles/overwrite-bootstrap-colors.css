@@ -89,6 +89,19 @@
   --bs-pagination-disabled-border-color: var(--bs-border-color);
 }
 
+.navbar {
+  --bs-navbar-color: var(--bs-body-color);
+  --bs-navbar-hover-color: hsl(from var(--bs-body-color) h s calc(l - 10));
+  --bs-navbar-disabled-color: hsl(from var(--bs-body-color) h s calc(l - 10));
+  --bs-navbar-active-color: var(--bs-primary);
+  --bs-navbar-toggler-border-color: var(--bs-primary);
+}
+
+.navbar-toggler {
+  color: var(--bs-primary);
+  background-color: transparent;
+}
+
 /* .btn-primary {
   --bs-btn-color: var(--bs-white);
   --bs-btn-bg: hsl(
