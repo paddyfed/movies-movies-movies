@@ -20,21 +20,24 @@
   }
 </script>
 
-<form class="d-flex" role="search" id="searchForm" name="searchForm">
-  <input
-    class="form-control me-2"
-    type="search"
-    placeholder="Search"
-    aria-label="Search"
-    bind:value
-    on:submit|preventDefault
-    on:keydown={key}
-  />
-  <a
-    class="btn btn-primary"
-    href="{import.meta.env.BASE_URL}/search?query={encodeURIComponent(
-      searchValue
-    )}"
-    on:click={() => (searchValue = value)}>Search</a
-  >
-</form>
+{#if window.location.pathname !== "/movies-movies-movies"}
+  <form class="d-flex" role="search" id="searchForm" name="searchForm">
+    <input
+      class="form-control me-2"
+      type="search"
+      placeholder="Search"
+      name="MovieSearch"
+      aria-label="Search"
+      bind:value
+      on:submit|preventDefault
+      on:keydown={key}
+    />
+    <a
+      class="btn btn-primary"
+      href="{import.meta.env.BASE_URL}/search?query={encodeURIComponent(
+        searchValue
+      )}"
+      on:click={() => (searchValue = value)}>Search</a
+    >
+  </form>
+{/if}

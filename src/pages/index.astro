@@ -1,14 +1,17 @@
 ---
 import MovieScroll from "../components/MovieScroll.svelte";
 import Layout from "../layouts/Layout.astro";
-import MainNavBarSearch from "../components/MainNavBarSearch.svelte";
+import MainPageSearch from "../components/MainPageSearch.svelte";
 ---
 
 <Layout title="Movies Movies Movies">
   <main class="container-fluid">
-    <section class="row align-items-center" style="height: 50vh; ">
-      <section class="col mb-3 d-flex justify-content-center">
-        <MainNavBarSearch client:only="svelte" />
+    <section class="row">
+      <section
+        class="col mb-5 d-flex flex-column align-items-center justify-content-evenly"
+      >
+        <h1 class="mb-5">Movies Movies Movies</h1>
+        <MainPageSearch client:only="svelte" />
       </section>
     </section>
     <section class="row">
