@@ -1,5 +1,6 @@
 <script>
   import MovieCertification from "./MovieCertification.svelte";
+  import MovieDetailsPlaceholder from "./MovieDetailsPlaceholder.svelte";
   import MovieGenres from "./MovieGenres.svelte";
   import MovieRating from "./MovieRating.svelte";
   import MovieTrailers from "./MovieTrailers.svelte";
@@ -22,8 +23,17 @@
   const backdropSize = "w1280";
 
   const fetchUrl = `/3/movie/${movieIdParam}`;
+  const paramsObj = {
+    append_to_response: "videos,release_dates",
+    include_adult: false,
+    language: "en-US",
+  };
 
   const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
+
+  for (const key in paramsObj) {
+    fullFetchUrl.searchParams.append(key, paramsObj[key]);
+  }
 
   let backdropUrl = new URL(imgPosterUrl + backdropSize);
   let posterUrl = new URL(imgPosterUrl + imgPosterSize);
@@ -33,39 +43,7 @@
 
 {#await promise}
   <!-- While API is loading, show placeholder images -->
-  <section
-    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)); background-repeat: no-repeat; background-size: cover;"
-    class="rounded p-3"
-  >
-    <h1 class="placeholder-glow mb-3">
-      <span class="placeholder col-12"></span>
-    </h1>
-    <div class="placeholder-glow poster">
-      <p class="poster-placeholder">
-        <i class="fas fa-fw fa-spinner fa-spin"></i>
-      </p>
-    </div>
-    <div class="placeholder-glow details">
-      <p class="placeholder col-12"></p>
-      <p class="placeholder col-12"></p>
-      <p class="placeholder col-12"></p>
-      <div class="row">
-        <p class="placeholder col-3"></p>
-      </div>
-      <div class="row">
-        <p class="placeholder col-3"></p>
-      </div>
-      <div class="row">
-        <p class="placeholder col-3"></p>
-      </div>
-      <div class="row">
-        <p class="placeholder col-3" style="height: 64px;"></p>
-      </div>
-      <div class="row">
-        <p class="placeholder col-4" style="height: 66px;"></p>
-      </div>
-    </div>
-  </section>
+  <MovieDetailsPlaceholder />
 {:then data}
   <!-- When data is loaded, display the movie details -->
   <section
@@ -101,7 +79,7 @@
       <MovieGenres genres={data.genres} />
       <MovieGenres genres={data.production_companies} />
       <p>
-        <MovieCertification movieId={movieIdParam} />
+        <MovieCertification releaseDates={data.release_dates.results} />
       </p>
 
       <p>
@@ -110,7 +88,7 @@
     </div>
 
     <div>
-      <MovieTrailers movieId={movieIdParam} />
+      <MovieTrailers trailers={data.videos.results} />
     </div>
   </section>
 {:catch error}
@@ -147,16 +125,6 @@
 
   .details {
     grid-area: details;
-  }
-
-  .poster-placeholder {
-    width: 342px;
-    max-width: 100%;
-    height: 513px;
-    background-color: gray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   @media screen and (max-width: 768px) {
