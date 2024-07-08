@@ -49,7 +49,21 @@
       <p class="placeholder col-12"></p>
       <p class="placeholder col-12"></p>
       <p class="placeholder col-12"></p>
-      <p class="placeholder col-3"></p>
+      <div class="row">
+        <p class="placeholder col-3"></p>
+      </div>
+      <div class="row">
+        <p class="placeholder col-3"></p>
+      </div>
+      <div class="row">
+        <p class="placeholder col-3"></p>
+      </div>
+      <div class="row">
+        <p class="placeholder col-3" style="height: 64px;"></p>
+      </div>
+      <div class="row">
+        <p class="placeholder col-4" style="height: 66px;"></p>
+      </div>
     </div>
   </section>
 {:then data}
