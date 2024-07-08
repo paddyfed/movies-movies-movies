@@ -15,7 +15,7 @@
   --bs-primary: #ffc801;
   --bs-primary-hover: hsl(from #ffc801 h s calc(l - 10));
   --bs-primary-hover-border: hsl(from var(--bs-primary-hover) h s calc(l - 10));
-  --bs-secondary: #6c757d;
+  --bs-secondary: hsl(from var(--bs-light) h s calc(l - 10));
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
@@ -32,6 +32,11 @@
     rgba(255, 255, 255, 0.15),
     rgba(255, 255, 255, 0)
   );
+
+  --bs-secondary-color: var(--bs-secondary);
+  --bs-secondary-color-rgb: 33, 37, 41;
+  --bs-secondary-bg: #e9ecef;
+  --bs-secondary-bg-rgb: 233, 236, 239;
 
   --bs-body-color: var(--bs-light);
   --bs-body-color-rgb: 33, 37, 41;
@@ -100,6 +105,26 @@
 .navbar-toggler {
   color: var(--bs-primary);
   background-color: transparent;
+}
+
+.form-control {
+  color: var(--bs-dark);
+  background-color: var(--bs-light);
+}
+
+.form-control::placeholder {
+  color: hsl(from var(--bs-body-color) h s calc(l - 20));
+}
+
+.form-control:focus {
+  color: var(--bs-dark);
+  background-color: var(--bs-light);
+  border-color: #86b7fe;
+}
+
+.form-select {
+  color: var(--bs-dark);
+  background-color: var(--bs-light);
 }
 
 /* .btn-primary {
