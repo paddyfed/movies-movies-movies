@@ -55,6 +55,7 @@
     line-height: 1.5em;
     font-size: 20px;
     border-radius: 50px;
+    box-shadow: 2px 2px 4px grey;
   }
 
   a {

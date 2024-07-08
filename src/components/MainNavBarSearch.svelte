@@ -20,6 +20,7 @@
   }
 </script>
 
+{window.location.pathname}
 {#if window.location.pathname !== "/movies-movies-movies"}
   <form class="d-flex" role="search" id="searchForm" name="searchForm">
     <input

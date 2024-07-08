@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { title } = Astro.props;
+const URL = Astro.url;
 import MainNavBar from "../components/MainNavBar.astro";
 import MainFooter from "../components/MainFooter.astro";
 import "../styles/overwrite-bootstrap-colors.css";
@@ -46,6 +47,7 @@ import "../styles/overwrite-bootstrap-colors.css";
   <body>
     <header class="mb-3">
       <MainNavBar />
+      {URL.pathname}
     </header>
     <slot />
     <footer class="mb-3"><MainFooter /></footer>
