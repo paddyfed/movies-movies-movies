@@ -1,5 +1,5 @@
-/* :root {
-  --bs-blue: #0d6efd;
+:root {
+  --bs-blue: var(--bs-primary);
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
@@ -12,17 +12,16 @@
   --bs-white: #fff;
   --bs-gray: #6c757d;
   --bs-gray-dark: #343a40;
-  --bs-primary: 284, 35%, 44%;
-  --bs-primary-hue-saturation: 284, 35%;
-  --bs-primary-lightness: 44%;
-  --bs-primary-lightness-hover: 34%;
+  --bs-primary: #ffc801;
+  --bs-primary-hover: hsl(from #ffc801 h s calc(l - 10));
+  --bs-primary-hover-border: hsl(from var(--bs-primary-hover) h s calc(l - 10));
   --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
   --bs-danger: #dc3545;
-  --bs-light: #f8f9fa;
-  --bs-dark: #212529;
+  --bs-light: #d9e6e6;
+  --bs-dark: #0f1819;
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -36,6 +35,23 @@
 }
 
 .btn-primary {
+  --bs-btn-color: var(--bs-dark);
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-color: var(--bs-dark);
+  --bs-btn-hover-bg: var(--bs-primary-hover);
+  --bs-btn-hover-border-color: var(--bs-primary-hover-border);
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: var(--bs-dark);
+  --bs-btn-active-bg: var(--bs-primary-hover);
+  --bs-btn-active-border-color: var(--bs-primary-hover-border);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: var(--bs-dark);
+  --bs-btn-disabled-bg: var(--bs-primary);
+  --bs-btn-disabled-border-color: var(--bs-primary);
+}
+
+/* .btn-primary {
   --bs-btn-color: var(--bs-white);
   --bs-btn-bg: hsl(
     var(--bs-primary-hue-saturation),
@@ -74,9 +90,9 @@
     var(--bs-primary-hue-saturation),
     var(--bs-primary-lightness)
   );
-}
+} */
 
-.btn-outline-primary {
+/* .btn-outline-primary {
   --bs-btn-color: var(--bs-primary);
   --bs-btn-border-color: var(--bs-primary);
   --bs-btn-hover-color: var(--bs-white);

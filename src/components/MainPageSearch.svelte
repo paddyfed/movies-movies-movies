@@ -59,7 +59,7 @@
   }
 
   a {
-    width: 45vw;
+    width: 25vw;
     padding: 1em;
     font-size: 18px;
     border-radius: 50px;
