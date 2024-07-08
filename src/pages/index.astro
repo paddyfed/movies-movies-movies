@@ -1,7 +1,9 @@
 ---
 import MovieScroll from "../components/MovieScroll.svelte";
+import Image from "astro/components/Image.astro";
 import Layout from "../layouts/Layout.astro";
 import MainPageSearch from "../components/MainPageSearch.svelte";
+import BrandImage from "../images/MoviesMoviesMovies_logo.svg";
 ---
 
 <Layout title="Movies Movies Movies">
@@ -10,7 +12,14 @@ import MainPageSearch from "../components/MainPageSearch.svelte";
       <section
         class="col mb-5 d-flex flex-column align-items-center justify-content-evenly"
       >
-        <h1 class="mb-5">Movies Movies Movies</h1>
+        <h1 class="mb-5">
+          <Image
+            src={BrandImage}
+            alt="Movies Movies Movies"
+            class="img-fluid"
+            width={500}
+          />
+        </h1>
         <MainPageSearch client:only="svelte" />
       </section>
     </section>
