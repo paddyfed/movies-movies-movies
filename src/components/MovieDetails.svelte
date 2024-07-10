@@ -5,7 +5,8 @@
   import MovieRating from "./MovieRating.svelte";
   import MovieTrailers from "./MovieTrailers.svelte";
 
-  const dateSetting = localStorage.getItem("dateSettingSelected") ?? "en-IE";
+  const dateSetting =
+    localStorage.getItem("dateSettingSelected") ?? "en-IE_Long";
 
   const movieIdParam = new URLSearchParams(window.location.search).get(
     "movieId"
@@ -39,6 +40,34 @@
   let posterUrl = new URL(imgPosterUrl + imgPosterSize);
 
   let promise = fetch(fullFetchUrl, options).then((x) => x.json());
+
+  const longDateOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  const localeSetting = {
+    "en-IE_Long": "en-IE",
+    "en-IE": "en-IE",
+    "en-US_Long": "en-US",
+    "en-US": "en-US",
+    "de-DE_Long": "de-DE",
+    "de-DE": "de-DE",
+    "ko-KR_Long": "ko-KR",
+    "ko-KR": "ko-KR",
+  };
+
+  const optionsSetting = {
+    "en-IE_Long": longDateOptions,
+    "en-IE": longDateOptions,
+    "en-US_Long": longDateOptions,
+    "en-US": longDateOptions,
+    "de-DE_Long": longDateOptions,
+    "de-DE": longDateOptions,
+    "ko-KR_Long": longDateOptions,
+    "ko-KR": longDateOptions,
+  };
 </script>
 
 {#await promise}
@@ -68,11 +97,10 @@
       <p>
         Release Date: {new Date(
           Date.parse(data.release_date)
-        ).toLocaleDateString(dateSetting, {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
+        ).toLocaleDateString(
+          localeSetting[dateSetting],
+          optionsSetting[dateSetting]
+        )}
       </p>
       <p>Runtime: {data.runtime} minutes</p>
 
