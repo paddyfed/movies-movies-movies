@@ -2,6 +2,9 @@
 <!-- Purpose: Allows users to change some settings on the site -->
 <script>
   // Load settings from localStorage
+
+  import DisplayDate from "./DisplayDate.svelte";
+
   // If the item does not exist in localStorage, then set a default setting
   let dateSettingSelected =
     localStorage.getItem("dateSettingSelected") ?? "en-IE_Long";
@@ -16,47 +19,6 @@
     localStorage.removeItem("dateSettingSelected");
     dateSettingSelected = "en-IE_Long";
   }
-
-  const longDateOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  const shortDateOptions = {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  };
-
-  const localeSetting = {
-    "en-IE_Long": "en-IE",
-    "en-IE": "en-IE",
-    "en-US_Long": "en-US",
-    "en-US": "en-US",
-    "de-DE_Long": "de-DE",
-    "de-DE": "de-DE",
-    "ko-KR_Long": "ko-KR",
-    "ko-KR": "ko-KR",
-    "en-IE_Short": "en-IE",
-    "en-US_Short": "en-US",
-    "de-DE_Short": "de-DE",
-    "ko-KR_Short": "ko-KR",
-  };
-
-  const optionsSetting = {
-    "en-IE_Long": longDateOptions,
-    "en-IE": longDateOptions,
-    "en-US_Long": longDateOptions,
-    "en-US": longDateOptions,
-    "de-DE_Long": longDateOptions,
-    "de-DE": longDateOptions,
-    "ko-KR_Long": longDateOptions,
-    "ko-KR": longDateOptions,
-    "en-IE_Short": shortDateOptions,
-    "en-US_Short": shortDateOptions,
-    "de-DE_Short": shortDateOptions,
-    "ko-KR_Short": shortDateOptions,
-  };
 </script>
 
 <h2 class="mb-3">Date Format</h2>
@@ -73,36 +35,33 @@
         bind:value={dateSettingSelected}
         on:change={handleDateSettingChanged}
       >
-        <option value="en-IE_Long"
-          >{new Date().toLocaleDateString("en-IE", longDateOptions)}
+        <option value="en-IE_Long">
+          <DisplayDate date={new Date()} dateSetting="en-IE_Long" />
         </option>
-        <option value="en-US_Long"
-          >{new Date().toLocaleDateString("en-US", longDateOptions)}
+        <option value="en-US_Long">
+          <DisplayDate date={new Date()} dateSetting="en-US_Long" />
         </option>
-        <option value="de-DE_Long"
-          >{new Date().toLocaleDateString("de-DE", longDateOptions)}
+        <option value="de-DE_Long">
+          <DisplayDate date={new Date()} dateSetting="de-DE_Long" />
         </option>
-        <option value="ko-KR_Long"
-          >{new Date().toLocaleDateString("ko-KR", longDateOptions)}
+        <option value="ko-KR_Long">
+          <DisplayDate date={new Date()} dateSetting="ko-KR_Long" />
         </option>
-        <option value="en-IE_Short"
-          >{new Date().toLocaleDateString("en-IE", shortDateOptions)}
+        <option value="en-IE_Short">
+          <DisplayDate date={new Date()} dateSetting="en-IE_Short" />
         </option>
-        <option value="en-US_Short"
-          >{new Date().toLocaleDateString("en-US", shortDateOptions)}
+        <option value="en-US_Short">
+          <DisplayDate date={new Date()} dateSetting="en-US_Short" />
         </option>
-        <option value="de-DE_Short"
-          >{new Date().toLocaleDateString("de-DE", shortDateOptions)}
+        <option value="de-DE_Short">
+          <DisplayDate date={new Date()} dateSetting="de-DE_Short" />
         </option>
-        <option value="ko-KR_Short"
-          >{new Date().toLocaleDateString("ko-KR", shortDateOptions)}
+        <option value="ko-KR_Short">
+          <DisplayDate date={new Date()} dateSetting="ko-KR_Short" />
         </option>
       </select>
       <div class="form-text" aria-describedby="dateSetting">
-        {new Date().toLocaleDateString(
-          localeSetting[dateSettingSelected],
-          optionsSetting[dateSettingSelected]
-        )}
+        <DisplayDate date={new Date()} {dateSettingSelected} />
       </div>
     </div>
   </div>
