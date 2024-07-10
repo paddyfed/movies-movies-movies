@@ -25,7 +25,6 @@
 
   const paramsObj = {
     page: currentPage,
-    include_adult: false,
     language: "en-US",
   };
 
@@ -51,7 +50,7 @@
 
 {#await promise}
   <!-- While API is loading, show placeholder images -->
-  <MovieScrollLoadingSpinner />
+  <MovieScrollLoadingSpinner --height="278px" --min-width="185px" />
 {:then data}
   <!-- When data is loaded, display the movies in a list -->
   <ul class="mb-3">
@@ -79,9 +78,19 @@
 
 <style>
   ul {
-    display: flex;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(5, 185px);
     gap: 0.5em;
-    overflow-y: auto;
+  }
+
+  @media (max-width: 768px) {
+    ul {
+      display: flex;
+      gap: 0.5em;
+      overflow-y: auto;
+      flex-wrap: nowrap;
+    }
   }
 
   img {

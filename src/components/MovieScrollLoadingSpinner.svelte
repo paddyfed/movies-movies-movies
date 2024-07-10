@@ -12,8 +12,19 @@
 
 <style>
   ul {
-    display: flex;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(5, 185px);
     gap: 0.5em;
+  }
+
+  @media (max-width: 768px) {
+    ul {
+      display: flex;
+      gap: 0.5em;
+      overflow-y: auto;
+      flex-wrap: nowrap;
+    }
   }
 
   li {
