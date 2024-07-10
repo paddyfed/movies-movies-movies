@@ -47,6 +47,12 @@
     day: "numeric",
   };
 
+  const shortDateOptions = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  };
+
   const localeSetting = {
     "en-IE_Long": "en-IE",
     "en-IE": "en-IE",
@@ -56,6 +62,10 @@
     "de-DE": "de-DE",
     "ko-KR_Long": "ko-KR",
     "ko-KR": "ko-KR",
+    "en-IE_Short": "en-IE",
+    "en-US_Short": "en-US",
+    "de-DE_Short": "de-DE",
+    "ko-KR_Short": "ko-KR",
   };
 
   const optionsSetting = {
@@ -67,6 +77,10 @@
     "de-DE": longDateOptions,
     "ko-KR_Long": longDateOptions,
     "ko-KR": longDateOptions,
+    "en-IE_Short": shortDateOptions,
+    "en-US_Short": shortDateOptions,
+    "de-DE_Short": shortDateOptions,
+    "ko-KR_Short": shortDateOptions,
   };
 </script>
 

@@ -22,6 +22,11 @@
     month: "long",
     day: "numeric",
   };
+  const shortDateOptions = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  };
 
   const localeSetting = {
     "en-IE_Long": "en-IE",
@@ -32,6 +37,10 @@
     "de-DE": "de-DE",
     "ko-KR_Long": "ko-KR",
     "ko-KR": "ko-KR",
+    "en-IE_Short": "en-IE",
+    "en-US_Short": "en-US",
+    "de-DE_Short": "de-DE",
+    "ko-KR_Short": "ko-KR",
   };
 
   const optionsSetting = {
@@ -43,6 +52,10 @@
     "de-DE": longDateOptions,
     "ko-KR_Long": longDateOptions,
     "ko-KR": longDateOptions,
+    "en-IE_Short": shortDateOptions,
+    "en-US_Short": shortDateOptions,
+    "de-DE_Short": shortDateOptions,
+    "ko-KR_Short": shortDateOptions,
   };
 </script>
 
@@ -61,17 +74,29 @@
         on:change={handleDateSettingChanged}
       >
         <option value="en-IE_Long"
-          >{new Date().toLocaleDateString("en-IE", longDateOptions)}</option
-        >
+          >{new Date().toLocaleDateString("en-IE", longDateOptions)}
+        </option>
         <option value="en-US_Long"
-          >{new Date().toLocaleDateString("en-US", longDateOptions)}</option
-        >
+          >{new Date().toLocaleDateString("en-US", longDateOptions)}
+        </option>
         <option value="de-DE_Long"
-          >{new Date().toLocaleDateString("de-DE", longDateOptions)}</option
-        >
+          >{new Date().toLocaleDateString("de-DE", longDateOptions)}
+        </option>
         <option value="ko-KR_Long"
-          >{new Date().toLocaleDateString("ko-KR", longDateOptions)}</option
-        >
+          >{new Date().toLocaleDateString("ko-KR", longDateOptions)}
+        </option>
+        <option value="en-IE_Short"
+          >{new Date().toLocaleDateString("en-IE", shortDateOptions)}
+        </option>
+        <option value="en-US_Short"
+          >{new Date().toLocaleDateString("en-US", shortDateOptions)}
+        </option>
+        <option value="de-DE_Short"
+          >{new Date().toLocaleDateString("de-DE", shortDateOptions)}
+        </option>
+        <option value="ko-KR_Short"
+          >{new Date().toLocaleDateString("ko-KR", shortDateOptions)}
+        </option>
       </select>
       <div class="form-text" aria-describedby="dateSetting">
         {new Date().toLocaleDateString(
