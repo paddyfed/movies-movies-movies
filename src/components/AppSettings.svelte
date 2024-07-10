@@ -1,10 +1,9 @@
 <!-- AppSettings.svelte component -->
 <!-- Purpose: Allows users to change some settings on the site -->
 <script>
-  // Load settings from localStorage
-
   import DisplayDate from "./DisplayDate.svelte";
 
+  // Load settings from localStorage
   // If the item does not exist in localStorage, then set a default setting
   let dateSettingSelected =
     localStorage.getItem("dateSettingSelected") ?? "en-IE_Long";
