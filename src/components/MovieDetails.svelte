@@ -25,7 +25,6 @@
   const fetchUrl = `/3/movie/${movieIdParam}`;
   const paramsObj = {
     append_to_response: "videos,release_dates",
-    include_adult: false,
     language: "en-US",
   };
 

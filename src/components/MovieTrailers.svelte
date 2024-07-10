@@ -1,14 +1,12 @@
 <script>
-  import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
-
   export let trailers;
 </script>
 
 <!-- When data is loaded, display the movie trailers from YouTube -->
 <h2 class="mb-3">Trailers</h2>
-{#if trailers.filter((element) => {
-  return element.official === true && element.type === "Trailer";
-}).length !== 0}
+{#if Array.isArray(trailers) && trailers.filter((element) => {
+    return element.official === true && element.type === "Trailer";
+  }).length !== 0}
   <ul>
     {#each trailers.filter((element) => {
       return element.official === true && element.type === "Trailer";
