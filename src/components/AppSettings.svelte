@@ -35,28 +35,28 @@
         on:change={handleDateSettingChanged}
       >
         <option value="en-IE_Long">
-          <DisplayDate date={new Date()} dateSetting="en-IE_Long" />
+          <DisplayDate date={new Date()} dateSettingSelected="en-IE_Long" />
         </option>
         <option value="en-US_Long">
-          <DisplayDate date={new Date()} dateSetting="en-US_Long" />
+          <DisplayDate date={new Date()} dateSettingSelected="en-US_Long" />
         </option>
         <option value="de-DE_Long">
-          <DisplayDate date={new Date()} dateSetting="de-DE_Long" />
+          <DisplayDate date={new Date()} dateSettingSelected="de-DE_Long" />
         </option>
         <option value="ko-KR_Long">
-          <DisplayDate date={new Date()} dateSetting="ko-KR_Long" />
+          <DisplayDate date={new Date()} dateSettingSelected="ko-KR_Long" />
         </option>
         <option value="en-IE_Short">
-          <DisplayDate date={new Date()} dateSetting="en-IE_Short" />
+          <DisplayDate date={new Date()} dateSettingSelected="en-IE_Short" />
         </option>
         <option value="en-US_Short">
-          <DisplayDate date={new Date()} dateSetting="en-US_Short" />
+          <DisplayDate date={new Date()} dateSettingSelected="en-US_Short" />
         </option>
         <option value="de-DE_Short">
-          <DisplayDate date={new Date()} dateSetting="de-DE_Short" />
+          <DisplayDate date={new Date()} dateSettingSelected="de-DE_Short" />
         </option>
         <option value="ko-KR_Short">
-          <DisplayDate date={new Date()} dateSetting="ko-KR_Short" />
+          <DisplayDate date={new Date()} dateSettingSelected="ko-KR_Short" />
         </option>
       </select>
       <div class="form-text" aria-describedby="dateSetting">
