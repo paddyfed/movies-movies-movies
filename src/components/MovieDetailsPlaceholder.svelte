@@ -7,31 +7,33 @@
   class="rounded p-3"
 >
   <h1 class="placeholder-glow mb-3">
-    <span class="placeholder col-12"></span>
+    <span class="placeholder col-12">Loading</span>
   </h1>
   <div class="placeholder-glow poster">
     <p class="poster-placeholder">
       <i class="fas fa-fw fa-spinner fa-spin"></i>
     </p>
   </div>
-  <div class="placeholder-glow details">
-    <p class="placeholder col-12"></p>
-    <p class="placeholder col-12"></p>
-    <p class="placeholder col-12"></p>
+  <div class="placeholder-glow details container">
     <div class="row">
-      <p class="placeholder col-3"></p>
+      <p class="placeholder col-12">Loading</p>
+      <p class="placeholder col-12">Loading</p>
+      <p class="placeholder col-12">Loading</p>
     </div>
     <div class="row">
-      <p class="placeholder col-3"></p>
+      <p class="placeholder col-3">Loading</p>
     </div>
     <div class="row">
-      <p class="placeholder col-3"></p>
+      <p class="placeholder col-3">Loading</p>
     </div>
     <div class="row">
-      <p class="placeholder col-3" style="height: 64px;"></p>
+      <p class="placeholder col-3">Loading</p>
     </div>
     <div class="row">
-      <p class="placeholder col-4" style="height: 66px;"></p>
+      <p class="placeholder col-3" style="height: 64px;">Loading</p>
+    </div>
+    <div class="row">
+      <p class="placeholder col-4" style="height: 66px;">Loading</p>
     </div>
   </div>
   <div class="footer">
