@@ -11,11 +11,13 @@
 <style>
   ul {
     display: flex;
-    gap: 0.5em;
   }
 
-  li:not(:last-child)::after {
-    content: "|";
-    margin-left: 0.5em;
+  li:not(:last-child) {
+    border-right: 1px solid var(--bs-light);
+    padding-right: 1em;
+  }
+  li:not(:first-child) {
+    margin-left: 1em;
   }
 </style>
