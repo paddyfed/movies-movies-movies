@@ -2,6 +2,7 @@
   import { findCurrentPage } from "../js/pagination";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
+  import posterPlaceholder from "../images/no-image-placeholder.svg";
 
   export let movieList;
 
@@ -58,7 +59,7 @@
       <li>
         <a href={import.meta.env.BASE_URL + "/movie?movieId=" + movie.id}>
           <img
-            onerror="this.onerror=null;this.src='https://placehold.co/185x278'"
+            onerror="this.onerror=null;this.src='{posterPlaceholder.src}'"
             src={imgPosterUrl + imgPosterSize + movie.poster_path}
             alt={movie.title + " Poster"}
             title={movie.title}

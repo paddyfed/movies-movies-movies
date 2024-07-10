@@ -1,6 +1,7 @@
 <script>
   import { findCurrentPage } from "../js/pagination";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
+  import posterPlaceholder from "../images/no-image-placeholder.svg";
 
   const queryParam = new URLSearchParams(window.location.search).get("query");
   export let currentPage = 1;
@@ -56,7 +57,7 @@
       <div class="flex-shrink-0">
         <a href={import.meta.env.BASE_URL + "/movie?movieId=" + result.id}>
           <img
-            onerror="this.onerror=null;this.src='https://placehold.co/185x278'"
+            onerror="this.onerror=null;this.src='{posterPlaceholder.src}'"
             src={imgPosterUrl + imgPosterSize + result.poster_path}
             alt="{result.title} Poster"
             title={result.title}

@@ -5,6 +5,7 @@
   import MovieGenres from "./MovieGenres.svelte";
   import MovieRating from "./MovieRating.svelte";
   import MovieTrailers from "./MovieTrailers.svelte";
+  import posterPlaceholder from "../images/no-image-placeholder.svg";
 
   const movieIdParam = new URLSearchParams(window.location.search).get(
     "movieId"
@@ -54,6 +55,7 @@
     <p class="poster">
       <img
         class="img-fluid"
+        onerror="this.onerror=null;this.src='{posterPlaceholder.src}'"
         src={posterUrl + data.poster_path}
         alt={data.title + " Poster"}
         title={data.title}
