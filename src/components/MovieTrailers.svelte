@@ -14,32 +14,33 @@
       return element.official === true && element.type === "Trailer";
     }) as video}
       <li>
-        <img
-          src="https://i.ytimg.com/vi/{video.key}/hqdefault.jpg"
-          alt={video.name}
-          title={video.name}
-        />
         <button
           type="button"
-          class="btn btn-primary"
+          class="btn btn-link"
           data-bs-toggle="modal"
           data-bs-target="#{video.key}Modal"
         >
-          {video.name}
-        </button>
-        <TrailerLightBox modalId="{video.key}Modal"
-          ><iframe
-            id="ytplayer"
-            type="text/html"
-            loading="lazy"
-            width="854"
-            height="480"
+          <img
+            src="https://i.ytimg.com/vi/{video.key}/hqdefault.jpg"
+            alt={video.name}
             title={video.name}
-            src="https://www.youtube.com/embed/{video.key}"
-            frameborder="0"
-            allowfullscreen
-          ></iframe></TrailerLightBox
-        >
+          />
+        </button>
+        <TrailerLightBox modalId="{video.key}Modal">
+          <div class="text-center">
+            <iframe
+              id="ytplayer_{video.key}"
+              type="text/html"
+              loading="lazy"
+              title={video.name}
+              src="https://www.youtube.com/embed/{video.key}"
+              frameborder="0"
+              allowfullscreen
+              class="youtube-video"
+            >
+            </iframe>
+          </div>
+        </TrailerLightBox>
       </li>
     {/each}
   </ul>
@@ -48,6 +49,10 @@
 {/if}
 
 <style>
+  .youtube-video {
+    aspect-ratio: 16 / 9;
+    height: 90vh;
+  }
   ul {
     display: flex;
     gap: 0.5em;
