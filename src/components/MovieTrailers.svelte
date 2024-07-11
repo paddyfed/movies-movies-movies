@@ -1,4 +1,6 @@
 <script>
+  import TrailerLightBox from "./TrailerLightBox.svelte";
+
   export let trailers;
 </script>
 
@@ -17,9 +19,18 @@
           alt={video.name}
           title={video.name}
         />
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          {video.name}
+        </button>
       </li>
     {/each}
   </ul>
+  <TrailerLightBox>Hello</TrailerLightBox>
 {:else}
   <div class="no-trailers-placeholder">No Trailers Available</div>
 {/if}
