@@ -23,14 +23,26 @@
           type="button"
           class="btn btn-primary"
           data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          data-bs-target="#{video.key}Modal"
         >
           {video.name}
         </button>
+        <TrailerLightBox modalId="{video.key}Modal"
+          ><iframe
+            id="ytplayer"
+            type="text/html"
+            loading="lazy"
+            width="854"
+            height="480"
+            title={video.name}
+            src="https://www.youtube.com/embed/{video.key}"
+            frameborder="0"
+            allowfullscreen
+          ></iframe></TrailerLightBox
+        >
       </li>
     {/each}
   </ul>
-  <TrailerLightBox>Hello</TrailerLightBox>
 {:else}
   <div class="no-trailers-placeholder">No Trailers Available</div>
 {/if}

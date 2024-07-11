@@ -1,4 +1,8 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+<script>
+  export let modalId = "exampleModal";
+</script>
+
+<div class="modal fade" id={modalId} tabindex="-1" aria-hidden="true">
   <div
     class="modal-dialog modal-fullscreen-xl-down modal-xl modal-dialog-centered"
   >
