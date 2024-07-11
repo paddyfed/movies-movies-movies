@@ -11,6 +11,8 @@
 <style>
   ul {
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 0.5em;
   }
 
   li:not(:last-child) {
