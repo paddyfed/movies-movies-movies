@@ -12,17 +12,7 @@
       return element.official === true && element.type === "Trailer";
     }) as video}
       <li>
-        <iframe
-          id="ytplayer"
-          type="text/html"
-          loading="lazy"
-          width="480"
-          height="270"
-          title={video.name}
-          src="https://www.youtube.com/embed/{video.key}"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
+        <img src="https://i.ytimg.com/vi/{video.key}/hqdefault.jpg" />
       </li>
     {/each}
   </ul>
