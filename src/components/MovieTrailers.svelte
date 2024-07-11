@@ -12,7 +12,11 @@
       return element.official === true && element.type === "Trailer";
     }) as video}
       <li>
-        <img src="https://i.ytimg.com/vi/{video.key}/hqdefault.jpg" />
+        <img
+          src="https://i.ytimg.com/vi/{video.key}/hqdefault.jpg"
+          alt={video.name}
+          title={video.name}
+        />
       </li>
     {/each}
   </ul>
