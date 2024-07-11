@@ -1,6 +1,7 @@
 <!-- BbfcIcon.svelte Component -->
 <!-- Purpose: Displays the certification of the movie from BBFC (British Board of Film Classification) if available -->
 <script>
+  import bbfcIcon from "../images/BBFC_Logo_Stacked.png";
   export let certification;
   let iconClass;
   let transform;
@@ -47,15 +48,38 @@
 </script>
 
 <!-- Use FontAwesome layering to combine the classification icon with the classification text https://docs.fontawesome.com/web/style/layer -->
-<span
-  class="fa-layers fa-fw fa-4x"
-  title="BBFC Classification of {certification}"
-  aria-label="BBFC Classification of {certification}"
->
-  <i class={iconClass} style="color: {color};"></i>
-  <span
-    class="fa-layers-text"
-    data-fa-transform={transform}
-    style="font-weight: 700; color: white;">{certification}</span
-  >
-</span>
+
+{#if certification !== ""}
+  <div>
+    <span
+      class="fa-layers fa-fw fa-4x"
+      title="BBFC Classification of {certification}"
+      aria-label="BBFC Classification of {certification}"
+    >
+      <i class={iconClass} style="color: {color};"></i>
+      <span
+        class="fa-layers-text"
+        data-fa-transform={transform}
+        style="font-weight: 700; color: white;">{certification}</span
+      >
+    </span>
+    <img
+      src={bbfcIcon.src}
+      width="80"
+      alt="BBFC British Board of Film Classification"
+      title="BBFC British Board of Film Classification"
+      style="mb-2"
+    />
+  </div>
+{/if}
+
+<style>
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    background-color: hsl(from var(--bs-light) h s l / 0.7);
+    padding: 0.2em;
+    border-radius: 4px;
+  }
+</style>

@@ -74,7 +74,7 @@
 
       <MovieGenres genres={data.genres} />
       <MovieGenres genres={data.production_companies} />
-      <p>
+      <p class="d-flex gap-3">
         <MovieCertification releaseDates={data.release_dates.results} />
       </p>
 
