@@ -1,4 +1,20 @@
 <script>
+  import BiggerPicture from "bigger-picture/svelte";
+  import "bigger-picture/css";
+
+  // initialize BiggerPicture
+  let bp = BiggerPicture({
+    target: document.body,
+  });
+
+  // function to open BiggerPicture
+  function openBiggerPicture(e) {
+    bp.open({
+      items: e.currentTarget,
+      el: e.currentTarget,
+    });
+  }
+
   export let trailers;
 </script>
 
@@ -12,17 +28,18 @@
       return element.official === true && element.type === "Trailer";
     }) as video}
       <li>
-        <iframe
-          id="ytplayer"
-          type="text/html"
-          loading="lazy"
-          width="480"
-          height="270"
-          title={video.name}
-          src="https://www.youtube.com/embed/{video.key}"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
+        <a
+          href="https://www.youtube.com/watch?v={video.key}"
+          data-thumb="https://i.ytimg.com/vi/{video.key}/hqdefault.jpg"
+          data-iframe="https://www.youtube.com/embed/{video.key}?autoplay=1&playsinline=1"
+          on:click|preventDefault={openBiggerPicture}
+        >
+          <img
+            src="https://i.ytimg.com/vi/{video.key}/hqdefault.jpg"
+            alt={video.name}
+            title={video.name}
+          />
+        </a>
       </li>
     {/each}
   </ul>
@@ -46,5 +63,9 @@
     max-width: 100%;
     background-color: gray;
     color: black;
+  }
+
+  img {
+    max-width: 70vw;
   }
 </style>
