@@ -66,6 +66,7 @@
     <img
       src={bbfcIcon.src}
       width="80"
+      height="68.52"
       alt="BBFC British Board of Film Classification"
       title="BBFC British Board of Film Classification"
       style="mb-2"

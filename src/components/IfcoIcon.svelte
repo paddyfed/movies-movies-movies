@@ -70,6 +70,7 @@
       alt="IFCO Irish Film Classification Office"
       title="IFCO Irish Film Classification Office"
       width="80"
+      height="26.69"
       style="mb-2"
     />
   </div>

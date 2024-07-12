@@ -30,7 +30,7 @@
       <li>
         <a
           href="https://www.youtube.com/watch?v={video.key}"
-          data-thumb="https://i.ytimg.com/vi/{video.key}/hqdefault.jpg"
+          data-thumb="https://i.ytimg.com/vi/{video.key}/maxresdefault.jpg"
           data-iframe="https://www.youtube.com/embed/{video.key}?autoplay=1&playsinline=1"
           on:click|preventDefault={openBiggerPicture}
         >
@@ -38,6 +38,8 @@
             src="https://i.ytimg.com/vi/{video.key}/hqdefault.jpg"
             alt={video.name}
             title={video.name}
+            width="480"
+            height="360"
           />
         </a>
       </li>
