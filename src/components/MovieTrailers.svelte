@@ -1,5 +1,4 @@
 <script>
-  import TrailerLightBox from "./TrailerLightBox.svelte";
   import BiggerPicture from "bigger-picture/svelte";
   import "bigger-picture/css";
 
