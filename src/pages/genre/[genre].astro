@@ -1,30 +1,381 @@
 ---
+import MovieScroll from "../../components/MovieScroll.svelte";
+import MovieList from "../../components/MovieList.svelte";
 import Layout from "../../layouts/Layout.astro";
 
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: import.meta.env.PUBLIC_API_ACCESS_TOKEN,
-  },
-};
+const imgPosterUrl = "https://image.tmdb.org/t/p/";
+const imgPosterSize = "w185/";
+let currentPage = 1;
+export let maxPages = 5;
 
-const data = await fetch(
-  `https://api.themoviedb.org/3/genre/movie/list?language=en`,
-  options
-).then((r) => r.json());
-console.log(data.genres.map((x) => ({ params: { genre: x.name } })));
+export async function getStaticPaths() {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: import.meta.env.PUBLIC_API_ACCESS_TOKEN,
+    },
+  };
 
-export function getStaticPaths() {
-  data.genres.map((x) => ({ params: { genre: x.name } }));
+  const data = await fetch(
+    `https://api.themoviedb.org/3/genre/movie/list?language=en`,
+    options
+  ).then((r) => r.json());
 
-  return [
-    { params: { genre: "Action" } },
-    { params: { genre: "Adventure" } },
-    { params: { genre: "War" } },
-    { params: { genre: "TV Movie" } },
-  ];
+  return data.genres.map((x) => {
+    return {
+      params: { genre: x.name },
+    };
+  });
 }
+
+const listOfMovies = {
+  page: 1,
+  results: [
+    {
+      adult: false,
+      backdrop_path: "/fDmci71SMkfZM8RnCuXJVDPaSdE.jpg",
+      genre_ids: [16, 10751, 35, 28],
+      id: 519182,
+      original_language: "en",
+      original_title: "Despicable Me 4",
+      overview:
+        "Gru and Lucy and their girls — Margo, Edith and Agnes — welcome a new member to the Gru family, Gru Jr., who is intent on tormenting his dad. Meanwhile, Gru faces a new nemesis in Maxime Le Mal and his femme fatale girlfriend Valentina, forcing the family to go on the run.",
+      popularity: 4379.882,
+      poster_path: "/3w84hCFJATpiCO5g8hpdWVPBbmq.jpg",
+      release_date: "2024-06-20",
+      title: "Despicable Me 4",
+      video: false,
+      vote_average: 7.5,
+      vote_count: 292,
+    },
+    {
+      adult: false,
+      backdrop_path: "/wNAhuOZ3Zf84jCIlrcI6JhgmY5q.jpg",
+      genre_ids: [28, 12, 878],
+      id: 786892,
+      original_language: "en",
+      original_title: "Furiosa: A Mad Max Saga",
+      overview:
+        "As the world fell, young Furiosa is snatched from the Green Place of Many Mothers and falls into the hands of a great Biker Horde led by the Warlord Dementus. Sweeping through the Wasteland they come across the Citadel presided over by The Immortan Joe. While the two Tyrants war for dominance, Furiosa must survive many trials as she puts together the means to find her way home.",
+      popularity: 1912.451,
+      poster_path: "/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
+      release_date: "2024-05-22",
+      title: "Furiosa: A Mad Max Saga",
+      video: false,
+      vote_average: 7.653,
+      vote_count: 2153,
+    },
+    {
+      adult: false,
+      backdrop_path: "/fqv8v6AycXKsivp1T5yKtLbGXce.jpg",
+      genre_ids: [878, 12, 28],
+      id: 653346,
+      original_language: "en",
+      original_title: "Kingdom of the Planet of the Apes",
+      overview:
+        "Several generations following Caesar's reign, apes – now the dominant species – live harmoniously while humans have been reduced to living in the shadows. As a new tyrannical ape leader builds his empire, one young ape undertakes a harrowing journey that will cause him to question all he's known about the past and to make choices that will define a future for apes and humans alike.",
+      popularity: 1804.611,
+      poster_path: "/gKkl37BQuKTanygYQG1pyYgLVgf.jpg",
+      release_date: "2024-05-08",
+      title: "Kingdom of the Planet of the Apes",
+      video: false,
+      vote_average: 7.121,
+      vote_count: 1874,
+    },
+    {
+      adult: false,
+      backdrop_path: "/rrwt0u1rW685u9bJ9ougg5HJEHC.jpg",
+      genre_ids: [28, 35, 80],
+      id: 280180,
+      original_language: "en",
+      original_title: "Beverly Hills Cop: Axel F",
+      overview:
+        "Forty years after his unforgettable first case in Beverly Hills, Detroit cop Axel Foley returns to do what he does best: solve crimes and cause chaos.",
+      popularity: 1321.295,
+      poster_path: "/zszRKfzjM5jltiq8rk6rasKVpUv.jpg",
+      release_date: "2024-06-20",
+      title: "Beverly Hills Cop: Axel F",
+      video: false,
+      vote_average: 6.895,
+      vote_count: 583,
+    },
+    {
+      adult: false,
+      backdrop_path: "/gRApXuxWmO2forYTuTmcz5RaNUV.jpg",
+      genre_ids: [28, 80, 53, 35],
+      id: 573435,
+      original_language: "en",
+      original_title: "Bad Boys: Ride or Die",
+      overview:
+        "After their late former Captain is framed, Lowrey and Burnett try to clear his name, only to end up on the run themselves.",
+      popularity: 1289.189,
+      poster_path: "/nP6RliHjxsz4irTKsxe8FRhKZYl.jpg",
+      release_date: "2024-06-05",
+      title: "Bad Boys: Ride or Die",
+      video: false,
+      vote_average: 7.1,
+      vote_count: 563,
+    },
+    {
+      adult: false,
+      backdrop_path: "/lA6KdSkCTxwzvqzPqxch997RabQ.jpg",
+      genre_ids: [28, 53],
+      id: 560016,
+      original_language: "en",
+      original_title: "Monkey Man",
+      overview:
+        "Kid is an anonymous young man who ekes out a meager living in an underground fight club where, night after night, wearing a gorilla mask, he is beaten bloody by more popular fighters for cash. After years of suppressed rage, Kid discovers a way to infiltrate the enclave of the city’s sinister elite. As his childhood trauma boils over, his mysteriously scarred hands unleash an explosive campaign of retribution to settle the score with the men who took everything from him.",
+      popularity: 1192.528,
+      poster_path: "/4lhR4L2vzzjl68P1zJyCH755Oz4.jpg",
+      release_date: "2024-04-03",
+      title: "Monkey Man",
+      video: false,
+      vote_average: 7.061,
+      vote_count: 600,
+    },
+    {
+      adult: false,
+      backdrop_path: "/lLh39Th5plbrQgbQ4zyIULsd0Pp.jpg",
+      genre_ids: [878, 28, 12],
+      id: 823464,
+      original_language: "en",
+      original_title: "Godzilla x Kong: The New Empire",
+      overview:
+        "Following their explosive showdown, Godzilla and Kong must reunite against a colossal undiscovered threat hidden within our world, challenging their very existence – and our own.",
+      popularity: 949.607,
+      poster_path: "/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
+      release_date: "2024-03-27",
+      title: "Godzilla x Kong: The New Empire",
+      video: false,
+      vote_average: 7.201,
+      vote_count: 3194,
+    },
+    {
+      adult: false,
+      backdrop_path: "/uNTciMXpCQDg7gvgMsPCdnxo6Re.jpg",
+      genre_ids: [28, 53],
+      id: 1114738,
+      original_language: "en",
+      original_title: "Boneyard",
+      overview:
+        'After Police Chief Carter discovers the remains of eleven women, FBI Special Agent Petrovick is recruited to profile the serial killer responsible for the infamous "boneyard" killings. As the police force, narcotics agency, and FBI lock horns, a tangled web of intrigue turns everyone into a suspect.',
+      popularity: 780.448,
+      poster_path: "/xkNK36hQv8SWiwiQoE7naRfP0zL.jpg",
+      release_date: "2024-07-05",
+      title: "Boneyard",
+      video: false,
+      vote_average: 5.788,
+      vote_count: 40,
+    },
+    {
+      adult: false,
+      backdrop_path: "/dbtGinhWWKgQLQ0hjZHMFWxBJcJ.jpg",
+      genre_ids: [28, 878, 27, 53],
+      id: 1159518,
+      original_language: "en",
+      original_title: "Black Noise",
+      overview:
+        "Members of an elite security team deployed to rescue a VIP on an exclusive island.The rescue mission becomes a desperate attempt to survive, escape the island and elude the sinister presence that seeks to harm them.",
+      popularity: 770.737,
+      poster_path: "/snKpXexv5dtWqEKEmXrJtp8QGQC.jpg",
+      release_date: "2023-11-03",
+      title: "Black Noise",
+      video: false,
+      vote_average: 5.313,
+      vote_count: 16,
+    },
+    {
+      adult: false,
+      backdrop_path: "/a4IWRYNMNMszIkRbEIiNsRg6cvt.jpg",
+      genre_ids: [10752, 28, 18],
+      id: 929590,
+      original_language: "en",
+      original_title: "Civil War",
+      overview:
+        "In the near future, a group of war journalists attempt to survive while reporting the truth as the United States stands on the brink of civil war.",
+      popularity: 703.829,
+      poster_path: "/sh7Rg8Er3tFcN9BpKIPOMvALgZd.jpg",
+      release_date: "2024-04-10",
+      title: "Civil War",
+      video: false,
+      vote_average: 7,
+      vote_count: 1903,
+    },
+    {
+      adult: false,
+      backdrop_path: "/iTWrsOVsUqcwYSxrpINNs3hG2nC.jpg",
+      genre_ids: [53, 27, 28, 9648],
+      id: 1001311,
+      original_language: "fr",
+      original_title: "Sous la Seine",
+      overview:
+        "In order to save Paris from an international bloodbath, a grieving scientist is forced to face her tragic past when a giant shark appears in the Seine.",
+      popularity: 688.836,
+      poster_path: "/qZPLK5ktRKa3CL4sKRZtj8UlPYc.jpg",
+      release_date: "2024-06-04",
+      title: "Under Paris",
+      video: false,
+      vote_average: 6.092,
+      vote_count: 907,
+    },
+    {
+      adult: false,
+      backdrop_path: "/aATi2PtaOQCVAquCym6OU0Z4FjY.jpg",
+      genre_ids: [28, 80, 53],
+      id: 704673,
+      original_language: "en",
+      original_title: "Trigger Warning",
+      overview:
+        "A Special Forces commando uncovers a dangerous conspiracy when she returns to her hometown looking for answers into her beloved father's death.",
+      popularity: 631.269,
+      poster_path: "/lJN24nn28s5afC1UnLPYRgYOp1K.jpg",
+      release_date: "2024-06-20",
+      title: "Trigger Warning",
+      video: false,
+      vote_average: 5.859,
+      vote_count: 322,
+    },
+    {
+      adult: false,
+      backdrop_path: "/dvBCdCohwWbsP5qAaglOXagDMtk.jpg",
+      genre_ids: [878, 28, 35],
+      id: 533535,
+      original_language: "en",
+      original_title: "Deadpool & Wolverine",
+      overview:
+        "A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine.",
+      popularity: 621.575,
+      poster_path: "/jbwYaoYWZwxtPP76AZnfYKQjCEB.jpg",
+      release_date: "2024-07-24",
+      title: "Deadpool & Wolverine",
+      video: false,
+      vote_average: 0,
+      vote_count: 0,
+    },
+    {
+      adult: false,
+      backdrop_path: "/fZv4EldEPurSz0d2uVIoL4Sng8x.jpg",
+      genre_ids: [28, 18, 53],
+      id: 1016346,
+      original_language: "bn",
+      original_title: "MR-9: Do or Die",
+      overview:
+        "Masud Rana is a Secret Agent with code name MR-9 of the Bangladesh Counter Intelligence Agency",
+      popularity: 603.411,
+      poster_path: "/29nqVPNFnB9ZxriApsIrFiteBa6.jpg",
+      release_date: "2023-08-25",
+      title: "MR-9: Do or Die",
+      video: false,
+      vote_average: 6.47,
+      vote_count: 115,
+    },
+    {
+      adult: false,
+      backdrop_path: "/7aPrv2HFssWcOtpig5G3HEVk3uS.jpg",
+      genre_ids: [28, 12, 53],
+      id: 718821,
+      original_language: "en",
+      original_title: "Twisters",
+      overview:
+        "As storm season intensifies, the paths of former storm chaser Kate Carter and reckless social-media superstar Tyler Owens collide when terrifying phenomena never seen before are unleashed. The pair and their competing teams find themselves squarely in the paths of multiple storm systems converging over central Oklahoma in the fight of their lives.",
+      popularity: 539.236,
+      poster_path: "/g7yg6jJj4Z377j5h6S3MBRmjQ7U.jpg",
+      release_date: "2024-07-10",
+      title: "Twisters",
+      video: false,
+      vote_average: 7.764,
+      vote_count: 53,
+    },
+    {
+      adult: false,
+      backdrop_path: "/yHEFwHkU2NqRxBrAoGBfuhuqIL1.jpg",
+      genre_ids: [35, 28],
+      id: 1143019,
+      original_language: "fr",
+      original_title: "Les Infaillibles",
+      overview:
+        "When a gang of robbers provokes chaos in Paris and humiliates the police, the Minister of the Interior wants new blood at the helm of the investigation: Alia is from Marseille, fiery-tempered and unmanageable, Hugo is Parisian, valedictorian and meticulous. In short, they have every reason to hate each other. A forced alliance, for better or for worse, or maybe blossoming into something else?",
+      popularity: 535.285,
+      poster_path: "/7PoIAvL3Io5v0HyBliXfXZruQTi.jpg",
+      release_date: "2024-06-20",
+      title: "The Infallibles",
+      video: false,
+      vote_average: 5.933,
+      vote_count: 60,
+    },
+    {
+      adult: false,
+      backdrop_path: "/vblTCXOWUQGSc837vgbhDRi4HSc.jpg",
+      genre_ids: [28, 80, 35, 53],
+      id: 955555,
+      original_language: "ko",
+      original_title: "범죄도시 3",
+      overview:
+        "Detective Ma Seok-do changes his affiliation from the Geumcheon Police Station to the Metropolitan Investigation Team, in order to eradicate Japanese gangsters who enter Korea to commit heinous crimes.",
+      popularity: 466.766,
+      poster_path: "/lW6IHrtaATxDKYVYoQGU5sh0OVm.jpg",
+      release_date: "2023-05-31",
+      title: "The Roundup: No Way Out",
+      video: false,
+      vote_average: 7.286,
+      vote_count: 365,
+    },
+    {
+      adult: false,
+      backdrop_path: "/g5Ha2DhXIuxsUl4gaDnbw3jOAlo.jpg",
+      genre_ids: [28],
+      id: 1115623,
+      original_language: "en",
+      original_title: "The Last Kumite",
+      overview:
+        "When Karate champion Michael Rivers wins the last tournament of his career, shady businessman Ron Hall offers him the opportunity to fight in an illegal Kumite in Bulgaria against the world’s best martial artists.  When Michael declines, Hall has his daughter kidnapped and, in order to rescue her, Rivers is left with no choice but to compete in the deadly tournament. Arriving in Bulgaria, he finds out that he is not the only fighter whose loved one was taken. Rivers enlists the help of trainers Master Loren, and Julie Jackson but will it be enough for him to win the tournament and save his daughter’s life?",
+      popularity: 464.754,
+      poster_path: "/zDkaJgsPoSqa2cMe2hW2HAfyWwO.jpg",
+      release_date: "2024-05-09",
+      title: "The Last Kumite",
+      video: false,
+      vote_average: 7.11,
+      vote_count: 77,
+    },
+    {
+      adult: false,
+      backdrop_path: "/H5HjE7Xb9N09rbWn1zBfxgI8uz.jpg",
+      genre_ids: [28, 35],
+      id: 746036,
+      original_language: "en",
+      original_title: "The Fall Guy",
+      overview:
+        "Fresh off an almost career-ending accident, stuntman Colt Seavers has to track down a missing movie star, solve a conspiracy and try to win back the love of his life while still doing his day job.",
+      popularity: 419.265,
+      poster_path: "/tSz1qsmSJon0rqjHBxXZmrotuse.jpg",
+      release_date: "2024-04-24",
+      title: "The Fall Guy",
+      video: false,
+      vote_average: 7.24,
+      vote_count: 1562,
+    },
+    {
+      adult: false,
+      backdrop_path: "/wPNI1fd18z5TKBOK9Mv9Rfjb0j0.jpg",
+      genre_ids: [53, 18, 28, 80],
+      id: 729165,
+      original_language: "en",
+      original_title: "Out of Exile",
+      overview:
+        "Recently paroled thief Gabriel Russell tries to balance his life and mend a troubled family as an FBI agent hunts him down, along with his crew after a botched armored car robbery.",
+      popularity: 384.367,
+      poster_path: "/jgF5XaXnJmOgMxulhy2k1f9LNNc.jpg",
+      release_date: "2023-01-20",
+      title: "Out of Exile",
+      video: false,
+      vote_average: 6.281,
+      vote_count: 16,
+    },
+  ],
+  total_pages: 2025,
+  total_results: 40483,
+};
 
 const { genre } = Astro.params;
 ---
@@ -32,5 +383,9 @@ const { genre } = Astro.params;
 <Layout title="Genre">
   <main class="container">
     <h1>{genre}</h1>
+
+    <ul class="mb-3">
+      <MovieList client:only="svelte" movies={listOfMovies.results} />
+    </ul>
   </main>
 </Layout>

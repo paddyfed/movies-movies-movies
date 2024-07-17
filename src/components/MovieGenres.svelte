@@ -4,7 +4,9 @@
 
 <ul class="mb-3">
   {#each genres as genre}
-    <li>{genre.name}</li>
+    <li>
+      <a href="{import.meta.env.BASE_URL}/genre/{genre.name}">{genre.name}</a>
+    </li>
   {/each}
 </ul>
 
