@@ -1,14 +1,36 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
+const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: import.meta.env.PUBLIC_API_ACCESS_TOKEN,
+  },
+};
+
 const data = await fetch(
-  `https://api.themoviedb.org/3/genre/movie/list?language=en`
-);
+  `https://api.themoviedb.org/3/genre/movie/list?language=en`,
+  options
+).then((r) => r.json());
+console.log(data.genres.map((x) => ({ params: { genre: x.name } })));
+
+export function getStaticPaths() {
+  data.genres.map((x) => ({ params: { genre: x.name } }));
+
+  return [
+    { params: { genre: "Action" } },
+    { params: { genre: "Adventure" } },
+    { params: { genre: "War" } },
+    { params: { genre: "TV Movie" } },
+  ];
+}
+
+const { genre } = Astro.params;
 ---
 
 <Layout title="Genre">
   <main class="container">
-    <h1>Genre</h1>
-    {data}
+    <h1>{genre}</h1>
   </main>
 </Layout>
