@@ -1,0 +1,32 @@
+---
+import { isPropertyAccessChain, isTemplateExpression } from "typescript";
+import Layout from "../layouts/Layout.astro";
+
+const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: import.meta.env.PUBLIC_API_ACCESS_TOKEN,
+  },
+};
+
+const data = await fetch(
+  `https://api.themoviedb.org/3/genre/movie/list?language=en`,
+  options
+).then((r) => r.json());
+
+console.log(data);
+---
+
+<Layout title="Genre">
+  <main class="container">
+    <h1>Genre</h1>
+    {
+      data.genres.map((x) => (
+        <p>
+          {x.id}: {x.name}
+        </p>
+      ))
+    }
+  </main>
+</Layout>

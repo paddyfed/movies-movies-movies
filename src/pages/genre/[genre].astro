@@ -1,0 +1,14 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const data = await fetch(
+  `https://api.themoviedb.org/3/genre/movie/list?language=en`
+);
+---
+
+<Layout title="Genre">
+  <main class="container">
+    <h1>Genre</h1>
+    {data}
+  </main>
+</Layout>
