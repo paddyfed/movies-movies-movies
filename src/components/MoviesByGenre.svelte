@@ -4,10 +4,19 @@
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import MovieList from "./MovieList.svelte";
 
-  export let movieList;
-
+  const url = new URL(window.location.href);
   let currentPage = 1;
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_replacestate
+  history.replaceState(1, "", document.location.href);
+
+  if (url.searchParams.has("page")) {
+    currentPage = parseInt(
+      new URLSearchParams(window.location.search).get("page")
+    );
+  }
   export let maxPages = 5;
+  export let genreId = 878;
 
   const options = {
     method: "GET",
@@ -17,13 +26,18 @@
     },
   };
 
-  const fetchUrl = "/3/movie/" + movieList;
+  // https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=878', options)
+  const fetchUrl = "/3/discover/movie";
 
   let fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
 
   const paramsObj = {
     page: currentPage,
+    include_adult: "false",
     language: "en-US",
+    include_video: "false",
+    sort_by: "popularity.desc",
+    with_genres: genreId,
   };
 
   for (const key in paramsObj) {
@@ -42,11 +56,23 @@
 
     fullFetchUrl.searchParams.set("page", currentPage);
 
-    const element = document.querySelector(`#movie-list-${movieList}`);
-    element.scrollIntoView({ behavior: "smooth" });
+    // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_pushstate
+    history.pushState(currentPage, "", `?page=${currentPage}`);
 
     promise = fetch(fullFetchUrl, options).then((x) => x.json());
+
+    const element = document.querySelector(`#movies-by-genre-header`);
+    element.scrollIntoView({ behavior: "smooth" });
   }
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_the_popstate_event
+  window.addEventListener("popstate", (event) => {
+    if (event.state) {
+      currentPage = event.state;
+      fullFetchUrl.searchParams.set("page", event.state);
+      promise = fetch(fullFetchUrl, options).then((x) => x.json());
+    }
+  });
 </script>
 
 {#await promise}

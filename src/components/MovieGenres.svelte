@@ -1,10 +1,22 @@
 <script>
   export let genres;
+  export let includeLinks = false;
 </script>
 
 <ul class="mb-3">
   {#each genres as genre}
-    <li>{genre.name}</li>
+    <li>
+      {#if includeLinks}<a
+          href="{import.meta.env.BASE_URL}/genre/{encodeURIComponent(
+            genre.name.toLowerCase()
+          )}"
+        >
+          {genre.name}
+        </a>
+      {:else}
+        {genre.name}
+      {/if}
+    </li>
   {/each}
 </ul>
 

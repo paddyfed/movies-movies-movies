@@ -72,7 +72,7 @@
       </p>
       <p>Runtime: {data.runtime} minutes</p>
 
-      <MovieGenres genres={data.genres} />
+      <MovieGenres genres={data.genres} includeLinks />
       <MovieGenres genres={data.production_companies} />
       <p class="d-flex gap-3">
         <MovieCertification releaseDates={data.release_dates.results} />
