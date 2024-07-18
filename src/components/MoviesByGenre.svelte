@@ -60,6 +60,8 @@
     history.pushState(currentPage, "", `?page=${currentPage}`);
 
     promise = fetch(fullFetchUrl, options).then((x) => x.json());
+
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }
 
   // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_the_popstate_event
