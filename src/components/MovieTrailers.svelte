@@ -29,9 +29,9 @@
     }) as video}
       <li>
         <a
-          href="https://www.youtube.com/watch?v={video.key}"
+          href="https://www.youtube-nocookie.com/watch?v={video.key}"
           data-thumb="https://i.ytimg.com/vi/{video.key}/maxresdefault.jpg"
-          data-iframe="https://www.youtube.com/embed/{video.key}?autoplay=1&playsinline=1"
+          data-iframe="https://www.youtube-nocookie.com/embed/{video.key}?autoplay=1&playsinline=1"
           on:click|preventDefault={openBiggerPicture}
         >
           <img
