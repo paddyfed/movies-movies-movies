@@ -29,7 +29,7 @@ const { x } = Astro.props;
 
 <Layout title="Genre">
   <main class="container">
-    <h1>{x["name"]}</h1>
+    <h1 id="movies-by-genre-header">{x["name"]}</h1>
 
     <ul class="mb-3">
       <MoviesByGenre client:only="svelte" genreId={x["id"]} />

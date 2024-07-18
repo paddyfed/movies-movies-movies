@@ -42,6 +42,9 @@
 
     fullFetchUrl.searchParams.set("page", currentPage);
 
+    const element = document.querySelector(`#movie-list-${movieList}`);
+    element.scrollIntoView({ behavior: "smooth" });
+
     promise = fetch(fullFetchUrl, options).then((x) => x.json());
   }
 </script>
