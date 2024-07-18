@@ -4,7 +4,17 @@
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import MovieList from "./MovieList.svelte";
 
+  const url = new URL(window.location.href);
   let currentPage = 1;
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_replacestate
+  history.replaceState(1, "", document.location.href);
+
+  if (url.searchParams.has("page")) {
+    currentPage = parseInt(
+      new URLSearchParams(window.location.search).get("page")
+    );
+  }
   export let maxPages = 5;
   export let genreId = 878;
 
@@ -46,8 +56,20 @@
 
     fullFetchUrl.searchParams.set("page", currentPage);
 
+    // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_pushstate
+    history.pushState(currentPage, "", `?page=${currentPage}`);
+
     promise = fetch(fullFetchUrl, options).then((x) => x.json());
   }
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_the_popstate_event
+  window.addEventListener("popstate", (event) => {
+    if (event.state) {
+      currentPage = event.state;
+      fullFetchUrl.searchParams.set("page", event.state);
+      promise = fetch(fullFetchUrl, options).then((x) => x.json());
+    }
+  });
 </script>
 
 {#await promise}
