@@ -5,7 +5,11 @@
 <ul class="mb-3">
   {#each genres as genre}
     <li>
-      <a href="{import.meta.env.BASE_URL}/genre/{genre.name}">{genre.name}</a>
+      <a
+        href="{import.meta.env.BASE_URL}/genre/{encodeURIComponent(
+          genre.name.toLowerCase()
+        )}">{genre.name}</a
+      >
     </li>
   {/each}
 </ul>
