@@ -12,7 +12,10 @@
 
   history.replaceState(initialState, "", document.location.href);
 
-  if (url.searchParams.has("page")) {
+  if (
+    url.searchParams.has("page") &&
+    parseInt(url.searchParams.get("page")) <= maxPages
+  ) {
     currentPage = parseInt(url.searchParams.get("page"));
   }
 
