@@ -17,7 +17,7 @@ import BrandImage from "../images/MoviesMoviesMovies_logo_path.svg";
             src={BrandImage}
             alt="Movies Movies Movies"
             class="img-fluid"
-            width={500}
+            width={300}
             loading="eager"
           />
         </h1>
@@ -25,16 +25,17 @@ import BrandImage from "../images/MoviesMoviesMovies_logo_path.svg";
       </section>
     </section>
     <section class="row">
+      <h2 class="mb-5 text-center">Discover a new favourite below</h2>
       <section class="col mb-3">
-        <h2 class="mb-3" id="movie-list-popular">Popular Movies</h2>
+        <h3 class="mb-3" id="movie-list-popular">Popular Movies</h3>
         <MovieScroll movieList=`popular` client:only="svelte" />
       </section>
       <section class="col mb-3">
-        <h2 class="mb-3" id="movie-list-now_playing">Now Playing Movies</h2>
+        <h3 class="mb-3" id="movie-list-now_playing">Now Playing Movies</h3>
         <MovieScroll movieList=`now_playing` client:only="svelte" />
       </section>
       <section class="col mb-3">
-        <h2 class="mb-3" id="movie-list-top_rated">Top Rated Movies</h2>
+        <h3 class="mb-3" id="movie-list-top_rated">Top Rated Movies</h3>
         <MovieScroll movieList=`top_rated` client:only="svelte" />
       </section>
     </section>

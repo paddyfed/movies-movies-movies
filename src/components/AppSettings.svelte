@@ -23,10 +23,10 @@
 <h2 class="mb-3">Date Format</h2>
 <form on:submit|preventDefault>
   <div class="row mb-3">
-    <label for="dateSetting" class="col-sm-2 col-form-label">
+    <label for="dateSetting" class="col-md-3 col-form-label">
       Choose your date setting
     </label>
-    <div class="col-sm-8">
+    <div class="col-md-7">
       <select
         class="form-select"
         name="dateSetting"
