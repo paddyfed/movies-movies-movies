@@ -3,9 +3,18 @@
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import posterPlaceholder from "../images/no-image-placeholder.svg";
 
-  const queryParam = new URLSearchParams(window.location.search).get("query");
+  const url = new URL(window.location.href);
+  let queryParam = url.searchParams.get("query");
   export let currentPage = 1;
   export let maxPages = 5;
+
+  const initialState = { currentPage: 1, queryParam: queryParam };
+
+  history.replaceState(initialState, "", document.location.href);
+
+  if (url.searchParams.has("page")) {
+    currentPage = parseInt(url.searchParams.get("page"));
+  }
 
   const imgPosterUrl = "https://image.tmdb.org/t/p/";
   const imgPosterSize = "w185/";
@@ -44,8 +53,24 @@
     );
 
     fullFetchUrl.searchParams.set("page", currentPage);
+
+    history.pushState(
+      { currentPage: currentPage, queryParam: queryParam },
+      "",
+      `?query=${queryParam}&page=${currentPage}`
+    );
     promise = fetch(fullFetchUrl, options).then((x) => x.json());
   }
+
+  window.addEventListener("popstate", (event) => {
+    if (event.state) {
+      currentPage = event.state.currentPage;
+      queryParam = event.state.queryParam;
+      fullFetchUrl.searchParams.set("page", event.state.currentPage);
+      fullFetchUrl.searchParams.set("query", event.state.queryParam);
+      promise = fetch(fullFetchUrl, options).then((x) => x.json());
+    }
+  });
 </script>
 
 {#await promise}
