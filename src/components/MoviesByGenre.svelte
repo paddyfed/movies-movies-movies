@@ -3,6 +3,7 @@
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import MovieList from "./MovieList.svelte";
+  import { apiOptions } from "../js/apiHelpers";
 
   const url = new URL(window.location.href);
   let currentPage = 1;
@@ -17,14 +18,6 @@
   }
   export let maxPages = 5;
   export let genreId = 878;
-
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: import.meta.env.PUBLIC_API_ACCESS_TOKEN,
-    },
-  };
 
   // https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=878', options)
   const fetchUrl = "/3/discover/movie";
@@ -44,7 +37,7 @@
     fullFetchUrl.searchParams.append(key, paramsObj[key]);
   }
 
-  let promise = fetch(fullFetchUrl, options).then((x) => x.json());
+  let promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
 
   // When a pagination button is clicked, move the current page and re-run the fetch of data
   function paginationClicked(event) {
@@ -59,7 +52,7 @@
     // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_pushstate
     history.pushState(currentPage, "", `?page=${currentPage}`);
 
-    promise = fetch(fullFetchUrl, options).then((x) => x.json());
+    promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
 
     const element = document.querySelector(`#movies-by-genre-header`);
     element.scrollIntoView({ behavior: "smooth" });
@@ -70,7 +63,7 @@
     if (event.state) {
       currentPage = event.state;
       fullFetchUrl.searchParams.set("page", event.state);
-      promise = fetch(fullFetchUrl, options).then((x) => x.json());
+      promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
     }
   });
 </script>

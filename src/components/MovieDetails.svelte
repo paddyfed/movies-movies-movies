@@ -6,18 +6,12 @@
   import MovieRating from "./MovieRating.svelte";
   import MovieTrailers from "./MovieTrailers.svelte";
   import ImagePoster from "./ImagePoster.svelte";
+  import { apiOptions } from "../js/apiHelpers";
 
   const movieIdParam = new URLSearchParams(window.location.search).get(
     "movieId"
   );
-  const token = import.meta.env.PUBLIC_API_ACCESS_TOKEN;
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: token,
-    },
-  };
+
   const imgPosterUrl = "https://image.tmdb.org/t/p/";
   const backdropSize = "w1280";
 
@@ -35,7 +29,7 @@
 
   let backdropUrl = new URL(imgPosterUrl + backdropSize);
 
-  let promise = fetch(fullFetchUrl, options).then((x) => x.json());
+  let promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
 </script>
 
 {#await promise}

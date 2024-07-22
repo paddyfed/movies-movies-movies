@@ -2,6 +2,7 @@
   import { findCurrentPage } from "../js/pagination";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import ImagePoster from "./ImagePoster.svelte";
+  import { apiOptions } from "../js/apiHelpers";
 
   const url = new URL(window.location.href);
   let queryParam = url.searchParams.get("query");
@@ -19,15 +20,6 @@
     currentPage = parseInt(url.searchParams.get("page"));
   }
 
-  const token = import.meta.env.PUBLIC_API_ACCESS_TOKEN;
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: token,
-    },
-  };
-
   const fetchUrl = `/3/search/movie`;
 
   const paramsObj = {
@@ -43,7 +35,7 @@
     fullFetchUrl.searchParams.append(key, paramsObj[key]);
   }
 
-  let promise = fetch(fullFetchUrl, options).then((x) => x.json());
+  let promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
 
   function paginationClicked(event) {
     currentPage = findCurrentPage(
@@ -59,7 +51,7 @@
       "",
       `?query=${queryParam}&page=${currentPage}`
     );
-    promise = fetch(fullFetchUrl, options).then((x) => x.json());
+    promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
   }
 
   window.addEventListener("popstate", (event) => {
@@ -68,7 +60,7 @@
       queryParam = event.state.queryParam;
       fullFetchUrl.searchParams.set("page", event.state.currentPage);
       fullFetchUrl.searchParams.set("query", event.state.queryParam);
-      promise = fetch(fullFetchUrl, options).then((x) => x.json());
+      promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
     }
   });
 </script>

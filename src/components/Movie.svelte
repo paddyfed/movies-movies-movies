@@ -1,21 +1,14 @@
 <script>
   import ImagePoster from "./ImagePoster.svelte";
+  import { apiOptions } from "../js/apiHelpers";
 
   export let movieId;
-  const token = import.meta.env.PUBLIC_API_ACCESS_TOKEN;
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: token,
-    },
-  };
 
   const fetchUrl = `/3/movie/${movieId}`;
 
   const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
 
-  let promise = fetch(fullFetchUrl, options).then((x) => x.json());
+  let promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
 </script>
 
 {#await promise}

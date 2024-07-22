@@ -3,19 +3,12 @@
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import MovieList from "./MovieList.svelte";
+  import { apiOptions } from "../js/apiHelpers";
 
   export let movieList;
 
   let currentPage = 1;
   export let maxPages = 5;
-
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: import.meta.env.PUBLIC_API_ACCESS_TOKEN,
-    },
-  };
 
   const fetchUrl = "/3/movie/" + movieList;
 
@@ -30,7 +23,7 @@
     fullFetchUrl.searchParams.append(key, paramsObj[key]);
   }
 
-  let promise = fetch(fullFetchUrl, options).then((x) => x.json());
+  let promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
 
   // When a pagination button is clicked, move the current page and re-run the fetch of data
   function paginationClicked(event) {
@@ -45,7 +38,7 @@
     const element = document.querySelector(`#movie-list-${movieList}`);
     element.scrollIntoView({ behavior: "smooth" });
 
-    promise = fetch(fullFetchUrl, options).then((x) => x.json());
+    promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
   }
 </script>
 
