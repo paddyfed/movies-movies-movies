@@ -5,7 +5,7 @@
   import MovieGenres from "./MovieGenres.svelte";
   import MovieRating from "./MovieRating.svelte";
   import MovieTrailers from "./MovieTrailers.svelte";
-  import posterPlaceholder from "../images/no-image-placeholder.svg";
+  import ImagePoster from "./ImagePoster.svelte";
 
   const movieIdParam = new URLSearchParams(window.location.search).get(
     "movieId"
@@ -19,7 +19,6 @@
     },
   };
   const imgPosterUrl = "https://image.tmdb.org/t/p/";
-  const imgPosterSize = "w342";
   const backdropSize = "w1280";
 
   const fetchUrl = `/3/movie/${movieIdParam}`;
@@ -35,7 +34,6 @@
   }
 
   let backdropUrl = new URL(imgPosterUrl + backdropSize);
-  let posterUrl = new URL(imgPosterUrl + imgPosterSize);
 
   let promise = fetch(fullFetchUrl, options).then((x) => x.json());
 </script>
@@ -52,12 +50,11 @@
   >
     <h1 class="mb-3">{data.title}</h1>
     <p class="poster">
-      <img
-        class="img-fluid"
-        onerror="this.onerror=null;this.src='{posterPlaceholder.src}'"
-        src={posterUrl + data.poster_path}
-        alt={data.title + " Poster"}
-        title={data.title}
+      <ImagePoster
+        posterTitle={data.title}
+        posterPath={data.poster_path}
+        imgPosterSize="w342"
+        imgFluid
         width="342"
         height="513"
       />
@@ -93,9 +90,6 @@
 {/await}
 
 <style>
-  img {
-    max-width: 100%;
-  }
   section {
     display: grid;
     gap: 0.5em;

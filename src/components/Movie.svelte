@@ -1,5 +1,5 @@
 <script>
-  import posterPlaceholder from "../images/no-image-placeholder.svg";
+  import ImagePoster from "./ImagePoster.svelte";
 
   export let movieId;
   const token = import.meta.env.PUBLIC_API_ACCESS_TOKEN;
@@ -15,10 +15,6 @@
 
   const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
 
-  const imgPosterUrl = "https://image.tmdb.org/t/p/";
-  const imgPosterSize = "w185";
-  let posterUrl = new URL(imgPosterUrl + imgPosterSize);
-
   let promise = fetch(fullFetchUrl, options).then((x) => x.json());
 </script>
 
@@ -28,14 +24,7 @@
 {:then data}
   <!-- When data is loaded, display the movie poster -->
   <a href={import.meta.env.BASE_URL + "/movie?movieId=" + data.id}>
-    <img
-      onerror="this.onerror=null;this.src='{posterPlaceholder.src}'"
-      src={posterUrl + data.poster_path}
-      alt={data.title + " Poster"}
-      title={data.title}
-      width="185"
-      height="278"
-    />
+    <ImagePoster posterTitle={data.title} posterPath={data.poster_path} />
   </a>
 {:catch error}
   <!-- Display the error if one occurs -->

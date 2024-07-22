@@ -1,7 +1,7 @@
 <script>
   import { findCurrentPage } from "../js/pagination";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
-  import posterPlaceholder from "../images/no-image-placeholder.svg";
+  import ImagePoster from "./ImagePoster.svelte";
 
   const url = new URL(window.location.href);
   let queryParam = url.searchParams.get("query");
@@ -18,9 +18,6 @@
   ) {
     currentPage = parseInt(url.searchParams.get("page"));
   }
-
-  const imgPosterUrl = "https://image.tmdb.org/t/p/";
-  const imgPosterSize = "w185/";
 
   const token = import.meta.env.PUBLIC_API_ACCESS_TOKEN;
   const options = {
@@ -80,27 +77,23 @@
   <div>Loading....</div>
 {:then data}
   <h1 class="mb-3">Search results for "{queryParam}"</h1>
-  {#each data.results as result}
+  {#each data.results as movie}
     <div class="d-flex mb-3">
       <div class="flex-shrink-0">
-        <a href={import.meta.env.BASE_URL + "/movie?movieId=" + result.id}>
-          <img
-            onerror="this.onerror=null;this.src='{posterPlaceholder.src}'"
-            src={imgPosterUrl + imgPosterSize + result.poster_path}
-            alt="{result.title} Poster"
-            title={result.title}
-            height="278"
-            width="185"
+        <a href={import.meta.env.BASE_URL + "/movie?movieId=" + movie.id}>
+          <ImagePoster
+            posterTitle={movie.title}
+            posterPath={movie.poster_path}
           />
         </a>
       </div>
       <div class="flex-grow-1 ms-3">
         <h2 class="mb-3">
-          <a href={import.meta.env.BASE_URL + "/movie?movieId=" + result.id}>
-            {result.title}
+          <a href={import.meta.env.BASE_URL + "/movie?movieId=" + movie.id}>
+            {movie.title}
           </a>
         </h2>
-        <p>{result.overview}</p>
+        <p>{movie.overview}</p>
       </div>
     </div>
   {/each}

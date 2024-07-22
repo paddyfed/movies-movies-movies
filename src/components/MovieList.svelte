@@ -1,23 +1,13 @@
 <script>
   export let movies;
-  import posterPlaceholder from "../images/no-image-placeholder.svg";
-
-  const imgPosterUrl = "https://image.tmdb.org/t/p/";
-  const imgPosterSize = "w185/";
+  import ImagePoster from "./ImagePoster.svelte";
 </script>
 
 <ul class="mb-3">
   {#each movies as movie}
     <li>
       <a href={import.meta.env.BASE_URL + "/movie?movieId=" + movie.id}>
-        <img
-          onerror="this.onerror=null;this.src='{posterPlaceholder.src}'"
-          src={imgPosterUrl + imgPosterSize + movie.poster_path}
-          alt={movie.title + " Poster"}
-          title={movie.title}
-          height="278"
-          width="185"
-        />
+        <ImagePoster posterTitle={movie.title} posterPath={movie.poster_path} />
       </a>
     </li>
   {/each}
@@ -38,14 +28,5 @@
       overflow-y: auto;
       flex-wrap: nowrap;
     }
-  }
-
-  img {
-    transition: 0.3s ease-in-out;
-    cursor: pointer;
-  }
-
-  img:hover {
-    opacity: 0.5;
   }
 </style>
