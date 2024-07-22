@@ -74,7 +74,7 @@
 </script>
 
 {#await promise}
-  <div>Loading....</div>
+  <div><i class="fa-solid fa-spinner fa-spin"></i></div>
 {:then data}
   <h1 class="mb-3">Search results for "{queryParam}"</h1>
   {#each data.results as movie}
