@@ -1,3 +1,6 @@
+<!-- MovieDetailsPlaceholder.svelte -->
+<!-- Purpose: uses Bootstrap placeholder options (https://getbootstrap.com/docs/5.3/components/placeholders/#about) to display an outline of the Movie Details screen while it is loading -->
+<!-- This is mainly an attempt to avoid layout shifting while the API loads the movie information -->
 <script>
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
 </script>
@@ -30,7 +33,7 @@
       <p class="placeholder col-3">Loading</p>
     </div>
     <div class="row">
-      <p class="placeholder col-3" style="height: 64px;">Loading</p>
+      <p class="placeholder col-3" style="height: 146.89px;">Loading</p>
     </div>
     <div class="row">
       <p class="placeholder col-4" style="height: 66px;">Loading</p>

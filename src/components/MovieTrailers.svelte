@@ -1,3 +1,6 @@
+<!-- MovieTrailers.svelte Component -->
+<!-- Purpose: to display the official trailers for each movie. Trailers are sourced from the API as youtube video keys -->
+<!-- The component displays an image of the trailer (sourced from YouTube) and then uses BiggerPicture (https://biggerpicture.henrygd.me/) to show/play the video in fullscreen -->
 <script>
   import BiggerPicture from "bigger-picture/svelte";
   import "bigger-picture/css";

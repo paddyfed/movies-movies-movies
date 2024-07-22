@@ -1,3 +1,6 @@
+<!-- ImagePoster.svelte -->
+<!-- purpose: Component to display movie posters where needed. The default size is set to 185x278 as this is the most common size in use on the site for search results and movie lists -->
+<!-- sizes can be overwritten for other areas when needed and the imgFluid flag can be used to include the img-fluid class from BootStrap -->
 <script>
   import posterPlaceholder from "../images/no-image-placeholder.svg";
 
@@ -24,6 +27,7 @@
 />
 
 <style>
+  /* Style for the hover effect except when img-fluid is true */
   img:not(.img-fluid) {
     transition: 0.3s ease-in-out;
     cursor: pointer;

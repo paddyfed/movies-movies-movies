@@ -1,3 +1,5 @@
+<!-- MoviesByGenre.svelte -->
+<!-- Purpose: Gathers a list of movies by genre. Based on a Genre ID passed down through the API -->
 <script>
   import { findCurrentPage } from "../js/pagination";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
@@ -19,6 +21,7 @@
   export let maxPages = 5;
   export let genreId = 878;
 
+  // build up the URL and fetch the info from the API
   // https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=878', options)
   const fetchUrl = "/3/discover/movie";
 
@@ -49,15 +52,18 @@
 
     fullFetchUrl.searchParams.set("page", currentPage);
 
+    // Push a new history item to the browser history with the currentPage as the URL
     // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_pushstate
     history.pushState(currentPage, "", `?page=${currentPage}`);
 
     promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
 
+    // Scroll the browser window to bring the heading into view so the user does not have to manually scroll back up
     const element = document.querySelector(`#movies-by-genre-header`);
     element.scrollIntoView({ behavior: "smooth" });
   }
 
+  // If back is selected, then get the history item that was pushed down and re-run the fetch using those options
   // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_the_popstate_event
   window.addEventListener("popstate", (event) => {
     if (event.state) {

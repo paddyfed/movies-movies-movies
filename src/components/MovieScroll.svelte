@@ -1,3 +1,5 @@
+<!-- MovieScroll.svelte -->
+<!-- Purpose: Displays the lists of popular, Now Playing, or Top Rated movies from the main (index) page -->
 <script>
   import { findCurrentPage } from "../js/pagination";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
@@ -5,14 +7,17 @@
   import MovieList from "./MovieList.svelte";
   import { apiOptions } from "../js/apiHelpers";
 
+  // Pass in the list that we want to display
   export let movieList;
 
   let currentPage = 1;
   export let maxPages = 5;
 
-  const fetchUrl = "/3/movie/" + movieList;
-
-  let fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
+  // Build up the URL and fetch the information from the API
+  let fullFetchUrl = new URL(
+    "/3/movie/" + movieList,
+    import.meta.env.PUBLIC_API_URL
+  );
 
   const paramsObj = {
     page: currentPage,
@@ -35,10 +40,11 @@
 
     fullFetchUrl.searchParams.set("page", currentPage);
 
+    promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
+
+    // Scroll the browser window to bring the heading into view so the user does not have to manually scroll back up
     const element = document.querySelector(`#movie-list-${movieList}`);
     element.scrollIntoView({ behavior: "smooth" });
-
-    promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
   }
 </script>
 

@@ -1,3 +1,5 @@
+<!-- MovieScrollLoadingSpinner.svelte -->
+<!-- Purpose: Displays placeholder images for items loaded from a list. Used for MovieList and MovieTrailers placeholders -->
 <script>
   export let numItems = 20;
 </script>
@@ -14,7 +16,7 @@
   ul {
     display: grid;
     justify-content: space-between;
-    grid-template-columns: repeat(5, 185px);
+    grid-template-columns: repeat(5, var(--min-width, 185px));
     gap: 0.5em;
   }
 

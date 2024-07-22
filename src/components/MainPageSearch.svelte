@@ -1,5 +1,5 @@
-<!-- MainNavBarSearch.svelte Component -->
-<!-- Purpose: Runs the search bar on the top nav bar -->
+<!-- MainPageSearch.svelte Component -->
+<!-- Purpose: Runs the search from the main (index) page -->
 <script>
   let value = new URLSearchParams(window.location.search).get("query");
   let searchValue;

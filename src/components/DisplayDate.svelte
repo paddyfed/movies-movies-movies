@@ -1,3 +1,5 @@
+<!-- DisplayDate.svelte -->
+<!-- purpose: Takes the users date preference from localStorage and displays the date in the correct format -->
 <script>
   export let date;
   export let dateSettingSelected =
@@ -15,6 +17,8 @@
     day: "2-digit",
   };
 
+  // localeSetting and optionSetting correspond to the options from the AppSettings component
+  // "en-IE", "en-US", "de-DE", and "ko-KR" options are included on the rare chance that someone has older settings saved in localStorage
   const localeSetting = {
     "en-IE_Long": "en-IE",
     "en-IE": "en-IE",

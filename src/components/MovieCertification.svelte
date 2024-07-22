@@ -1,3 +1,5 @@
+<!-- MovieCertification.svelte -->
+<!-- Purpose: Wrapper for the certifications of each movie. Currently including BBFC (British Board of Film Classification) and (IFCO Irish Film Censors Office) -->
 <script>
   import BbfcIcon from "./BbfcIcon.svelte";
   import IfcoIcon from "./IfcoIcon.svelte";
@@ -5,7 +7,7 @@
   export let releaseDates;
 </script>
 
-<!-- When data is loaded, display the film classifications from IFCo and BBFC -->
+<!-- When data is loaded, display the film classifications from IFCO and BBFC -->
 {#each releaseDates.filter((element) => {
   return element.iso_3166_1 === "GB";
 }) as cert}
