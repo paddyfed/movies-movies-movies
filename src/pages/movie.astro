@@ -4,11 +4,9 @@ import MovieDetails from "../components/MovieDetails.svelte";
 ---
 
 <Layout title="Movie">
-  <main class="container">
-    <section class="row">
-      <section class="col-12">
-        <MovieDetails client:only="svelte" />
-      </section>
+  <section class="row">
+    <section class="col-12">
+      <MovieDetails client:only="svelte" />
     </section>
-  </main>
+  </section>
 </Layout>

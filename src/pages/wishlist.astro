@@ -4,11 +4,9 @@ import ViewWishList from "../components/ViewWishList.svelte";
 ---
 
 <Layout title="Wish List">
-  <main class="container">
-    <section class="row">
-      <section class="col">
-        <ViewWishList client:only="svelte" />
-      </section>
+  <section class="row">
+    <section class="col">
+      <ViewWishList client:only="svelte" />
     </section>
-  </main>
+  </section>
 </Layout>

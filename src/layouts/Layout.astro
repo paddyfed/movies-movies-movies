@@ -48,7 +48,9 @@ import "../styles/overwrite-bootstrap-colors.css";
     <header class="mb-3">
       <MainNavBar />
     </header>
-    <slot />
+    <main class="container">
+      <slot />
+    </main>
     <footer class="mb-3"><MainFooter /></footer>
   </body>
 </html>

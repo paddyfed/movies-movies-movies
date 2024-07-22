@@ -9,6 +9,7 @@ const options = {
   },
 };
 
+// Get a list of Genres from the API to display as links to the user
 const data = await fetch(
   `https://api.themoviedb.org/3/genre/movie/list?language=en`,
   options
