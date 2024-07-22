@@ -27,15 +27,15 @@ import BrandImage from "../images/MoviesMoviesMovies_logo_path.svg";
     <h2 class="mb-5 text-center">Discover a new favourite below</h2>
     <section class="col mb-3">
       <h3 class="mb-3" id="movie-list-popular">Popular Movies</h3>
-      <MovieScroll movieList=`popular` client:only="svelte" />
+      <MovieScroll movieList=`popular` client:load />
     </section>
     <section class="col mb-3">
       <h3 class="mb-3" id="movie-list-now_playing">Now Playing Movies</h3>
-      <MovieScroll movieList=`now_playing` client:only="svelte" />
+      <MovieScroll movieList=`now_playing` client:load />
     </section>
     <section class="col mb-3">
       <h3 class="mb-3" id="movie-list-top_rated">Top Rated Movies</h3>
-      <MovieScroll movieList=`top_rated` client:only="svelte" />
+      <MovieScroll movieList=`top_rated` client:load />
     </section>
   </section>
 </Layout>
