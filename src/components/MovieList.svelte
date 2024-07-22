@@ -5,15 +5,20 @@
   import ImagePoster from "./ImagePoster.svelte";
 </script>
 
-<ul class="mb-3">
-  {#each movies as movie}
-    <li>
-      <a href={import.meta.env.BASE_URL + "/movie?movieId=" + movie.id}>
-        <ImagePoster posterTitle={movie.title} posterPath={movie.poster_path} />
-      </a>
-    </li>
-  {/each}
-</ul>
+{#if Array.isArray(movies)}
+  <ul class="mb-3">
+    {#each movies as movie}
+      <li>
+        <a href={import.meta.env.BASE_URL + "/movie?movieId=" + movie.id}>
+          <ImagePoster
+            posterTitle={movie.title}
+            posterPath={movie.poster_path}
+          />
+        </a>
+      </li>
+    {/each}
+  </ul>
+{/if}
 
 <style>
   /* On larger screens, display the lsit in a five column grid */

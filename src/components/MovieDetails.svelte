@@ -35,7 +35,13 @@
     fullFetchUrl.searchParams.append(key, paramsObj[key]);
   }
 
-  let promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
+  let promise = fetch(fullFetchUrl, apiOptions).then((r) => {
+    if (!r.ok) {
+      console.error(r);
+      throw new Error(r.status);
+    }
+    return r.json();
+  });
 </script>
 
 {#await promise}

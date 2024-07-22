@@ -8,13 +8,17 @@
 </script>
 
 <!-- When data is loaded, display the film classifications from IFCO and BBFC -->
-{#each releaseDates.filter((element) => {
-  return element.iso_3166_1 === "GB";
-}) as cert}
-  <BbfcIcon certification={cert.release_dates[0].certification} />
-{/each}
-{#each releaseDates.filter((element) => {
-  return element.iso_3166_1 === "IE";
-}) as cert}
-  <IfcoIcon certification={cert.release_dates[0].certification} />
-{/each}
+{#if Array.isArray(releaseDates) && releaseDates.length !== 0}
+  {#each releaseDates.filter((element) => {
+    return element.iso_3166_1 === "GB";
+  }) as cert}
+    <BbfcIcon certification={cert.release_dates[0].certification} />
+  {/each}
+  {#each releaseDates.filter((element) => {
+    return element.iso_3166_1 === "IE";
+  }) as cert}
+    <IfcoIcon certification={cert.release_dates[0].certification} />
+  {/each}
+{:else}
+  Nothing to show
+{/if}
