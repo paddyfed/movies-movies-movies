@@ -95,7 +95,11 @@
         </a>
       </div>
       <div class="flex-grow-1 ms-3">
-        <h2 class="mb-3">{result.title}</h2>
+        <h2 class="mb-3">
+          <a href={import.meta.env.BASE_URL + "/movie?movieId=" + result.id}>
+            {result.title}
+          </a>
+        </h2>
         <p>{result.overview}</p>
       </div>
     </div>
