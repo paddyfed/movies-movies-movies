@@ -1,3 +1,7 @@
+<!-- MovieDetails.svelte -->
+<!-- purpose: Displays all the details of an individual movie -->
+<!-- Includes: Title, Descriptin, Poster, Genre(s), Production Companies, Certifications, Release Date, Run Time, and Trailers -->
+<!-- Also has options for marking the movie on the Liked, Disliked, or Wish List lists -->
 <script>
   import DisplayDate from "./DisplayDate.svelte";
   import MovieCertification from "./MovieCertification.svelte";
@@ -8,13 +12,17 @@
   import ImagePoster from "./ImagePoster.svelte";
   import { apiOptions } from "../js/apiHelpers";
 
+  // Build up the URL for the background image
+  const imgPosterUrl = "https://image.tmdb.org/t/p/";
+  const backdropSize = "w1280";
+  let backdropUrl = new URL(imgPosterUrl + backdropSize);
+
+  // Get the movie id from the URL
   const movieIdParam = new URLSearchParams(window.location.search).get(
     "movieId"
   );
 
-  const imgPosterUrl = "https://image.tmdb.org/t/p/";
-  const backdropSize = "w1280";
-
+  // Build up the URL and fetch movie data from the API
   const fetchUrl = `/3/movie/${movieIdParam}`;
   const paramsObj = {
     append_to_response: "videos,release_dates",
@@ -27,26 +35,24 @@
     fullFetchUrl.searchParams.append(key, paramsObj[key]);
   }
 
-  let backdropUrl = new URL(imgPosterUrl + backdropSize);
-
   let promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
 </script>
 
 {#await promise}
   <!-- While API is loading, show placeholder images -->
   <MovieDetailsPlaceholder />
-{:then data}
+{:then movie}
   <!-- When data is loaded, display the movie details -->
   <section
     style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url({backdropUrl +
-      data.backdrop_path}); background-repeat: no-repeat; background-size: cover;"
+      movie.backdrop_path}); background-repeat: no-repeat; background-size: cover; background-position: center;"
     class="rounded p-3"
   >
-    <h1 class="mb-3">{data.title}</h1>
+    <h1 class="mb-3">{movie.title}</h1>
     <p class="poster">
       <ImagePoster
-        posterTitle={data.title}
-        posterPath={data.poster_path}
+        posterTitle={movie.title}
+        posterPath={movie.poster_path}
         imgPosterSize="w342"
         imgFluid
         width="342"
@@ -54,19 +60,19 @@
       />
     </p>
     <div class="details">
-      <p>{data.overview}</p>
+      <p>{movie.overview}</p>
 
       <p>
         Release Date: <DisplayDate
-          date={new Date(Date.parse(data.release_date))}
+          date={new Date(Date.parse(movie.release_date))}
         />
       </p>
-      <p>Runtime: {data.runtime} minutes</p>
+      <p>Runtime: {movie.runtime} minutes</p>
 
-      <MovieGenres genres={data.genres} includeLinks />
-      <MovieGenres genres={data.production_companies} />
+      <MovieGenres genres={movie.genres} includeLinks />
+      <MovieGenres genres={movie.production_companies} />
       <p class="d-flex gap-3">
-        <MovieCertification releaseDates={data.release_dates.results} />
+        <MovieCertification releaseDates={movie.release_dates.results} />
       </p>
 
       <p>
@@ -75,7 +81,7 @@
     </div>
 
     <div>
-      <MovieTrailers trailers={data.videos.results} />
+      <MovieTrailers trailers={movie.videos.results} />
     </div>
   </section>
 {:catch error}
