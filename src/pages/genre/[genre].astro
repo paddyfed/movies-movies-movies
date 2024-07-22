@@ -34,7 +34,7 @@ export async function getStaticPaths() {
 const { genre: genre } = Astro.props;
 ---
 
-<Layout title="Genre">
+<Layout title={"Genre : " + genre["name"]}>
   <h1 id="movies-by-genre-header">{genre["name"]}</h1>
   <MoviesByGenre client:only="svelte" genreId={genre["id"]} />
 </Layout>
