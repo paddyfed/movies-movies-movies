@@ -2,6 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 import MoviesByGenre from "../../components/MoviesByGenre.svelte";
 
+// getStaticPaths tells Astro which pages to generate when building the site
+// based on the information that is set in the return statement
 export async function getStaticPaths() {
   const options = {
     method: "GET",
@@ -11,28 +13,28 @@ export async function getStaticPaths() {
     },
   };
 
+  // We fetch a list of the genres from the API to populate in the getStaticPaths return statement
   const data = await fetch(
     `https://api.themoviedb.org/3/genre/movie/list?language=en`,
     options
   ).then((r) => r.json());
 
-  return data.genres.map((x) => {
+  return data.genres.map((genre) => {
+    // The params object is a list of the genres which Astro will create during build
+    // The props object is the full genre object returned from the API so that we can get the
+    // ID of that genre passed to the svelte component
     return {
-      params: { genre: x.name.toLowerCase() },
-      props: { x },
+      params: { genre: genre.name.toLowerCase() },
+      props: { genre: genre },
     };
   });
 }
 
-const { x } = Astro.props;
+// The props from the getStaticParams is passed to the component as a Astro prop
+const { genre: genre } = Astro.props;
 ---
 
 <Layout title="Genre">
-  <main class="container">
-    <h1 id="movies-by-genre-header">{x["name"]}</h1>
-
-    <ul class="mb-3">
-      <MoviesByGenre client:only="svelte" genreId={x["id"]} />
-    </ul>
-  </main>
+  <h1 id="movies-by-genre-header">{genre["name"]}</h1>
+  <MoviesByGenre client:only="svelte" genreId={genre["id"]} />
 </Layout>

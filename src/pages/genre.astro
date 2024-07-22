@@ -16,34 +16,36 @@ const data = await fetch(
 ---
 
 <Layout title="Genre">
-  <main class="container">
-    <h1>Genre</h1>
-    <h2>Discover movies by Genre</h2>
-    <ul>
-      {
-        data.genres.map((x) => (
-          <li>
-            <a
-              href={
-                import.meta.env.BASE_URL +
-                "/genre/" +
-                encodeURIComponent(x.name.toLowerCase())
-              }
-            >
-              {x.name}
-            </a>
-            {/* {x.name} */}
-          </li>
-        ))
-      }
-    </ul>
-  </main>
+  <h1>Genre</h1>
+  <h2>Discover movies by Genre</h2>
+  <ul>
+    {
+      data.genres.map((genre) => (
+        <li>
+          <a
+            href={
+              import.meta.env.BASE_URL +
+              "/genre/" +
+              encodeURIComponent(genre.name.toLowerCase())
+            }
+          >
+            {genre.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </Layout>
 
 <style>
+  /* on mobile, show the list of genres in one column */
   ul {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
   }
+
+  /* on bigger screens, show the list of genres in a grid of 5 columns */
   @media (min-width: 576px) {
     ul {
       display: grid;
