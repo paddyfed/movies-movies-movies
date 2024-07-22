@@ -69,5 +69,6 @@
 
   img {
     max-width: 70vw;
+    height: auto;
   }
 </style>
