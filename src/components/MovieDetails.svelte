@@ -86,9 +86,22 @@
       </p>
     </div>
 
-    <div>
+    <div class="trailers">
       <MovieTrailers trailers={movie.videos.results} />
     </div>
+
+    {#if movie.belongs_to_collection}
+      <div class="collection">
+        <h2>Included in: {movie.belongs_to_collection.name}</h2>
+        <a
+          href={import.meta.env.BASE_URL +
+            "/collection?collectionId=" +
+            movie.belongs_to_collection.id}
+        >
+          See more movies in this collection
+        </a>
+      </div>
+    {/if}
   </section>
 {:catch error}
   <!-- Display the error if one occurs -->
@@ -108,7 +121,8 @@
     grid-template-areas:
       "header header header"
       "poster details ."
-      "footer footer footer";
+      "trailers trailers trailers"
+      "collection collection collection";
     color: var(--bs-light);
   }
 
@@ -116,8 +130,8 @@
     grid-area: header;
   }
 
-  div {
-    grid-area: footer;
+  .trailers {
+    grid-area: trailers;
   }
 
   .poster {
@@ -126,6 +140,10 @@
 
   .details {
     grid-area: details;
+  }
+
+  .collection {
+    grid-area: collection;
   }
 
   @media screen and (max-width: 768px) {
