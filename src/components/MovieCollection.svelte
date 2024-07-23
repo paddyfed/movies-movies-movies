@@ -4,11 +4,7 @@
 <script>
   import { apiOptions } from "../js/apiHelpers";
   import MovieList from "../components/MovieList.svelte";
-
-  // Build up the URL for the background image
-  const imgPosterUrl = "https://image.tmdb.org/t/p/";
-  const backdropSize = "w1280";
-  let backdropUrl = new URL(imgPosterUrl + backdropSize);
+  import DetailsBackground from "./DetailsBackground.svelte";
 
   // get the collection id from the URL
   const collectionIdParam = new URLSearchParams(window.location.search).get(
@@ -40,15 +36,11 @@
 {#await promise}
   Loading
 {:then collection}
-  <section
-    class="rounded p-3"
-    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url({backdropUrl +
-      collection.backdrop_path}); background-repeat: no-repeat; background-size: cover; background-position: center;"
-  >
+  <DetailsBackground backdropPath={collection.backdrop_path}>
     <h1 class="mb-3">{collection.name}</h1>
     <p>{collection.overview}</p>
     <MovieList movies={collection.parts} />
-  </section>
+  </DetailsBackground>
 {:catch error}
   {error}
 {/await}

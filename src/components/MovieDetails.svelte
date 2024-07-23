@@ -12,11 +12,7 @@
   import ImagePoster from "./ImagePoster.svelte";
   import { apiOptions } from "../js/apiHelpers";
   import PageNotFound from "./PageNotFound.svelte";
-
-  // Build up the URL for the background image
-  const imgPosterUrl = "https://image.tmdb.org/t/p/";
-  const backdropSize = "w1280";
-  let backdropUrl = new URL(imgPosterUrl + backdropSize);
+  import DetailsBackground from "./DetailsBackground.svelte";
 
   // Get the movie id from the URL
   const movieIdParam = new URLSearchParams(window.location.search).get(
@@ -49,60 +45,53 @@
   <MovieDetailsPlaceholder />
 {:then movie}
   <!-- When data is loaded, display the movie details -->
-  <section
-    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url({backdropUrl +
-      movie.backdrop_path}); background-repeat: no-repeat; background-size: cover; background-position: center;"
-    class="rounded p-3"
-  >
-    <h1 class="mb-3">{movie.title}</h1>
-    <p class="poster">
-      <ImagePoster
-        posterTitle={movie.title}
-        posterPath={movie.poster_path}
-        imgPosterSize="w342"
-        imgFluid
-        width="342"
-        height="513"
-      />
-    </p>
-    <div class="details">
-      <p>{movie.overview}</p>
-
-      <p>
-        Release Date: <DisplayDate
-          date={new Date(Date.parse(movie.release_date))}
+  <DetailsBackground backdropPath={movie.backdrop_path}>
+    <section>
+      <h1 class="mb-3">{movie.title}</h1>
+      <p class="poster">
+        <ImagePoster
+          posterTitle={movie.title}
+          posterPath={movie.poster_path}
+          imgPosterSize="w342"
+          imgFluid
+          width="342"
+          height="513"
         />
       </p>
-      <p>Runtime: {movie.runtime} minutes</p>
-
-      <MovieGenres genres={movie.genres} includeLinks />
-      <MovieGenres genres={movie.production_companies} />
-      <p class="d-flex gap-3">
-        <MovieCertification releaseDates={movie.release_dates.results} />
-      </p>
-
-      <p>
-        <MovieRating movieId={movieIdParam} />
-      </p>
-    </div>
-
-    <div class="trailers">
-      <MovieTrailers trailers={movie.videos.results} />
-    </div>
-
-    {#if movie.belongs_to_collection}
-      <div class="collection">
-        <h2>{movie.belongs_to_collection.name}</h2>
-        <a
-          href={import.meta.env.BASE_URL +
-            "/collection?collectionId=" +
-            movie.belongs_to_collection.id}
-        >
-          See more movies in this collection
-        </a>
+      <div class="details">
+        <p>{movie.overview}</p>
+        <p>
+          Release Date: <DisplayDate
+            date={new Date(Date.parse(movie.release_date))}
+          />
+        </p>
+        <p>Runtime: {movie.runtime} minutes</p>
+        <MovieGenres genres={movie.genres} includeLinks />
+        <MovieGenres genres={movie.production_companies} />
+        <p class="d-flex gap-3">
+          <MovieCertification releaseDates={movie.release_dates.results} />
+        </p>
+        <p>
+          <MovieRating movieId={movieIdParam} />
+        </p>
       </div>
-    {/if}
-  </section>
+      <div class="trailers">
+        <MovieTrailers trailers={movie.videos.results} />
+      </div>
+      {#if movie.belongs_to_collection}
+        <div class="collection">
+          <h2>{movie.belongs_to_collection.name}</h2>
+          <a
+            href={import.meta.env.BASE_URL +
+              "/collection?collectionId=" +
+              movie.belongs_to_collection.id}
+          >
+            See more movies in this collection
+          </a>
+        </div>
+      {/if}
+    </section>
+  </DetailsBackground>
 {:catch error}
   <!-- Display the error if one occurs -->
   {#if error.message === "404"}
