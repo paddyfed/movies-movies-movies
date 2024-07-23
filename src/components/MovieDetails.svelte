@@ -92,7 +92,7 @@
 
     {#if movie.belongs_to_collection}
       <div class="collection">
-        <h2>Included in: {movie.belongs_to_collection.name}</h2>
+        <h2>{movie.belongs_to_collection.name}</h2>
         <a
           href={import.meta.env.BASE_URL +
             "/collection?collectionId=" +

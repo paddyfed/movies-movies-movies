@@ -46,6 +46,7 @@
       collection.backdrop_path}); background-repeat: no-repeat; background-size: cover; background-position: center;"
   >
     <h1 class="mb-3">{collection.name}</h1>
+    <p>{collection.overview}</p>
     <MovieList movies={collection.parts} />
   </section>
 {:catch error}
