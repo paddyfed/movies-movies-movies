@@ -28,7 +28,12 @@
     fullFetchUrl.searchParams.append(key, paramsObj[key]);
   }
 
-  let promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
+  let promise = fetch(fullFetchUrl, apiOptions).then((r) => {
+    if (!r.ok) {
+      throw new Error(r.status);
+    }
+    return r.json();
+  });
 
   // When a pagination button is clicked, move the current page and re-run the fetch of data
   function paginationClicked(event) {
@@ -40,7 +45,12 @@
 
     fullFetchUrl.searchParams.set("page", currentPage);
 
-    promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
+    promise = fetch(fullFetchUrl, apiOptions).then((r) => {
+      if (!r.ok) {
+        throw new Error(r.status);
+      }
+      return r.json();
+    });
 
     // Scroll the browser window to bring the heading into view so the user does not have to manually scroll back up
     const element = document.querySelector(`#movie-list-${movieList}`);

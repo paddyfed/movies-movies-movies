@@ -8,7 +8,12 @@
 
   const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
 
-  let promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
+  let promise = fetch(fullFetchUrl, apiOptions).then((r) => {
+    if (!r.ok) {
+      throw new Error(r.status);
+    }
+    return r.json();
+  });
 </script>
 
 {#await promise}

@@ -40,7 +40,12 @@
     fullFetchUrl.searchParams.append(key, paramsObj[key]);
   }
 
-  let promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
+  let promise = fetch(fullFetchUrl, apiOptions).then((r) => {
+    if (!r.ok) {
+      throw new Error(r.status);
+    }
+    return r.json();
+  });
 
   // Handle the pagination clicks by getting the button that was clicked and re-running the fetch with the new paramater
   function paginationClicked(event) {
@@ -59,7 +64,12 @@
       "",
       `?query=${queryParam}&page=${currentPage}`
     );
-    promise = fetch(fullFetchUrl, apiOptions).then((x) => x.json());
+    promise = fetch(fullFetchUrl, apiOptions).then((r) => {
+      if (!r.ok) {
+        throw new Error(r.status);
+      }
+      return r.json();
+    });
   }
 
   // If back is selected, then get the history item that was pushed down and re-run the fetch using those options
