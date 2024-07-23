@@ -25,8 +25,9 @@
   ul {
     display: grid;
     justify-content: space-between;
-    /* This ensures that there will be four rows of five posters at 185px as each "page" returns 20 results */
-    grid-template-columns: repeat(5, 185px);
+    /* The default ensures that there will be four rows of five posters at 185px as each "page" returns 20 results */
+    /* The number of items can be overwritten by the calling component */
+    grid-template-columns: repeat(var(--numItems, 5), 185px);
     gap: 0.5em;
   }
 
