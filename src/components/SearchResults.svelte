@@ -5,7 +5,6 @@
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import ImagePoster from "./ImagePoster.svelte";
   import { apiOptions } from "../js/apiHelpers";
-  import { isArray } from "chart.js/helpers";
 
   // Query is passed to the url as a search param
   const url = new URL(window.location.href);
