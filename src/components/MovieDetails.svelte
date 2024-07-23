@@ -11,6 +11,7 @@
   import MovieTrailers from "./MovieTrailers.svelte";
   import ImagePoster from "./ImagePoster.svelte";
   import { apiOptions } from "../js/apiHelpers";
+  import PageNotFound from "./PageNotFound.svelte";
 
   // Build up the URL for the background image
   const imgPosterUrl = "https://image.tmdb.org/t/p/";
@@ -37,7 +38,6 @@
 
   let promise = fetch(fullFetchUrl, apiOptions).then((r) => {
     if (!r.ok) {
-      console.error(r);
       throw new Error(r.status);
     }
     return r.json();
@@ -92,7 +92,11 @@
   </section>
 {:catch error}
   <!-- Display the error if one occurs -->
-  {error}
+  {#if error.message === "404"}
+    <PageNotFound />
+  {:else}
+    {error.message}
+  {/if}
 {/await}
 
 <style>
