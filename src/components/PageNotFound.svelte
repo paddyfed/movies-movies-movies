@@ -6,6 +6,6 @@
   Sorry this page is not available. Return to the <a
     href={import.meta.env.BASE_URL}
   >
-    home page
+    home page.
   </a>
 </p>
