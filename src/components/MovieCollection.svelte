@@ -5,6 +5,7 @@
   import { apiOptions } from "../js/apiHelpers";
   import MovieList from "../components/MovieList.svelte";
   import DetailsBackground from "./DetailsBackground.svelte";
+  import PageNotFound from "./PageNotFound.svelte";
 
   // get the collection id from the URL
   const collectionIdParam = new URLSearchParams(window.location.search).get(
@@ -42,5 +43,9 @@
     <MovieList movies={collection.parts} />
   </DetailsBackground>
 {:catch error}
-  {error}
+  {#if error.message === "404"}
+    <PageNotFound />
+  {:else}
+    {error.message}
+  {/if}
 {/await}
