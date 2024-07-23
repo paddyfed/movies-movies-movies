@@ -40,6 +40,13 @@
   });
 </script>
 
+<!-- Include the Movie Title in the page title -->
+<svelte:head>
+  {#await promise then movie}
+    <title>Movies Movies Movies : Movie : {movie.title}</title>
+  {/await}
+</svelte:head>
+
 {#await promise}
   <!-- While API is loading, show placeholder images -->
   <MovieDetailsPlaceholder />

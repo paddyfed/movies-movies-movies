@@ -90,6 +90,13 @@
   });
 </script>
 
+<!-- Inlcude the search query in the page title -->
+<svelte:head>
+  <title>
+    Movies Movies Movies : Search Results : Search results for "{queryParam}"
+  </title>
+</svelte:head>
+
 {#await promise}
   <!-- While API is loading, show placeholder images -->
   <div><i class="fa-solid fa-spinner fa-spin"></i></div>

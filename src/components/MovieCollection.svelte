@@ -6,6 +6,7 @@
   import MovieList from "../components/MovieList.svelte";
   import DetailsBackground from "./DetailsBackground.svelte";
   import PageNotFound from "./PageNotFound.svelte";
+  import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
 
   // get the collection id from the URL
   const collectionIdParam = new URLSearchParams(window.location.search).get(
@@ -32,10 +33,19 @@
     }
     return r.json();
   });
+
+  let title = "Test";
 </script>
 
+<!-- Include the collection name in the page title -->
+<svelte:head>
+  {#await promise then collection}
+    <title>Movies Movies Movies : Collection : {collection.name}</title>
+  {/await}
+</svelte:head>
+
 {#await promise}
-  Loading
+  <MovieScrollLoadingSpinner />
 {:then collection}
   <DetailsBackground backdropPath={collection.backdrop_path}>
     <h1 class="mb-3">{collection.name}</h1>
