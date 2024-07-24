@@ -82,19 +82,37 @@
           <MovieRating movieId={movieIdParam} />
         </p>
       </div>
-      <div class="trailers">
+      <div class="trailers mb-3">
         <MovieTrailers trailers={movie.videos.results} />
       </div>
       {#if movie.belongs_to_collection}
-        <div class="collection">
-          <h2>{movie.belongs_to_collection.name}</h2>
-          <a
-            href={import.meta.env.BASE_URL +
-              "/collection?collectionId=" +
-              movie.belongs_to_collection.id}
-          >
-            See more movies in this collection
-          </a>
+        <div class="d-flex mb-3 collection">
+          <div class="flex-shrink-0">
+            <a
+              href={import.meta.env.BASE_URL +
+                "/collection?collectionId=" +
+                movie.belongs_to_collection.id}
+            >
+              <ImagePoster
+                posterTitle={movie.belongs_to_collection.name}
+                posterPath={movie.belongs_to_collection.poster_path}
+              />
+            </a>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h2 class="mb-3">
+              {movie.belongs_to_collection.name}
+            </h2>
+            <p>
+              <a
+                href={import.meta.env.BASE_URL +
+                  "/collection?collectionId=" +
+                  movie.belongs_to_collection.id}
+              >
+                See more movies in this collection
+              </a>
+            </p>
+          </div>
         </div>
       {/if}
     </section>
