@@ -86,6 +86,36 @@
     element.scrollIntoView({ behavior: "smooth" });
   }
 
+  // If the Date Picker is changed, get the value of the date picker and re-run the fetch with the new info
+  function datePickerChanged(event) {
+    console.log(event.currentTarget.value);
+    console.log(event.currentTarget);
+    console.log(event.currentTarget.id);
+
+    switch (event.currentTarget.id) {
+      case "dateTo":
+        console.log("Date To");
+        dateTo = new Date(event.currentTarget.value);
+        fullFetchUrl.searchParams.set("primary_release_date.lte", dateTo);
+        break;
+      case "dateFrom":
+        console.log("Date From");
+        dateFrom = new Date(event.currentTarget.value);
+        fullFetchUrl.searchParams.set("primary_release_date.gte", dateFrom);
+        break;
+      default:
+        console.log("None");
+        break;
+    }
+
+    promise = fetch(fullFetchUrl, apiOptions).then((r) => {
+      if (!r.ok) {
+        throw new Error(r.status);
+      }
+      return r.json();
+    });
+  }
+
   // If back is selected, then get the history item that was pushed down and re-run the fetch using those options
   // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_the_popstate_event
   window.addEventListener("popstate", (event) => {
@@ -110,10 +140,7 @@
   value={toISODate(dateFrom)}
   min={toISODate(today)}
   max={toISODate(dateTo)}
-  on:change={(e) => {
-    console.log(e.currentTarget.value);
-    dateFrom = new Date(e.currentTarget.value);
-  }}
+  on:change={datePickerChanged}
 />
 <label for="dateTo">To</label>
 <input
@@ -121,10 +148,7 @@
   id="dateTo"
   value={toISODate(dateTo)}
   min={toISODate(dateFrom)}
-  on:change={(e) => {
-    console.log(e.currentTarget.value);
-    dateTo = new Date(e.currentTarget.value);
-  }}
+  on:change={datePickerChanged}
 />
 <p>{today}</p>
 <p>{dateFrom}</p>
