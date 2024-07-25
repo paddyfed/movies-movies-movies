@@ -7,11 +7,15 @@
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import { findCurrentPage } from "../js/pagination";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
+  import { toISODate } from "../js/dateHelpers";
 
   const url = new URL(window.location.href);
 
   export let maxPages = 5;
   let currentPage = 1;
+
+  const today = new Date();
+  const todayPlus30 = new Date(Date.now() + 2592000000);
 
   // Create an initial state and pass it to the browser history so this can be loaded when the back button is clicked
   // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_replacestate
@@ -37,10 +41,11 @@
     include_video: "false",
     language: "en-US",
     page: currentPage,
-    "primary_release_date.gte": "2024-07-24",
-    "primary_release_date.lte": "2024-08-24",
+    "primary_release_date.gte": toISODate(today),
+    "primary_release_date.lte": toISODate(todayPlus30),
     sort_by: "popularity.desc",
-    with_release_type: "2|3",
+    with_release_type: "2",
+    with_original_language: "en",
   };
 
   for (const key in paramsObj) {
@@ -77,7 +82,6 @@
 
     // Scroll the browser window to bring the heading into view so the user does not have to manually scroll back up
     const element = document.querySelector("#upcoming-movies-header");
-    console.log(element);
     element.scrollIntoView({ behavior: "smooth" });
   }
 
@@ -98,6 +102,10 @@
   });
 </script>
 
+<label for="dateFrom">From</label>
+<input type="date" id="dateFrom" value={toISODate(today)} />
+<label for="dateTo">To</label>
+<input type="date" id="dateTo" value={toISODate(todayPlus30)} />
 {#await promise}
   <MovieScrollLoadingSpinner --height="278px" --min-width="185px" />
 {:then data}
