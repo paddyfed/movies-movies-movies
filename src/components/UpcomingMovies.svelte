@@ -31,6 +31,23 @@
     currentPage = parseInt(url.searchParams.get("page"));
   }
 
+  // Get the dateFrom and dateTo from searchParams if they exist
+  if (url.searchParams.has("dateFrom") && url.searchParams.has("dateTo")) {
+    const dateFromParam = new Date(
+      Date.parse(url.searchParams.get("dateFrom"))
+    );
+    const dateToParam = new Date(Date.parse(url.searchParams.get("dateTo")));
+
+    if (
+      dateFromParam > today &&
+      dateToParam > today &&
+      dateFromParam <= dateToParam
+    ) {
+      dateFrom = dateFromParam;
+      dateTo = dateToParam;
+    }
+  }
+
   // build up the URL and fetch data from the API
   // https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_date.gte=2024-07-24&primary_release_date.lte=2024-08-24&sort_by=popularity.desc&with_release_type=2|3
   const fetchUrl = "/3/discover/movie";
