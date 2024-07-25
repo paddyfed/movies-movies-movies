@@ -157,8 +157,11 @@
   <MovieScrollLoadingSpinner --height="278px" --min-width="185px" />
 {:then data}
   <MovieList movies={data.results} />
+  <MovieScrollPagination
+    on:click={paginationClicked}
+    maxPages={data.total_pages < maxPages ? data.total_pages : maxPages}
+    {currentPage}
+  />
 {:catch error}
   {error}
 {/await}
-
-<MovieScrollPagination on:click={paginationClicked} {maxPages} {currentPage} />

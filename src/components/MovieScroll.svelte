@@ -64,9 +64,13 @@
 {:then data}
   <!-- When data is loaded, display the movies in a list -->
   <MovieList movies={data.results} />
+  <MovieScrollPagination
+    on:click={paginationClicked}
+    maxPages={data.total_pages < maxPages ? data.total_pages : maxPages}
+    {currentPage}
+  />
 {:catch error}
   <!-- Display the error if one occurs -->
   {error}
 {/await}
 <!-- Include pagination -->
-<MovieScrollPagination on:click={paginationClicked} {maxPages} {currentPage} />
