@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/Layout.astro";
+import UpcomingMovies from "../components/UpcomingMovies.svelte";
+---
+
+<Layout title="Upcoming">
+  <h1 class="mb-3" id="upcoming-movies-header">Upcoming</h1>
+
+  <UpcomingMovies client:only="svelte" />
+</Layout>
