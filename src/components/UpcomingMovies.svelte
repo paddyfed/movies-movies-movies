@@ -15,7 +15,8 @@
   let currentPage = 1;
 
   const today = new Date();
-  const todayPlus30 = new Date(Date.now() + 2592000000);
+  let dateFrom = today;
+  let dateTo = new Date(Date.now() + 2592000000);
 
   // Create an initial state and pass it to the browser history so this can be loaded when the back button is clicked
   // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_replacestate
@@ -41,8 +42,8 @@
     include_video: "false",
     language: "en-US",
     page: currentPage,
-    "primary_release_date.gte": toISODate(today),
-    "primary_release_date.lte": toISODate(todayPlus30),
+    "primary_release_date.gte": toISODate(dateFrom),
+    "primary_release_date.lte": toISODate(dateTo),
     sort_by: "popularity.desc",
     with_release_type: "2",
     with_original_language: "en",
@@ -103,9 +104,31 @@
 </script>
 
 <label for="dateFrom">From</label>
-<input type="date" id="dateFrom" value={toISODate(today)} />
+<input
+  type="date"
+  id="dateFrom"
+  value={toISODate(dateFrom)}
+  min={toISODate(today)}
+  max={toISODate(dateTo)}
+  on:change={(e) => {
+    console.log(e.currentTarget.value);
+    dateFrom = new Date(e.currentTarget.value);
+  }}
+/>
 <label for="dateTo">To</label>
-<input type="date" id="dateTo" value={toISODate(todayPlus30)} />
+<input
+  type="date"
+  id="dateTo"
+  value={toISODate(dateTo)}
+  min={toISODate(dateFrom)}
+  on:change={(e) => {
+    console.log(e.currentTarget.value);
+    dateTo = new Date(e.currentTarget.value);
+  }}
+/>
+<p>{today}</p>
+<p>{dateFrom}</p>
+<p>{dateTo}</p>
 {#await promise}
   <MovieScrollLoadingSpinner --height="278px" --min-width="185px" />
 {:then data}
