@@ -20,7 +20,11 @@
 
   // Create an initial state and pass it to the browser history so this can be loaded when the back button is clicked
   // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_replacestate
-  const initialState = { currentPage: 1 };
+  const initialState = {
+    currentPage: 1,
+    dateFrom: dateFrom,
+    dateTo: dateTo,
+  };
   history.replaceState(initialState, "", document.location.href);
 
   // Get the page number from searchParams if it exists
@@ -89,7 +93,15 @@
 
     // Push a new history item to the browser history with the currentPage as the URL
     // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_pushstate
-    history.pushState({ currentPage }, "", `?page=${currentPage}`);
+    history.pushState(
+      {
+        currentPage: currentPage,
+        dateFrom: dateFrom,
+        dateTo: dateTo,
+      },
+      "",
+      `?page=${currentPage}&dateFrom=${toISODate(dateFrom)}&dateTo=${toISODate(dateTo)}`
+    );
 
     promise = fetch(fullFetchUrl, apiOptions).then((r) => {
       if (!r.ok) {
@@ -105,25 +117,36 @@
 
   // If the Date Picker is changed, get the value of the date picker and re-run the fetch with the new info
   function datePickerChanged(event) {
-    console.log(event.currentTarget.value);
-    console.log(event.currentTarget);
-    console.log(event.currentTarget.id);
-
     switch (event.currentTarget.id) {
       case "dateTo":
-        console.log("Date To");
         dateTo = new Date(event.currentTarget.value);
-        fullFetchUrl.searchParams.set("primary_release_date.lte", dateTo);
+        fullFetchUrl.searchParams.set(
+          "primary_release_date.lte",
+          toISODate(dateTo)
+        );
         break;
       case "dateFrom":
-        console.log("Date From");
         dateFrom = new Date(event.currentTarget.value);
-        fullFetchUrl.searchParams.set("primary_release_date.gte", dateFrom);
+        fullFetchUrl.searchParams.set(
+          "primary_release_date.gte",
+          toISODate(dateFrom)
+        );
         break;
       default:
-        console.log("None");
         break;
     }
+
+    // Push a new history item to the browser history with the currentPage as the URL
+    // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_pushstate
+    history.pushState(
+      {
+        currentPage: currentPage,
+        dateFrom: dateFrom,
+        dateTo: dateTo,
+      },
+      "",
+      `?page=${currentPage}&dateFrom=${toISODate(dateFrom)}&dateTo=${toISODate(dateTo)}`
+    );
 
     promise = fetch(fullFetchUrl, apiOptions).then((r) => {
       if (!r.ok) {
@@ -136,9 +159,21 @@
   // If back is selected, then get the history item that was pushed down and re-run the fetch using those options
   // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_the_popstate_event
   window.addEventListener("popstate", (event) => {
+    console.log(event);
     if (event.state) {
       currentPage = event.state.currentPage;
+      dateFrom = event.state.dateFrom;
+      dateTo = event.state.dateTo;
       fullFetchUrl.searchParams.set("page", event.state.currentPage);
+      fullFetchUrl.searchParams.set(
+        "primary_release_date.lte",
+        toISODate(event.state.dateTo)
+      );
+      fullFetchUrl.searchParams.set(
+        "primary_release_date.gte",
+        toISODate(event.state.dateFrom)
+      );
+
       promise = fetch(fullFetchUrl, apiOptions).then((r) => {
         if (!r.ok) {
           console.error(r);
