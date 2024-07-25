@@ -185,26 +185,38 @@
   });
 </script>
 
-<label for="dateFrom">From</label>
-<input
-  type="date"
-  id="dateFrom"
-  value={toISODate(dateFrom)}
-  min={toISODate(today)}
-  max={toISODate(dateTo)}
-  on:change={datePickerChanged}
-/>
-<label for="dateTo">To</label>
-<input
-  type="date"
-  id="dateTo"
-  value={toISODate(dateTo)}
-  min={toISODate(dateFrom)}
-  on:change={datePickerChanged}
-/>
-<p>{today}</p>
-<p>{dateFrom}</p>
-<p>{dateTo}</p>
+<form>
+  <div class="row mb-3">
+    <div class="col-md-auto">
+      <label for="dateFrom" class="col-form-label">From</label>
+    </div>
+    <div class="col-md-auto">
+      <input
+        class="form-control"
+        type="date"
+        id="dateFrom"
+        value={toISODate(dateFrom)}
+        min={toISODate(today)}
+        max={toISODate(dateTo)}
+        on:change|preventDefault={datePickerChanged}
+      />
+    </div>
+    <div class="col-md-auto">
+      <label for="dateTo" class="col-form-label">To</label>
+    </div>
+    <div class="col-md-auto">
+      <input
+        class="form-control"
+        type="date"
+        id="dateTo"
+        value={toISODate(dateTo)}
+        min={toISODate(dateFrom)}
+        on:change|preventDefault={datePickerChanged}
+      />
+    </div>
+  </div>
+</form>
+
 {#await promise}
   <MovieScrollLoadingSpinner --height="278px" --min-width="185px" />
 {:then data}
