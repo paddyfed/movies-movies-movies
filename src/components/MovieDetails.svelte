@@ -3,7 +3,6 @@
 <!-- Includes: Title, Descriptin, Poster, Genre(s), Production Companies, Certifications, Release Date, Run Time, and Trailers -->
 <!-- Also has options for marking the movie on the Liked, Disliked, or Wish List lists -->
 <script>
-  import DisplayDate from "./DisplayDate.svelte";
   import MovieCertification from "./MovieCertification.svelte";
   import MovieDetailsPlaceholder from "./MovieDetailsPlaceholder.svelte";
   import MovieGenres from "./MovieGenres.svelte";
@@ -13,6 +12,7 @@
   import { apiOptions } from "../js/apiHelpers";
   import PageNotFound from "./PageNotFound.svelte";
   import DetailsBackground from "./DetailsBackground.svelte";
+  import MovieReleaseDate from "./MovieReleaseDate.svelte";
 
   // Get the movie id from the URL
   const movieIdParam = new URLSearchParams(window.location.search).get(
@@ -67,11 +67,8 @@
       </p>
       <div class="details">
         <p>{movie.overview}</p>
-        <p>
-          Release Date: <DisplayDate
-            date={new Date(Date.parse(movie.release_date))}
-          />
-        </p>
+        <MovieReleaseDate {movie} />
+
         <p>Runtime: {movie.runtime} minutes</p>
         <MovieGenres genres={movie.genres} includeLinks />
         <MovieGenres genres={movie.production_companies} />
