@@ -27,55 +27,104 @@
       }
     }
   }
-  let movieDetails = [];
-  let promise = convertToMovieList(likedList);
-  // convertToMovieList(dislikedList);
-  // convertToMovieList(wishlistList);
+  // let movieDetails = [];
+  // let promises = convertToMovieList(likedList);
+  // console.log("promises", promises);
+  // // convertToMovieList(dislikedList);
+  // // convertToMovieList(wishlistList);
 
-  //Transform lists into MovieLists so that we can use the Movie List component
-  // We need to fetch the movie details to construct the list that MovieList needs as at the minute we only have the Movie ID
-  async function convertToMovieList(list) {
-    console.log("wishlistList", list);
+  // //Transform lists into MovieLists so that we can use the Movie List component
+  // // We need to fetch the movie details to construct the list that MovieList needs as at the minute we only have the Movie ID
+  // async function convertToMovieList(list) {
+  //   const paramsObj = {
+  //     language: "en-US",
+  //   };
+  //   console.log("wishlistList", list);
 
-    // get the property names from the list. This will be an array of Movie IDs
-    const movieIds = Object.getOwnPropertyNames(list);
-    console.log("movieIds", movieIds);
+  //   // get the property names from the list. This will be an array of Movie IDs
+  //   const movieIds = Object.getOwnPropertyNames(list);
+  //   console.log("movieIds", movieIds);
+  //   const fetchUrls = movieIds.map((movieId) => {
+  //     const fetchUrl = `/3/movie/${movieId}`;
+  //     const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
 
-    // run fetch on all of the IDs to get all the movie info
-    // Build up the URL and fetch movie data from the API
-    const fetchUrl = `/3/movie/${movieIds[0]}`;
-    const paramsObj = {
-      language: "en-US",
-    };
+  //     for (const key in paramsObj) {
+  //       fullFetchUrl.searchParams.append(key, paramsObj[key]);
+  //     }
+  //     return fullFetchUrl;
+  //   });
 
-    const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
-    console.log("fullFetchUrl", fullFetchUrl);
+  //   console.log("fetchUrls", fetchUrls);
+  //   // run fetch on all of the IDs to get all the movie info
+  //   // Build up the URL and fetch movie data from the API
 
-    for (const key in paramsObj) {
-      fullFetchUrl.searchParams.append(key, paramsObj[key]);
+  //   try {
+  //     let promise = await Promise.all(
+  //       fetchUrls.forEach((fetchUrl) => {
+  //         fetch(fetchUrl, apiOptions).then((r) => {
+  //           if (!r.ok) {
+  //             throw new Error(r.status);
+  //           }
+  //           return r.json();
+  //         });
+  //       })
+  //     );
+  //     console.log("promise", promise);
+  //     console.log("movieDetails", movieDetails);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+
+  //   return promise;
+  // }
+
+  async function fetchURLs(list) {
+    try {
+      // Promise.all() lets us coalesce multiple promises into a single super-promise
+      var data = await Promise.all([
+        /* Alternatively store each in an array */
+        // var [x, y, z] = await Promise.all([
+        // parse results as json; fetch data response has several reader methods available:
+        //.arrayBuffer()
+        //.blob()
+        //.formData()
+        //.json()
+        //.text()
+        fetch(
+          "https://api.themoviedb.org/3/movie/11?language=en-US",
+          apiOptions
+        ).then((response) => response.json()), // parse each response as json
+        fetch(
+          "https://api.themoviedb.org/3/movie/519182?language=en-US",
+          apiOptions
+        ).then((response) => response.json()),
+        fetch(
+          "https://api.themoviedb.org/3/movie/822119?language=en-US",
+          apiOptions
+        ).then((response) => response.json()),
+      ]);
+
+      console.log(data);
+
+      return data;
+    } catch (error) {
+      console.log(error);
     }
-
-    let promise = await fetch(fullFetchUrl, apiOptions)
-      .then((r) => {
-        if (!r.ok) {
-          throw new Error(r.status);
-        }
-        return r.json();
-      })
-      .then((data) => {
-        movieDetails.push(data);
-        console.log("data", data);
-        return data;
-      });
-
-    console.log("promise", promise);
-    console.log("movieDetails", movieDetails);
-    return promise;
   }
+
+  let promises = fetchURLs();
 </script>
 
-{#await promise then data}
-  <MovieList movies={[data]} />
+{#await promises}
+  loading
+{:then data}
+  <!-- {#each data as m}
+    {JSON.stringify(m)}
+    <MovieList movies={[m]} />
+  {/each} -->
+  <MovieList movies={data} />
+{:catch error}
+  {error.message}
 {/await}
 <!-- Display all the movies that have been marked as 'Liked' -->
 <h2 class="mb-3">Liked</h2>
