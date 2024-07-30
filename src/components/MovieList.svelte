@@ -3,14 +3,11 @@
 <script>
   export let movies;
   import ImagePoster from "./ImagePoster.svelte";
-
-  console.log("movieList movies", movies);
 </script>
 
 {#if Array.isArray(movies)}
   <ul class="mb-3">
     {#each movies as movie}
-      <!-- {JSON.stringify(movie)} -->
       <li>
         <a href={import.meta.env.BASE_URL + "/movie?movieId=" + movie.id}>
           <ImagePoster
@@ -21,8 +18,6 @@
       </li>
     {/each}
   </ul>
-{:else}
-  Not an Array
 {/if}
 
 <style>

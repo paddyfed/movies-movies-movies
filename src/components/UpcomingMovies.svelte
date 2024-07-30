@@ -185,10 +185,6 @@
     }
   });
 
-  // This checks whether the showPicker() function is available in the current browser
-  // https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/showPicker#feature_detection
-  const showPickerAllowed = "showPicker" in HTMLInputElement.prototype;
-
   // check which date button was selected and open the relevant date picker
   function dateClicked(event) {
     let dateInput;
