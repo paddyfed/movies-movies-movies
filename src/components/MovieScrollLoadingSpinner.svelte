@@ -20,7 +20,7 @@
     gap: 0.5em;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     ul {
       display: flex;
       gap: 0.5em;
