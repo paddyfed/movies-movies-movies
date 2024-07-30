@@ -185,8 +185,12 @@
     }
   });
 
+  // This checks whether the showPicker() function is available in the current browser
+  // https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/showPicker#feature_detection
+  const showPickerAllowed = "showPicker" in HTMLInputElement.prototype;
+
+  // check which date button was selected and open the relevant date picker
   function dateClicked(event) {
-    console.log(event.currentTarget.id);
     let dateInput;
 
     switch (event.currentTarget.id) {
@@ -214,6 +218,7 @@
     </div>
     <div class="col-md-auto date">
       <button
+        class:hidden={!showPickerAllowed}
         type="button"
         class="btn btn-primary"
         on:click|preventDefault={dateClicked}
@@ -223,7 +228,8 @@
         <i class="fa-regular fa-calendar ms-1"></i>
       </button>
       <input
-        class="form-control"
+        class:form-control={!showPickerAllowed}
+        class:hidden={showPickerAllowed}
         type="date"
         id="dateFrom"
         value={toISODate(dateFrom)}
@@ -237,6 +243,7 @@
     </div>
     <div class="col-md-auto date">
       <button
+        class:hidden={!showPickerAllowed}
         type="button"
         class="btn btn-primary"
         on:click|preventDefault={dateClicked}
@@ -246,7 +253,8 @@
         <i class="fa-regular fa-calendar ms-1"></i>
       </button>
       <input
-        class="form-control"
+        class:form-control={!showPickerAllowed}
+        class:hidden={showPickerAllowed}
         type="date"
         id="dateTo"
         value={toISODate(dateTo)}
@@ -274,19 +282,23 @@
   .date {
     position: relative;
   }
+
   input[type="date"] {
+    position: relative;
+  }
+
+  input[type="date"].hidden {
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: -1;
     visibility: hidden;
   }
+
   button {
     position: relative;
-    word-wrap: unset;
-    left: 0;
-    top: 0;
-    width: auto;
-    display: inline;
+  }
+
+  button.hidden {
+    display: none;
   }
 </style>
