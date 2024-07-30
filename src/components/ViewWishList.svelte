@@ -79,30 +79,31 @@
   // }
 
   async function fetchURLs(list) {
+    const paramsObj = {
+      language: "en-US",
+    };
+
+    // get the property names from the list. This will be an array of Movie IDs
+    const movieIds = Object.getOwnPropertyNames(list);
+
+    const fetchUrlsss = movieIds.map((movieId) => {
+      const fetchUrl = `/3/movie/${movieId}`;
+      const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
+
+      for (const key in paramsObj) {
+        fullFetchUrl.searchParams.append(key, paramsObj[key]);
+      }
+      return fullFetchUrl;
+    });
+
+    const finalFetch = fetchUrlsss.map((i) => {
+      return fetch(i, apiOptions).then((response) => response.json());
+    });
+
+    console.log("finalFetch", finalFetch);
     try {
       // Promise.all() lets us coalesce multiple promises into a single super-promise
-      var data = await Promise.all([
-        /* Alternatively store each in an array */
-        // var [x, y, z] = await Promise.all([
-        // parse results as json; fetch data response has several reader methods available:
-        //.arrayBuffer()
-        //.blob()
-        //.formData()
-        //.json()
-        //.text()
-        fetch(
-          "https://api.themoviedb.org/3/movie/11?language=en-US",
-          apiOptions
-        ).then((response) => response.json()), // parse each response as json
-        fetch(
-          "https://api.themoviedb.org/3/movie/519182?language=en-US",
-          apiOptions
-        ).then((response) => response.json()),
-        fetch(
-          "https://api.themoviedb.org/3/movie/822119?language=en-US",
-          apiOptions
-        ).then((response) => response.json()),
-      ]);
+      var data = await Promise.all(finalFetch);
 
       console.log(data);
 
@@ -112,7 +113,7 @@
     }
   }
 
-  let promises = fetchURLs();
+  let promises = fetchURLs(wishlistList);
 </script>
 
 {#await promises}
