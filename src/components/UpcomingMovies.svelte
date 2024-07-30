@@ -2,13 +2,13 @@
 <!-- Purpose: to fetch and display upcoming movies to users -->
 
 <script>
-  import MovieList from "./MovieList.svelte";
   import { apiOptions } from "../js/apiHelpers";
-  import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import { findCurrentPage } from "../js/pagination";
-  import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
   import { toISODate } from "../js/dateHelpers";
-  import DisplayDate from "./DisplayDate.svelte";
+  import MovieList from "./MovieList.svelte";
+  import MovieScrollPagination from "./MovieScrollPagination.svelte";
+  import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
+  import DatePicker from "./DatePicker.svelte";
 
   const url = new URL(window.location.href);
 
@@ -44,8 +44,8 @@
     const dateToParam = new Date(Date.parse(url.searchParams.get("dateTo")));
 
     if (
-      dateFromParam > today &&
-      dateToParam > today &&
+      dateFromParam >= today &&
+      dateToParam >= today &&
       dateFromParam <= dateToParam
     ) {
       dateFrom = dateFromParam;
@@ -213,55 +213,25 @@
 
 <form>
   <div class="row mb-3">
-    <div class="col-md-auto">
-      <label for="dateFrom" class="col-form-label">From</label>
-    </div>
-    <div class="col-md-auto date">
-      <button
-        class:hidden={!showPickerAllowed}
-        type="button"
-        class="btn btn-primary"
-        on:click|preventDefault={dateClicked}
-        id="dateFromButton"
-      >
-        <DisplayDate date={dateFrom} />
-        <i class="fa-regular fa-calendar ms-1"></i>
-      </button>
-      <input
-        class:form-control={!showPickerAllowed}
-        class:hidden={showPickerAllowed}
-        type="date"
-        id="dateFrom"
-        value={toISODate(dateFrom)}
-        min={toISODate(today)}
-        max={toISODate(dateTo)}
-        on:change|preventDefault={datePickerChanged}
-      />
-    </div>
-    <div class="col-md-auto">
-      <label for="dateTo" class="col-form-label">To</label>
-    </div>
-    <div class="col-md-auto date">
-      <button
-        class:hidden={!showPickerAllowed}
-        type="button"
-        class="btn btn-primary"
-        on:click|preventDefault={dateClicked}
-        id="dateToButton"
-      >
-        <DisplayDate date={dateTo} />
-        <i class="fa-regular fa-calendar ms-1"></i>
-      </button>
-      <input
-        class:form-control={!showPickerAllowed}
-        class:hidden={showPickerAllowed}
-        type="date"
-        id="dateTo"
-        value={toISODate(dateTo)}
-        min={toISODate(dateFrom)}
-        on:change|preventDefault={datePickerChanged}
-      />
-    </div>
+    <DatePicker
+      id="dateFrom"
+      on:change={datePickerChanged}
+      on:click={dateClicked}
+      date={dateFrom}
+      min={today}
+      max={dateTo}
+    >
+      From
+    </DatePicker>
+    <DatePicker
+      id="dateTo"
+      on:change={datePickerChanged}
+      on:click={dateClicked}
+      date={dateTo}
+      min={dateFrom}
+    >
+      To
+    </DatePicker>
   </div>
 </form>
 
@@ -277,28 +247,3 @@
 {:catch error}
   {error}
 {/await}
-
-<style>
-  .date {
-    position: relative;
-  }
-
-  input[type="date"] {
-    position: relative;
-  }
-
-  input[type="date"].hidden {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    visibility: hidden;
-  }
-
-  button {
-    position: relative;
-  }
-
-  button.hidden {
-    display: none;
-  }
-</style>
