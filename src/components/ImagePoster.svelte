@@ -16,17 +16,24 @@
   let posterUrl = new URL(imgPosterUrl + imgPosterSize + posterPath);
 </script>
 
-<img
-  class={imgFluid ? "img-fluid" : ""}
-  onerror="this.onerror=null;this.src='{posterPlaceholder.src}'"
-  src={posterUrl}
-  alt={posterTitle + " Poster"}
-  title={posterTitle}
-  {height}
-  {width}
-/>
+<figure>
+  <img
+    class={imgFluid ? "img-fluid" : ""}
+    onerror="this.onerror=null;this.src='{posterPlaceholder.src}'"
+    src={posterUrl}
+    alt={posterTitle + " Poster"}
+    title={posterTitle}
+    {height}
+    {width}
+  />
+  <figcaption>{posterTitle}</figcaption>
+</figure>
 
 <style>
+  figure {
+    position: relative;
+  }
+
   /* Style for the hover effect except when img-fluid is true */
   img:not(.img-fluid) {
     transition: 0.3s ease-in-out;
@@ -35,5 +42,17 @@
 
   img:not(.img-fluid):hover {
     opacity: 0.5;
+  }
+
+  figcaption {
+    background-color: #222;
+    color: #fff;
+    font: italic smaller sans-serif;
+    padding: 3px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    opacity: 0.7;
   }
 </style>
