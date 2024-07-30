@@ -8,6 +8,7 @@
   import { findCurrentPage } from "../js/pagination";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
   import { toISODate } from "../js/dateHelpers";
+  import DisplayDate from "./DisplayDate.svelte";
 
   const url = new URL(window.location.href);
 
@@ -183,6 +184,27 @@
       });
     }
   });
+
+  function dateClicked(event) {
+    console.log(event.currentTarget.id);
+    let dateInput;
+
+    switch (event.currentTarget.id) {
+      case "dateToButton":
+        dateInput = document.querySelector("#dateTo");
+        break;
+      case "dateFromButton":
+        dateInput = document.querySelector("#dateFrom");
+        break;
+      default:
+        break;
+    }
+    try {
+      dateInput.showPicker();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 </script>
 
 <form>
@@ -190,7 +212,16 @@
     <div class="col-md-auto">
       <label for="dateFrom" class="col-form-label">From</label>
     </div>
-    <div class="col-md-auto">
+    <div class="col-md-auto date">
+      <button
+        type="button"
+        class="btn btn-primary"
+        on:click|preventDefault={dateClicked}
+        id="dateFromButton"
+      >
+        <DisplayDate date={dateFrom} />
+        <i class="fa-regular fa-calendar ms-1"></i>
+      </button>
       <input
         class="form-control"
         type="date"
@@ -204,7 +235,16 @@
     <div class="col-md-auto">
       <label for="dateTo" class="col-form-label">To</label>
     </div>
-    <div class="col-md-auto">
+    <div class="col-md-auto date">
+      <button
+        type="button"
+        class="btn btn-primary"
+        on:click|preventDefault={dateClicked}
+        id="dateToButton"
+      >
+        <DisplayDate date={dateTo} />
+        <i class="fa-regular fa-calendar ms-1"></i>
+      </button>
       <input
         class="form-control"
         type="date"
@@ -229,3 +269,24 @@
 {:catch error}
   {error}
 {/await}
+
+<style>
+  .date {
+    position: relative;
+  }
+  input[type="date"] {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    visibility: hidden;
+  }
+  button {
+    position: relative;
+    word-wrap: unset;
+    left: 0;
+    top: 0;
+    width: auto;
+    display: inline;
+  }
+</style>
