@@ -23,23 +23,8 @@
   }
 
   function displayToaster(message) {
-    const main = document.querySelector("main");
     const toast = document.createElement("div");
     const toastBody = document.createElement("div");
-
-    if (!document.querySelector("#toastContainer")) {
-      const toastContainer = document.createElement("div");
-      toastContainer.classList.add(
-        "toast-container",
-        "position-fixed",
-        "top-0",
-        "start-50",
-        "translate-middle-x",
-        "p-3"
-      );
-      toastContainer.id = "toastContainer";
-      main.appendChild(toastContainer);
-    }
 
     toast.classList.add(
       "toast",
@@ -47,7 +32,6 @@
       "bg-secondary-subtle"
     );
     toast.role = "alert";
-    toast.id = `liveToast`;
     toast.ariaAtomic = "true";
     toast.ariaLive = "assertive";
 
@@ -58,10 +42,6 @@
 
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
     toastBootstrap.show();
-
-    // toast.addEventListener("hidden.bs.toast", () => {
-    //   toast.remove();
-    // });
   }
 </script>
 

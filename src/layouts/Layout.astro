@@ -50,6 +50,11 @@ import "../styles/overwrite-bootstrap-colors.css";
     </header>
     <main class="container">
       <slot />
+      <div
+        class="toast-container position-fixed top-0 start-50 translate-middle-x p-3"
+        id="toastContainer"
+      >
+      </div>
     </main>
     <footer class="mb-3"><MainFooter /></footer>
   </body>
