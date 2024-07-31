@@ -1,6 +1,7 @@
 <!-- AppSettings.svelte component -->
 <!-- Purpose: Allows users to change some settings on the site -->
 <script>
+  import { onMount } from "svelte";
   import DisplayDate from "./DisplayDate.svelte";
 
   // Load settings from localStorage
@@ -11,12 +12,56 @@
   // When the date setting is changed, record it in localStorage
   function handleDateSettingChanged() {
     localStorage.setItem("dateSettingSelected", dateSettingSelected);
+    displayToaster("Date Format changed");
   }
 
   // Reset all settings back to their defaults
   function resetLocalStorage() {
     localStorage.removeItem("dateSettingSelected");
     dateSettingSelected = "en-IE_Long";
+    displayToaster("All settings reset to default");
+  }
+
+  function displayToaster(message) {
+    const main = document.querySelector("main");
+    const toast = document.createElement("div");
+    const toastBody = document.createElement("div");
+
+    if (!document.querySelector("#toastContainer")) {
+      const toastContainer = document.createElement("div");
+      toastContainer.classList.add(
+        "toast-container",
+        "position-fixed",
+        "top-0",
+        "start-50",
+        "translate-middle-x",
+        "p-3"
+      );
+      toastContainer.id = "toastContainer";
+      main.appendChild(toastContainer);
+    }
+
+    toast.classList.add(
+      "toast",
+      "text-secondary-emphasis",
+      "bg-secondary-subtle"
+    );
+    toast.role = "alert";
+    toast.id = `liveToast`;
+    toast.ariaAtomic = "true";
+    toast.ariaLive = "assertive";
+
+    toastBody.classList.add("toast-body");
+    toastBody.innerText = message;
+    toast.appendChild(toastBody);
+    toastContainer.appendChild(toast);
+
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+    toastBootstrap.show();
+
+    // toast.addEventListener("hidden.bs.toast", () => {
+    //   toast.remove();
+    // });
   }
 </script>
 
@@ -74,3 +119,27 @@
     </button>
   </div>
 </form>
+
+<!-- <div
+  class="toast-container position-fixed top-0 start-50 translate-middle-x p-3"
+>
+  <div
+    id="liveToast"
+    class="toast text-secondary-emphasis bg-secondary-subtle"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="toast-header bg-secondary-subtle text-secondary-emphasis">
+      <strong class="me-auto">Bootstrap</strong>
+      <small>11 mins ago</small>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="toast-body">Hello, world! This is a toast message.</div>
+  </div>
+</div> -->
