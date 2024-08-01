@@ -1,7 +1,7 @@
 <!-- AppSettings.svelte component -->
 <!-- Purpose: Allows users to change some settings on the site -->
 <script>
-  import { onMount } from "svelte";
+  import { displayToaster } from "../js/toastHelpers";
   import DisplayDate from "./DisplayDate.svelte";
 
   // Load settings from localStorage
@@ -20,28 +20,6 @@
     localStorage.removeItem("dateSettingSelected");
     dateSettingSelected = "en-IE_Long";
     displayToaster("All settings reset to default");
-  }
-
-  function displayToaster(message) {
-    const toast = document.createElement("div");
-    const toastBody = document.createElement("div");
-
-    toast.classList.add(
-      "toast",
-      "text-secondary-emphasis",
-      "bg-secondary-subtle"
-    );
-    toast.role = "alert";
-    toast.ariaAtomic = "true";
-    toast.ariaLive = "assertive";
-
-    toastBody.classList.add("toast-body");
-    toastBody.innerText = message;
-    toast.appendChild(toastBody);
-    toastContainer.appendChild(toast);
-
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
-    toastBootstrap.show();
   }
 </script>
 

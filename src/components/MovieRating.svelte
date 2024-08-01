@@ -1,6 +1,8 @@
 <!-- MovieRating.svelte -->
 <!-- Purpose: Displays icons and handles user clicks for the Liked, Disliked, and WishList options on the MovieDetails page -->
 <script>
+  import { displayToaster } from "../js/toastHelpers";
+
   // MovieID is passed from the MovieDetails component
   export let movieId;
 
@@ -29,6 +31,7 @@
 
     // update the rating variable so that svelte will update any UI elements
     rating = localStorage.getItem(movieId);
+    displayToaster(`Movie marked as ${rating}`);
   }
 </script>
 
