@@ -10,7 +10,9 @@
   class="rounded p-3"
 >
   <h1 class="placeholder-glow mb-3">
-    <span class="placeholder col-12">Loading</span>
+    <span class="placeholder col-12">
+      <span class="visually-hidden">Loading</span>
+    </span>
   </h1>
   <div class="placeholder-glow poster">
     <p class="poster-placeholder">
@@ -19,29 +21,29 @@
   </div>
   <div class="placeholder-glow details container">
     <div class="row">
-      <p class="placeholder col-12">Loading</p>
-      <p class="placeholder col-12">Loading</p>
-      <p class="placeholder col-12">Loading</p>
+      <p class="placeholder col-12"></p>
+      <p class="placeholder col-12"></p>
+      <p class="placeholder col-12"></p>
     </div>
     <div class="row">
-      <p class="placeholder col-3">Loading</p>
+      <p class="placeholder col-3"></p>
     </div>
     <div class="row">
-      <p class="placeholder col-3">Loading</p>
+      <p class="placeholder col-3"></p>
     </div>
     <div class="row">
-      <p class="placeholder col-3">Loading</p>
+      <p class="placeholder col-3"></p>
     </div>
     <div class="row">
-      <p class="placeholder col-3" style="height: 146.89px;">Loading</p>
+      <p class="placeholder col-3" style="height: 146.89px;"></p>
     </div>
     <div class="row">
-      <p class="placeholder col-4" style="height: 66px;">Loading</p>
+      <p class="placeholder col-4" style="height: 66px;"></p>
     </div>
   </div>
   <div class="footer">
     <h2 class="placeholder-glow mb-3">
-      <span class="placeholder col-12">Loading</span>
+      <span class="placeholder col-12"></span>
     </h2>
     <MovieScrollLoadingSpinner
       numItems={5}
