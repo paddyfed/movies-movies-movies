@@ -87,7 +87,7 @@
 {/await}
 
 <!-- Display all the movies that have been marked for the 'WishList' -->
-<h2 class="mb-3">Wishlist</h2>
+<h2 class="mb-3">Want to See</h2>
 {#await wishListPromise}
   <MovieScrollLoadingSpinner />
 {:then data}
