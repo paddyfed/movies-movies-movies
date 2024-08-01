@@ -2,6 +2,7 @@
 <!-- Purpose: Displays icons and handles user clicks for the Liked, Disliked, and WishList options on the MovieDetails page -->
 <script>
   import { displayToaster } from "../js/toastHelpers";
+  import { capitalizeFirstLetter } from "../js/stringFormatHelpers";
 
   // MovieID is passed from the MovieDetails component
   export let movieId;
@@ -22,16 +23,19 @@
     // This has the affect of 'turning off' or 'de-selecting' the option that was already clicked
     if (rating === buttonClicked) {
       localStorage.removeItem(movieId);
+      displayToaster(
+        `Movie removed from ${capitalizeFirstLetter(rating)} list`
+      );
     }
     // Else, if the rating is not the same as the button that was clicked, we will update localStorage with the selected button
     // This has the affect of 'turning on' the option that was clicked while 'turning off' any other option that was clicked
     else {
       localStorage.setItem(movieId, buttonClicked);
+      displayToaster(`Movie marked as ${capitalizeFirstLetter(buttonClicked)}`);
     }
 
     // update the rating variable so that svelte will update any UI elements
     rating = localStorage.getItem(movieId);
-    displayToaster(`Movie marked as ${rating}`);
   }
 </script>
 
