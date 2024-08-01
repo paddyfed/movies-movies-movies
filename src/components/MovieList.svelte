@@ -5,7 +5,7 @@
   import ImagePoster from "./ImagePoster.svelte";
 </script>
 
-{#if Array.isArray(movies)}
+{#if Array.isArray(movies) && movies.length !== 0}
   <ul class="mb-3">
     {#each movies as movie}
       <li>
@@ -18,6 +18,8 @@
       </li>
     {/each}
   </ul>
+{:else}
+  <p class="mb-3">No items in this list</p>
 {/if}
 
 <style>
