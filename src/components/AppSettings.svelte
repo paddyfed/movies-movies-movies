@@ -2,23 +2,32 @@
 <!-- Purpose: Allows users to change some settings on the site -->
 <script>
   import { displayToaster } from "../js/toastHelpers";
+  import { displayDatePreference } from "../js/dateHelpers";
   import DisplayDate from "./DisplayDate.svelte";
+
+  const defaultDateSetting = "en-IE_Long";
 
   // Load settings from localStorage
   // If the item does not exist in localStorage, then set a default setting
   let dateSettingSelected =
-    localStorage.getItem("dateSettingSelected") ?? "en-IE_Long";
+    localStorage.getItem("dateSettingSelected") ?? defaultDateSetting;
 
   // When the date setting is changed, record it in localStorage
   function handleDateSettingChanged() {
+    let currentSetting = localStorage.getItem("dateSettingSelected");
+    if (!currentSetting) {
+      currentSetting = defaultDateSetting;
+    }
     localStorage.setItem("dateSettingSelected", dateSettingSelected);
-    displayToaster("Date Format changed");
+    displayToaster(
+      `Date format changed from\n ${displayDatePreference(new Date(), currentSetting)} to ${displayDatePreference(new Date(), dateSettingSelected)}`
+    );
   }
 
   // Reset all settings back to their defaults
   function resetLocalStorage() {
-    localStorage.removeItem("dateSettingSelected");
-    dateSettingSelected = "en-IE_Long";
+    dateSettingSelected = defaultDateSetting;
+    localStorage.setItem("dateSettingSelected", dateSettingSelected);
     displayToaster("All settings reset to default");
   }
 </script>
@@ -77,27 +86,3 @@
     </button>
   </div>
 </form>
-
-<!-- <div
-  class="toast-container position-fixed top-0 start-50 translate-middle-x p-3"
->
-  <div
-    id="liveToast"
-    class="toast text-secondary-emphasis bg-secondary-subtle"
-    role="alert"
-    aria-live="assertive"
-    aria-atomic="true"
-  >
-    <div class="toast-header bg-secondary-subtle text-secondary-emphasis">
-      <strong class="me-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="toast"
-        aria-label="Close"
-      ></button>
-    </div>
-    <div class="toast-body">Hello, world! This is a toast message.</div>
-  </div>
-</div> -->
