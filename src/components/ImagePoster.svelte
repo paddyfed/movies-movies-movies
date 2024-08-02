@@ -32,6 +32,7 @@
 <style>
   figure {
     position: relative;
+    margin: 0;
   }
 
   /* Style for the hover effect except when img-fluid is true */
