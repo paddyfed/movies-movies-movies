@@ -2,9 +2,9 @@
 <!-- Purpose: To fetch and display search results from the nav bar search or the main (index) page search. -->
 <script>
   import { findCurrentPage } from "../js/pagination";
+  import { getData } from "../js/apiHelpers";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import ImagePoster from "./ImagePoster.svelte";
-  import { apiOptions } from "../js/apiHelpers";
 
   // Query is passed to the url as a search param
   const url = new URL(window.location.href);
@@ -39,11 +39,9 @@
     fullFetchUrl.searchParams.append(key, paramsObj[key]);
   }
 
-  let promise = fetch(fullFetchUrl, apiOptions).then((r) => {
-    if (!r.ok) {
-      throw new Error(r.status);
-    }
-    return r.json();
+  let promise = getData(fullFetchUrl).then((result) => {
+    maxPages = result.total_pages < maxPages ? result.total_pages : maxPages;
+    return result;
   });
 
   // Handle the pagination clicks by getting the button that was clicked and re-running the fetch with the new paramater
@@ -63,12 +61,7 @@
       "",
       `?query=${queryParam}&page=${currentPage}`
     );
-    promise = fetch(fullFetchUrl, apiOptions).then((r) => {
-      if (!r.ok) {
-        throw new Error(r.status);
-      }
-      return r.json();
-    });
+    promise = getData(fullFetchUrl);
   }
 
   // If back is selected, then get the history item that was pushed down and re-run the fetch using those options
@@ -79,12 +72,7 @@
       queryParam = event.state.queryParam;
       fullFetchUrl.searchParams.set("page", event.state.currentPage);
       fullFetchUrl.searchParams.set("query", event.state.queryParam);
-      promise = fetch(fullFetchUrl, apiOptions).then((r) => {
-        if (!r.ok) {
-          throw new Error(r.status);
-        }
-        return r.json();
-      });
+      promise = getData(fullFetchUrl);
     }
   });
 </script>
@@ -125,11 +113,6 @@
         </div>
       </div>
     {/each}
-    <MovieScrollPagination
-      on:click={paginationClicked}
-      {currentPage}
-      maxPages={data.total_pages < maxPages ? data.total_pages : maxPages}
-    />
   {:else}
     <div class="mb-3">No results returned</div>
   {/if}
@@ -137,3 +120,4 @@
   <!-- Display the error if one occurs -->
   {error.message}
 {/await}
+<MovieScrollPagination on:click={paginationClicked} {currentPage} {maxPages} />
