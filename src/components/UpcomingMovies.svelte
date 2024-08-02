@@ -241,5 +241,5 @@
     {currentPage}
   />
 {:catch error}
-  {error}
+  {error.message}
 {/await}

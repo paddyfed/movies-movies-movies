@@ -102,6 +102,6 @@
   />
 {:catch error}
   <!-- Display the error if one occurs -->
-  {error}
+  {error.message}
 {/await}
 <!-- Include pagination -->
