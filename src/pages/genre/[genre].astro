@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import MoviesByGenre from "../../components/MoviesByGenre.svelte";
+import { getData, buildFetchUrl } from "../../js/apiHelpers";
 
 // getStaticPaths tells Astro which pages to generate when building the site
 // based on the information that is set in the return statement
@@ -14,10 +15,11 @@ export async function getStaticPaths() {
   };
 
   // We fetch a list of the genres from the API to populate in the getStaticPaths return statement
-  const data = await fetch(
-    `https://api.themoviedb.org/3/genre/movie/list?language=en`,
-    options
-  ).then((r) => r.json());
+  const fullFetchUrl = buildFetchUrl(
+    `https://api.themoviedb.org/3/genre/movie/list`,
+    { language: "en" }
+  );
+  const data = await getData(fullFetchUrl);
 
   return data.genres.map((genre) => {
     // The params object is a list of the genres which Astro will create during build
