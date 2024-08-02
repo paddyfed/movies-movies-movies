@@ -1,4 +1,5 @@
 ---
+import { buildFetchUrl, getData } from "../js/apiHelpers";
 import Layout from "../layouts/Layout.astro";
 
 const options = {
@@ -10,10 +11,11 @@ const options = {
 };
 
 // Get a list of Genres from the API to display as links to the user
-const data = await fetch(
-  `https://api.themoviedb.org/3/genre/movie/list?language=en`,
-  options
-).then((r) => r.json());
+const fullFetchUrl = buildFetchUrl(
+  `https://api.themoviedb.org/3/genre/movie/list`,
+  { language: "en" }
+);
+const data = await getData(fullFetchUrl);
 ---
 
 <Layout title="Genre">
