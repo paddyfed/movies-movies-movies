@@ -2,7 +2,7 @@
 <!-- Purpose: Displays the lists of popular, Now Playing, or Top Rated movies from the main (index) page -->
 <script>
   import { findCurrentPage } from "../js/pagination";
-  import { getData } from "../js/apiHelpers";
+  import { buildFetchUrl, getData } from "../js/apiHelpers";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import MovieList from "./MovieList.svelte";
@@ -14,19 +14,10 @@
   export let maxPages = 5;
 
   // Build up the URL and fetch the information from the API
-  let fullFetchUrl = new URL(
-    "/3/movie/" + movieList,
-    import.meta.env.PUBLIC_API_URL
-  );
-
-  const paramsObj = {
+  let fullFetchUrl = buildFetchUrl(`/3/movie/${movieList}`, {
     page: currentPage,
     language: "en-US",
-  };
-
-  for (const key in paramsObj) {
-    fullFetchUrl.searchParams.append(key, paramsObj[key]);
-  }
+  });
 
   let promise = getData(fullFetchUrl).then((result) => {
     maxPages = result.total_pages < maxPages ? result.total_pages : maxPages;
