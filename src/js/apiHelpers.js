@@ -18,6 +18,6 @@ export async function getData(fetchUrl) {
     return parsedResponse;
   } catch (error) {
     console.error(error);
-    throw new Error(error);
+    throw new Error(error.message);
   }
 }

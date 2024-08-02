@@ -3,13 +3,13 @@
 <!-- Includes: Title, Descriptin, Poster, Genre(s), Production Companies, Certifications, Release Date, Run Time, and Trailers -->
 <!-- Also has options for marking the movie on the Liked, Disliked, or Wish List lists -->
 <script>
+  import { getData } from "../js/apiHelpers";
   import MovieCertification from "./MovieCertification.svelte";
   import MovieDetailsPlaceholder from "./MovieDetailsPlaceholder.svelte";
   import MovieGenres from "./MovieGenres.svelte";
   import MovieRating from "./MovieRating.svelte";
   import MovieTrailers from "./MovieTrailers.svelte";
   import ImagePoster from "./ImagePoster.svelte";
-  import { apiOptions } from "../js/apiHelpers";
   import PageNotFound from "./PageNotFound.svelte";
   import DetailsBackground from "./DetailsBackground.svelte";
   import MovieReleaseDate from "./MovieReleaseDate.svelte";
@@ -32,12 +32,7 @@
     fullFetchUrl.searchParams.append(key, paramsObj[key]);
   }
 
-  let promise = fetch(fullFetchUrl, apiOptions).then((r) => {
-    if (!r.ok) {
-      throw new Error(r.status);
-    }
-    return r.json();
-  });
+  let promise = getData(fullFetchUrl);
 </script>
 
 <!-- Include the Movie Title in the page title -->
