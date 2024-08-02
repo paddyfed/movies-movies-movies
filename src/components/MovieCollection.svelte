@@ -2,7 +2,7 @@
 <!-- Purpose: To fetch and display the collection of movies as defined by a collection ID on a movie details page -->
 
 <script>
-  import { apiOptions } from "../js/apiHelpers";
+  import { getData } from "../js/apiHelpers";
   import MovieList from "../components/MovieList.svelte";
   import DetailsBackground from "./DetailsBackground.svelte";
   import PageNotFound from "./PageNotFound.svelte";
@@ -27,14 +27,7 @@
     fullFetchUrl.searchParams.append(key, paramsObj[key]);
   }
 
-  let promise = fetch(fullFetchUrl, apiOptions).then((r) => {
-    if (!r.ok) {
-      throw new Error(r.status);
-    }
-    return r.json();
-  });
-
-  let title = "Test";
+  let promise = getData(fullFetchUrl);
 </script>
 
 <!-- Include the collection name in the page title -->
