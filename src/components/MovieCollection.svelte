@@ -2,7 +2,7 @@
 <!-- Purpose: To fetch and display the collection of movies as defined by a collection ID on a movie details page -->
 
 <script>
-  import { getData } from "../js/apiHelpers";
+  import { buildFetchUrl, getData } from "../js/apiHelpers";
   import MovieList from "../components/MovieList.svelte";
   import DetailsBackground from "./DetailsBackground.svelte";
   import PageNotFound from "./PageNotFound.svelte";
@@ -15,17 +15,9 @@
 
   // Build up the URL and fetch the collection data from the API
   // https://api.themoviedb.org/3/collection/10?language=en-US
-  const fullFetchUrl = new URL(
-    `/3/collection/${collectionIdParam}`,
-    import.meta.env.PUBLIC_API_URL
-  );
-  const paramsObj = {
+  const fullFetchUrl = buildFetchUrl(`/3/collection/${collectionIdParam}`, {
     language: "en-US",
-  };
-
-  for (const key in paramsObj) {
-    fullFetchUrl.searchParams.append(key, paramsObj[key]);
-  }
+  });
 
   let promise = getData(fullFetchUrl);
 </script>
