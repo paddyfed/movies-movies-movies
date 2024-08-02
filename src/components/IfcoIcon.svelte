@@ -56,7 +56,6 @@
     <span
       class="fa-layers fa-fw fa-4x"
       title="IFCO Classification of {certification}"
-      aria-label="IFCO Classification of {certification}"
     >
       <i class={iconClass} style="color: {color};"></i>
       <span

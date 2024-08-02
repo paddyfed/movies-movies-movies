@@ -54,7 +54,6 @@
     <span
       class="fa-layers fa-fw fa-4x"
       title="BBFC Classification of {certification}"
-      aria-label="BBFC Classification of {certification}"
     >
       <i class={iconClass} style="color: {color};"></i>
       <span
