@@ -2,13 +2,15 @@
 <!-- Purpose: Gathers a list of movies by genre. Based on a Genre ID passed down through the API -->
 <script>
   import { findCurrentPage } from "../js/pagination";
+  import { getData } from "../js/apiHelpers";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import MovieList from "./MovieList.svelte";
-  import { apiOptions } from "../js/apiHelpers";
 
   const url = new URL(window.location.href);
   let currentPage = 1;
+  export let maxPages = 5;
+  export let genreId = 878;
 
   // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_replacestate
   history.replaceState(1, "", document.location.href);
@@ -18,14 +20,12 @@
       new URLSearchParams(window.location.search).get("page")
     );
   }
-  export let maxPages = 5;
-  export let genreId = 878;
 
   // build up the URL and fetch the info from the API
   // https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=878', options)
   const fetchUrl = "/3/discover/movie";
 
-  let fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
+  const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
 
   const paramsObj = {
     page: currentPage,
@@ -40,11 +40,9 @@
     fullFetchUrl.searchParams.append(key, paramsObj[key]);
   }
 
-  let promise = fetch(fullFetchUrl, apiOptions).then((r) => {
-    if (!r.ok) {
-      throw new Error(r.status);
-    }
-    return r.json();
+  let promise = getData(fullFetchUrl).then((result) => {
+    maxPages = result.total_pages < maxPages ? result.total_pages : maxPages;
+    return result;
   });
 
   // When a pagination button is clicked, move the current page and re-run the fetch of data
@@ -61,12 +59,7 @@
     // https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API#using_pushstate
     history.pushState(currentPage, "", `?page=${currentPage}`);
 
-    promise = fetch(fullFetchUrl, apiOptions).then((r) => {
-      if (!r.ok) {
-        throw new Error(r.status);
-      }
-      return r.json();
-    });
+    promise = getData(fullFetchUrl);
 
     // Scroll the browser window to bring the heading into view so the user does not have to manually scroll back up
     const element = document.querySelector(`#movies-by-genre-header`);
@@ -79,12 +72,7 @@
     if (event.state) {
       currentPage = event.state;
       fullFetchUrl.searchParams.set("page", event.state);
-      promise = fetch(fullFetchUrl, apiOptions).then((r) => {
-        if (!r.ok) {
-          throw new Error(r.status);
-        }
-        return r.json();
-      });
+      promise = getData(fullFetchUrl);
     }
   });
 </script>
@@ -95,13 +83,9 @@
 {:then data}
   <!-- When data is loaded, display the movies in a list -->
   <MovieList movies={data.results} />
-  <MovieScrollPagination
-    on:click={paginationClicked}
-    maxPages={data.total_pages < maxPages ? data.total_pages : maxPages}
-    {currentPage}
-  />
 {:catch error}
   <!-- Display the error if one occurs -->
   {error.message}
 {/await}
 <!-- Include pagination -->
+<MovieScrollPagination on:click={paginationClicked} {maxPages} {currentPage} />
