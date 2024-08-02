@@ -2,7 +2,7 @@
 <!-- Purpose: to fetch and display upcoming movies to users -->
 
 <script>
-  import { getData } from "../js/apiHelpers";
+  import { buildFetchUrl, getData } from "../js/apiHelpers";
   import { findCurrentPage } from "../js/pagination";
   import { toISODate } from "../js/dateHelpers";
   import MovieList from "./MovieList.svelte";
@@ -56,11 +56,7 @@
 
   // build up the URL and fetch data from the API
   // https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_date.gte=2024-07-24&primary_release_date.lte=2024-08-24&sort_by=popularity.desc&with_release_type=2|3
-  const fetchUrl = "/3/discover/movie";
-
-  let fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
-
-  const paramsObj = {
+  let fullFetchUrl = buildFetchUrl("/3/discover/movie", {
     include_adult: "false",
     include_video: "false",
     language: "en-US",
@@ -70,11 +66,7 @@
     sort_by: "popularity.desc",
     with_release_type: "2",
     with_original_language: "en",
-  };
-
-  for (const key in paramsObj) {
-    fullFetchUrl.searchParams.append(key, paramsObj[key]);
-  }
+  });
 
   let promise = getData(fullFetchUrl).then((result) => {
     maxPages = result.total_pages < maxPages ? result.total_pages : maxPages;

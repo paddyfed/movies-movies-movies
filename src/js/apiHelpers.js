@@ -1,5 +1,6 @@
 const token = import.meta.env.PUBLIC_API_ACCESS_TOKEN;
-export const apiOptions = {
+
+const apiOptions = {
   method: "GET",
   headers: {
     accept: "application/json",
@@ -20,4 +21,12 @@ export async function getData(fetchUrl) {
     console.error(error);
     throw new Error(error.message);
   }
+}
+
+export function buildFetchUrl(fetchUrl, paramsObj) {
+  const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
+  for (const key in paramsObj) {
+    fullFetchUrl.searchParams.append(key, paramsObj[key]);
+  }
+  return fullFetchUrl;
 }
