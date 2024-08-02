@@ -3,7 +3,7 @@
 <!-- Includes: Title, Descriptin, Poster, Genre(s), Production Companies, Certifications, Release Date, Run Time, and Trailers -->
 <!-- Also has options for marking the movie on the Liked, Disliked, or Wish List lists -->
 <script>
-  import { getData } from "../js/apiHelpers";
+  import { buildFetchUrl, getData } from "../js/apiHelpers";
   import MovieCertification from "./MovieCertification.svelte";
   import MovieDetailsPlaceholder from "./MovieDetailsPlaceholder.svelte";
   import MovieGenres from "./MovieGenres.svelte";
@@ -20,17 +20,10 @@
   );
 
   // Build up the URL and fetch movie data from the API
-  const fetchUrl = `/3/movie/${movieIdParam}`;
-  const paramsObj = {
+  const fullFetchUrl = buildFetchUrl(`/3/movie/${movieIdParam}`, {
     append_to_response: "videos,release_dates",
     language: "en-US",
-  };
-
-  const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
-
-  for (const key in paramsObj) {
-    fullFetchUrl.searchParams.append(key, paramsObj[key]);
-  }
+  });
 
   let promise = getData(fullFetchUrl);
 </script>
