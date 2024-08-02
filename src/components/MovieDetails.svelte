@@ -64,7 +64,7 @@
           <MovieCertification releaseDates={movie.release_dates.results} />
         </p>
         <p>
-          <MovieRating movieId={movieIdParam} />
+          <MovieRating {movie} />
         </p>
       </div>
       <div class="trailers mb-3">

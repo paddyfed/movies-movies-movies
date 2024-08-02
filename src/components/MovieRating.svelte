@@ -5,11 +5,11 @@
   import { capitalizeFirstLetter } from "../js/stringFormatHelpers";
 
   // MovieID is passed from the MovieDetails component
-  export let movieId;
+  export let movie;
 
-  // We read if there is any current rating for this movieId from localStorage. It should be one of "liked", "disliked, or "wishlist"
+  // We read if there is any current rating for this movie.id from localStorage. It should be one of "liked", "disliked, or "wishlist"
   // we populate corresponding variables to be true or false depending on what is laoded from localStorage to indicate when buttons have been clicked
-  let rating = localStorage.getItem(movieId);
+  let rating = localStorage.getItem(movie.id);
   $: liked = rating === "liked" ? true : false;
   $: disliked = rating === "disliked" ? true : false;
   $: wishlist = rating === "wishlist" ? true : false;
@@ -22,22 +22,22 @@
     // When the rating is already the same as the button that was clicked, then we will remove the item from localStorage
     // This has the affect of 'turning off' or 'de-selecting' the option that was already clicked
     if (rating === buttonClicked) {
-      localStorage.removeItem(movieId);
+      localStorage.removeItem(movie.id);
       displayToaster(
-        `Movie removed from ${buttonClicked === "wishlist" ? " Want to See " : capitalizeFirstLetter(rating)} list.`
+        `${movie.title} removed from ${buttonClicked === "wishlist" ? " Want to See " : capitalizeFirstLetter(rating)} list.`
       );
     }
     // Else, if the rating is not the same as the button that was clicked, we will update localStorage with the selected button
     // This has the affect of 'turning on' the option that was clicked while 'turning off' any other option that was clicked
     else {
-      localStorage.setItem(movieId, buttonClicked);
+      localStorage.setItem(movie.id, buttonClicked);
       displayToaster(
-        `Movie marked as ${buttonClicked === "wishlist" ? " Want to See" : capitalizeFirstLetter(buttonClicked)}.`
+        `${movie.title} added to ${buttonClicked === "wishlist" ? " Want to See" : capitalizeFirstLetter(buttonClicked)} list.`
       );
     }
 
     // update the rating variable so that svelte will update any UI elements
-    rating = localStorage.getItem(movieId);
+    rating = localStorage.getItem(movie.id);
   }
 </script>
 
