@@ -9,7 +9,6 @@
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
   import DatePicker from "./DatePicker.svelte";
-  import { get } from "svelte/store";
 
   const url = new URL(window.location.href);
 

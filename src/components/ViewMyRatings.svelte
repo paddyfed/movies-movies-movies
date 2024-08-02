@@ -1,7 +1,7 @@
 <!-- ViewWishList.svelte -->
 <!-- Purpose: Displays the movies that the user has Liked, Disliked, or put on the Wish List -->
 <script>
-  import { getData } from "../js/apiHelpers";
+  import { buildFetchUrl, getData } from "../js/apiHelpers";
   import MovieList from "./MovieList.svelte";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
 
@@ -29,21 +29,14 @@
   }
 
   async function convertFromMovieIdsToMovieList(list) {
-    const paramsObj = {
-      language: "en-US",
-    };
-
     // get the property names from the list. This will be an array of Movie IDs
     const movieIds = Object.getOwnPropertyNames(list);
 
     // get a list of URLs that we need to fetch later
     const fetchUrls = movieIds.map((movieId) => {
-      const fetchUrl = `/3/movie/${movieId}`;
-      const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
-
-      for (const key in paramsObj) {
-        fullFetchUrl.searchParams.append(key, paramsObj[key]);
-      }
+      const fullFetchUrl = buildFetchUrl(`/3/movie/${movieId}`, {
+        language: "en-US",
+      });
       return fullFetchUrl;
     });
 
