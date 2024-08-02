@@ -2,7 +2,7 @@
 <!-- Purpose: To fetch and display search results from the nav bar search or the main (index) page search. -->
 <script>
   import { findCurrentPage } from "../js/pagination";
-  import { getData } from "../js/apiHelpers";
+  import { buildFetchUrl, getData } from "../js/apiHelpers";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import ImagePoster from "./ImagePoster.svelte";
 
@@ -26,18 +26,12 @@
   }
 
   // Build up the URL and fetch the search results from the API
-  const paramsObj = {
+  let fullFetchUrl = buildFetchUrl(`/3/search/movie`, {
     query: queryParam,
     page: currentPage,
     include_adult: false,
     language: "en-US",
-  };
-
-  let fullFetchUrl = new URL(`/3/search/movie`, import.meta.env.PUBLIC_API_URL);
-
-  for (const key in paramsObj) {
-    fullFetchUrl.searchParams.append(key, paramsObj[key]);
-  }
+  });
 
   let promise = getData(fullFetchUrl).then((result) => {
     maxPages = result.total_pages < maxPages ? result.total_pages : maxPages;
