@@ -1,7 +1,7 @@
 <!-- ViewWishList.svelte -->
 <!-- Purpose: Displays the movies that the user has Liked, Disliked, or put on the Wish List -->
 <script>
-  import { apiOptions } from "../js/apiHelpers";
+  import { getData } from "../js/apiHelpers";
   import MovieList from "./MovieList.svelte";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
 
@@ -49,7 +49,7 @@
 
     // create an array of 'fetch' for each fetch URLs
     const fetchArray = fetchUrls.map((fetchUrl) => {
-      return fetch(fetchUrl, apiOptions).then((response) => response.json());
+      return getData(fetchUrl);
     });
 
     try {
