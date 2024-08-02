@@ -2,10 +2,10 @@
 <!-- Purpose: Displays the lists of popular, Now Playing, or Top Rated movies from the main (index) page -->
 <script>
   import { findCurrentPage } from "../js/pagination";
+  import { getData } from "../js/apiHelpers";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import MovieList from "./MovieList.svelte";
-  import { apiOptions } from "../js/apiHelpers";
 
   // Pass in the list that we want to display
   export let movieList;
@@ -28,11 +28,9 @@
     fullFetchUrl.searchParams.append(key, paramsObj[key]);
   }
 
-  let promise = fetch(fullFetchUrl, apiOptions).then((r) => {
-    if (!r.ok) {
-      throw new Error(r.status);
-    }
-    return r.json();
+  let promise = getData(fullFetchUrl).then((result) => {
+    maxPages = result.total_pages < maxPages ? result.total_pages : maxPages;
+    return result;
   });
 
   // When a pagination button is clicked, move the current page and re-run the fetch of data
@@ -45,12 +43,7 @@
 
     fullFetchUrl.searchParams.set("page", currentPage);
 
-    promise = fetch(fullFetchUrl, apiOptions).then((r) => {
-      if (!r.ok) {
-        throw new Error(r.status);
-      }
-      return r.json();
-    });
+    promise = getData(fullFetchUrl);
 
     // Scroll the browser window to bring the heading into view so the user does not have to manually scroll back up
     const element = document.querySelector(`#movie-list-${movieList}`);
@@ -64,13 +57,9 @@
 {:then data}
   <!-- When data is loaded, display the movies in a list -->
   <MovieList movies={data.results} />
-  <MovieScrollPagination
-    on:click={paginationClicked}
-    maxPages={data.total_pages < maxPages ? data.total_pages : maxPages}
-    {currentPage}
-  />
 {:catch error}
   <!-- Display the error if one occurs -->
   {error.message}
 {/await}
 <!-- Include pagination -->
+<MovieScrollPagination on:click={paginationClicked} {maxPages} {currentPage} />
