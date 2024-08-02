@@ -2,7 +2,7 @@
 <!-- Purpose: Gathers a list of movies by genre. Based on a Genre ID passed down through the API -->
 <script>
   import { findCurrentPage } from "../js/pagination";
-  import { getData } from "../js/apiHelpers";
+  import { buildFetchUrl, getData } from "../js/apiHelpers";
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
   import MovieScrollPagination from "./MovieScrollPagination.svelte";
   import MovieList from "./MovieList.svelte";
@@ -23,22 +23,14 @@
 
   // build up the URL and fetch the info from the API
   // https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=878', options)
-  const fetchUrl = "/3/discover/movie";
-
-  const fullFetchUrl = new URL(fetchUrl, import.meta.env.PUBLIC_API_URL);
-
-  const paramsObj = {
+  const fullFetchUrl = buildFetchUrl("/3/discover/movie", {
     page: currentPage,
     include_adult: "false",
     language: "en-US",
     include_video: "false",
     sort_by: "popularity.desc",
     with_genres: genreId,
-  };
-
-  for (const key in paramsObj) {
-    fullFetchUrl.searchParams.append(key, paramsObj[key]);
-  }
+  });
 
   let promise = getData(fullFetchUrl).then((result) => {
     maxPages = result.total_pages < maxPages ? result.total_pages : maxPages;
