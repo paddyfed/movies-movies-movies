@@ -20,7 +20,7 @@
         on:click|preventDefault
         disabled={currentPage === 1}
       >
-        <i class="fa fa-fw fa-caret-left" aria-label="Previous"></i>
+        <i class="fa fa-fw fa-caret-left"></i>
       </button>
     </li>
     {#if maxPages > 0}
@@ -47,7 +47,7 @@
         on:click|preventDefault
         disabled={currentPage === maxPages}
       >
-        <i class="fa fa-fw fa-caret-right" aria-label="Next"></i>
+        <i class="fa fa-fw fa-caret-right"></i>
       </button>
     </li>
   </ul>
