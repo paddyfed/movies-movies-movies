@@ -88,7 +88,7 @@
   <!-- https://getbootstrap.com/docs/5.3/utilities/flex/#media-object -->
   {#if Array.isArray(data.results) && data.results.length !== 0}
     {#each data.results as movie}
-      <div class="d-flex mb-3">
+      <section class="d-flex mb-3">
         <div class="flex-shrink-0">
           <a href={import.meta.env.BASE_URL + "/movie?movieId=" + movie.id}>
             <ImagePoster
@@ -105,7 +105,7 @@
           </h2>
           <p>{movie.overview}</p>
         </div>
-      </div>
+      </section>
     {/each}
   {:else}
     <div class="mb-3">No results returned</div>

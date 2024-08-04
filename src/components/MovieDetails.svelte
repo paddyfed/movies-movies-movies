@@ -41,17 +41,19 @@
 {:then movie}
   <!-- When data is loaded, display the movie details -->
   <DetailsBackground backdropPath={movie.backdrop_path}>
+    <h1 class="mb-3">{movie.title}</h1>
     <section>
-      <h1 class="mb-3">{movie.title}</h1>
       <div class="poster mb-3">
-        <ImagePoster
-          posterTitle={movie.title}
-          posterPath={movie.poster_path}
-          imgPosterSize="w342"
-          imgFluid
-          width="342"
-          height="513"
-        />
+        <h2>
+          <ImagePoster
+            posterTitle={movie.title}
+            posterPath={movie.poster_path}
+            imgPosterSize="w342"
+            imgFluid
+            width="342"
+            height="513"
+          />
+        </h2>
       </div>
       <div class="details">
         <p>{movie.overview}</p>

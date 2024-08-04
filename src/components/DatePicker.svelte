@@ -7,7 +7,6 @@
   // This checks whether the showPicker() function is available in the current browser
   // https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/showPicker#feature_detection
   const showPickerAllowed = "showPicker" in HTMLInputElement.prototype;
-  const today = new Date();
   export let id;
   export let date;
   export let min;
