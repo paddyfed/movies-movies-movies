@@ -43,7 +43,7 @@
   <DetailsBackground backdropPath={movie.backdrop_path}>
     <section>
       <h1 class="mb-3">{movie.title}</h1>
-      <p class="poster">
+      <div class="poster mb-3">
         <ImagePoster
           posterTitle={movie.title}
           posterPath={movie.poster_path}
@@ -52,7 +52,7 @@
           width="342"
           height="513"
         />
-      </p>
+      </div>
       <div class="details">
         <p>{movie.overview}</p>
         <MovieReleaseDate {movie} />
