@@ -18,7 +18,7 @@
     <add-to-calendar-button
       name={movie.title}
       startDate={movie.release_date}
-      options="'Google','Apple'"
+      options="'Google','Apple','Outlook.com','Yahoo','iCal'"
       size="1"
       inline="true"
       hideBranding="true"
