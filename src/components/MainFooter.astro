@@ -5,20 +5,25 @@ import tmDbLogo from "../images/TmDb_Logo.svg";
 
 <div class="container">
   <div
-    class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
+    class="row justify-content-between align-items-center py-3 my-4 border-top"
   >
-    <div class="d-flex align-items-center">
-      <span class="mb-3 mb-md-0">
-        © {new Date().getFullYear()} Company, Inc
+    <div class="col-md-3 mb-3 align-items-center">
+      <span>
+        © {new Date().getFullYear()} Paddy O'Hara
       </span>
     </div>
-    <div class="d-flex align-items-center">
-      <span class="mb-3 mb-md-0">
-        <span class="me-2">Information and Images from </span>
-        <a href="https://www.themoviedb.org/">
-          <Image src={tmDbLogo} alt="themoviedb.org" width="80" height="50" />
-        </a>
-      </span>
+    <div class="col-md-3 mb-3 align-items-center">
+      <div class="d-flex align-items-center">
+        <div class="me-3">
+          This product uses the TMDB API but is not endorsed or certified by
+          TMDB.
+        </div>
+        <div>
+          <a href="https://www.themoviedb.org/">
+            <Image src={tmDbLogo} alt="themoviedb.org" width="80" height="50" />
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
