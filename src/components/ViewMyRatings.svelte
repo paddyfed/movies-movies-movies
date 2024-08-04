@@ -60,31 +60,37 @@
 </script>
 
 <!-- Display all the movies that have been marked as 'Liked' -->
-<h2 class="mb-3">Liked</h2>
-{#await likedListPromise}
-  <MovieScrollLoadingSpinner />
-{:then data}
-  <MovieList movies={data} />
-{:catch error}
-  {error.message}
-{/await}
+<section>
+  <h2 class="mb-3">Liked</h2>
+  {#await likedListPromise}
+    <MovieScrollLoadingSpinner />
+  {:then data}
+    <MovieList movies={data} />
+  {:catch error}
+    {error.message}
+  {/await}
+</section>
 
 <!-- Display all the movies that have been marked as 'Disliked' -->
-<h2 class="mb-3">Disliked</h2>
-{#await dislikedListPromise}
-  <MovieScrollLoadingSpinner />
-{:then data}
-  <MovieList movies={data} />
-{:catch error}
-  {error.message}
-{/await}
+<section>
+  <h2 class="mb-3">Disliked</h2>
+  {#await dislikedListPromise}
+    <MovieScrollLoadingSpinner />
+  {:then data}
+    <MovieList movies={data} />
+  {:catch error}
+    {error.message}
+  {/await}
+</section>
 
 <!-- Display all the movies that have been marked for the 'WishList' -->
-<h2 class="mb-3">Want to See</h2>
-{#await wishListPromise}
-  <MovieScrollLoadingSpinner />
-{:then data}
-  <MovieList movies={data} />
-{:catch error}
-  {error.message}
-{/await}
+<section>
+  <h2 class="mb-3">Want to See</h2>
+  {#await wishListPromise}
+    <MovieScrollLoadingSpinner />
+  {:then data}
+    <MovieList movies={data} />
+  {:catch error}
+    {error.message}
+  {/await}
+</section>
