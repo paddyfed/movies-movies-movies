@@ -5,19 +5,19 @@
   import MovieScrollLoadingSpinner from "./MovieScrollLoadingSpinner.svelte";
 </script>
 
+<h1 class="placeholder-glow mb-3">
+  <span class="placeholder col-12">
+    <span class="visually-hidden">Loading</span>
+  </span>
+</h1>
 <section
   style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)); background-repeat: no-repeat; background-size: cover;"
   class="rounded p-3"
 >
-  <h1 class="placeholder-glow mb-3">
-    <span class="placeholder col-12">
-      <span class="visually-hidden">Loading</span>
-    </span>
-  </h1>
   <div class="placeholder-glow poster">
-    <p class="poster-placeholder">
+    <h2 class="poster-placeholder">
       <i class="fas fa-fw fa-spinner fa-spin"></i>
-    </p>
+    </h2>
   </div>
   <div class="placeholder-glow details container">
     <div class="row">

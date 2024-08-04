@@ -4,13 +4,13 @@
   export let numItems = 20;
 </script>
 
-<section class="mb-3">
+<div class="mb-3">
   <ul>
     {#each Array(numItems) as _}
       <li><i class="fas fa-fw fa-spinner fa-spin"></i></li>
     {/each}
   </ul>
-</section>
+</div>
 
 <style>
   ul {
@@ -38,7 +38,7 @@
     justify-content: center;
   }
 
-  section {
+  div {
     overflow-y: auto;
   }
 </style>
