@@ -65,6 +65,15 @@ const URL = Astro.url.pathname.split("/")[2];
             Settings
           </a>
         </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            class:list={{ active: URL === "credits" }}
+            href=`${import.meta.env.BASE_URL}/credits`
+          >
+            Credits
+          </a>
+        </li>
       </ul>
       <MainNavBarSearch client:only="svelte" URL={URL} />
     </div>
