@@ -48,6 +48,7 @@
   on:click|preventDefault={processRatingClick}
   aria-label="Like"
   data-target="liked"
+  title="Like"
 >
   <i class="fa-regular fa-thumbs-up fa-4x fa-fw"></i>
 </button>
@@ -56,6 +57,7 @@
   on:click|preventDefault={processRatingClick}
   aria-label="Dislike"
   data-target="disliked"
+  title="Dislike"
 >
   <i class="fa-regular fa-thumbs-down fa-flip-horizontal fa-4x fa-fw"></i>
 </button>
@@ -64,6 +66,7 @@
   on:click|preventDefault={processRatingClick}
   aria-label="Want to See"
   data-target="wishlist"
+  title="Want to See"
 >
   <i class="fa-regular fa-heart fa-4x fa-fw"></i>
 </button>
