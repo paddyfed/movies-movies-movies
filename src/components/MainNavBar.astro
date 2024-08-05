@@ -2,12 +2,13 @@
 import MainNavBarSearch from "./MainNavBarSearch.svelte";
 import BrandImage from "../images/MoviesMoviesMovies_logo_path.svg";
 import Image from "astro/components/Image.astro";
-const URL = Astro.url.pathname.split("/")[2];
+const URL = Astro.url.pathname;
+const BASE_URL = import.meta.env.BASE_URL;
 ---
 
 <nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" href={import.meta.env.BASE_URL}>
+    <a class="navbar-brand" href={BASE_URL}>
       <Image
         src={BrandImage}
         alt="Movies Movies Movies"
@@ -32,8 +33,8 @@ const URL = Astro.url.pathname.split("/")[2];
         <li class="nav-item">
           <a
             class="nav-link"
-            class:list={{ active: URL === "genre" }}
-            href=`${import.meta.env.BASE_URL}/genre`
+            class:list={{ active: URL === `${BASE_URL}/genre` }}
+            href=`${BASE_URL}/genre`
           >
             Genre
           </a>
@@ -41,8 +42,8 @@ const URL = Astro.url.pathname.split("/")[2];
         <li class="nav-item">
           <a
             class="nav-link"
-            class:list={{ active: URL === "upcoming" }}
-            href=`${import.meta.env.BASE_URL}/upcoming`
+            class:list={{ active: URL === `${BASE_URL}/upcoming` }}
+            href=`${BASE_URL}/upcoming`
           >
             Upcoming
           </a>
@@ -50,8 +51,8 @@ const URL = Astro.url.pathname.split("/")[2];
         <li class="nav-item">
           <a
             class="nav-link"
-            class:list={{ active: URL === "myratings" }}
-            href=`${import.meta.env.BASE_URL}/myratings`
+            class:list={{ active: URL === `${BASE_URL}/myratings` }}
+            href=`${BASE_URL}/myratings`
           >
             My Ratings
           </a>
@@ -59,8 +60,8 @@ const URL = Astro.url.pathname.split("/")[2];
         <li class="nav-item">
           <a
             class="nav-link"
-            class:list={{ active: URL === "settings" }}
-            href=`${import.meta.env.BASE_URL}/settings`
+            class:list={{ active: URL === `${BASE_URL}/settings` }}
+            href=`${BASE_URL}/settings`
           >
             Settings
           </a>
@@ -68,14 +69,14 @@ const URL = Astro.url.pathname.split("/")[2];
         <li class="nav-item">
           <a
             class="nav-link"
-            class:list={{ active: URL === "credits" }}
-            href=`${import.meta.env.BASE_URL}/credits`
+            class:list={{ active: URL === `${BASE_URL}/credits` }}
+            href=`${BASE_URL}/credits`
           >
             Credits
           </a>
         </li>
       </ul>
-      <MainNavBarSearch client:only="svelte" URL={URL} />
+      <MainNavBarSearch client:only="svelte" />
     </div>
   </div>
 </nav>

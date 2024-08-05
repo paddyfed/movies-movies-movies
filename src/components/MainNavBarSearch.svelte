@@ -3,7 +3,8 @@
 <script>
   let value = new URLSearchParams(window.location.search).get("query");
   let searchValue;
-  export let URL;
+  let URL = window.location.pathname;
+  const BASE_URL = import.meta.env.BASE_URL;
 
   // Added this event handler to capture keybaord events as there was an issue
   // when the Enter key is pressed when entering a search query
@@ -13,7 +14,7 @@
       case 13:
         e.preventDefault();
         searchValue = value;
-        window.location.href = `${import.meta.env.BASE_URL}/search?query=${encodeURIComponent(
+        window.location.href = `${BASE_URL}/search?query=${encodeURIComponent(
           searchValue
         )}`;
         break;
@@ -21,7 +22,7 @@
   }
 </script>
 
-{#if URL != ""}
+{#if URL != BASE_URL}
   <form class="d-flex" role="search" id="searchForm" name="searchForm">
     <input
       class="form-control me-2"
@@ -35,9 +36,7 @@
     />
     <a
       class="btn btn-primary"
-      href="{import.meta.env.BASE_URL}/search?query={encodeURIComponent(
-        searchValue
-      )}"
+      href="{BASE_URL}/search?query={encodeURIComponent(searchValue)}"
       on:click={() => (searchValue = value)}>Search</a
     >
   </form>
