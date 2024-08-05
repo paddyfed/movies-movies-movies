@@ -22,6 +22,9 @@
   }
 </script>
 
+<p>{URL}</p>
+<p>{BASE_URL}</p>
+
 {#if URL != BASE_URL}
   <form class="d-flex" role="search" id="searchForm" name="searchForm">
     <input
