@@ -3,7 +3,7 @@
 <script>
   let value = new URLSearchParams(window.location.search).get("query");
   let searchValue;
-  let URL = window.location.pathname;
+  const URL = window.location.pathname;
   const BASE_URL = import.meta.env.BASE_URL;
 
   // Added this event handler to capture keybaord events as there was an issue
