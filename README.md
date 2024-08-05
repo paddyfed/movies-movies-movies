@@ -14,12 +14,13 @@ Users can update their date preference in the settings section and these date pr
 
 You will need an API Read Access Token from [https://www.themoviedb.org/](https://www.themoviedb.org/)
 
-Code repository is on GitHub: [https://github.com/paddyfed/movies-movies-movies](https://github.com/paddyfed/movies-movies-movies)
-Clone the repository and navigate to the repository folder in the terminal
-Run `npm install`
-Copy the API Read Access Token to `PUBLIC_API_ACCESS_TOKEN` in a .env file
-Add `https://api.themoviedb.org/` to `PUBLIC_API_URL` in the .env file
-Run `npm run dev` and the site should be up and running on `localhost:4321/movies-movies-movies`
+Code repository is on GitHub: [https://github.com/paddyfed/movies-movies-movies](https://github.com/paddyfed/movies-movies-movies)  
+Clone the repository and navigate to the repository folder in the terminal  
+Run `npm install`  
+Copy the API Read Access Token to `PUBLIC_API_ACCESS_TOKEN` in a .env file  
+Add `https://api.themoviedb.org/` to `PUBLIC_API_URL` in the .env file  
+Run `npm run dev` and the site should be up and running on `localhost:4321/movies-movies-movies`  
+If deploying to GitHub Pages, update the `site` and `base` settings in `astro.config.mjs`
 
 ## Site Tree
 
