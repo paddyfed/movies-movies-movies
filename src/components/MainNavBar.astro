@@ -2,12 +2,11 @@
 import MainNavBarSearch from "./MainNavBarSearch.svelte";
 import BrandImage from "../images/MoviesMoviesMovies_logo_path.svg";
 import Image from "astro/components/Image.astro";
+import MainNavBarLink from "./MainNavBarLink.astro";
 const URL = Astro.url.pathname;
 const BASE_URL = import.meta.env.BASE_URL;
 ---
 
-<p>{URL}</p>
-<p>{BASE_URL}</p>
 <nav class="navbar navbar-expand-lg">
   <div class="container">
     <a class="navbar-brand" href={BASE_URL}>
@@ -33,49 +32,19 @@ const BASE_URL = import.meta.env.BASE_URL;
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a
-            class="nav-link"
-            class:list={{ active: URL === `${BASE_URL}/genre` }}
-            href=`${BASE_URL}/genre`
-          >
-            Genre
-          </a>
+          <MainNavBarLink activeUrl="genre">Genre</MainNavBarLink>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            class:list={{ active: URL === `${BASE_URL}/upcoming` }}
-            href=`${BASE_URL}/upcoming`
-          >
-            Upcoming
-          </a>
+          <MainNavBarLink activeUrl="upcoming"> Upcoming</MainNavBarLink>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            class:list={{ active: URL === `${BASE_URL}/myratings` }}
-            href=`${BASE_URL}/myratings`
-          >
-            My Ratings
-          </a>
+          <MainNavBarLink activeUrl="myratings"> My Ratings</MainNavBarLink>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            class:list={{ active: URL === `${BASE_URL}/settings` }}
-            href=`${BASE_URL}/settings`
-          >
-            Settings
-          </a>
+          <MainNavBarLink activeUrl="settings"> Settings</MainNavBarLink>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            class:list={{ active: URL === `${BASE_URL}/credits` }}
-            href=`${BASE_URL}/credits`
-          >
-            Credits
-          </a>
+          <MainNavBarLink activeUrl="credits"> Credits</MainNavBarLink>
         </li>
       </ul>
       <MainNavBarSearch client:only="svelte" />
