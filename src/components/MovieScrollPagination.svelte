@@ -9,7 +9,7 @@
 
 <!-- Uses BootStrap pagination with FontAwesome icons for the arrows -->
 <!-- https://getbootstrap.com/docs/5.3/components/pagination/ -->
-<nav aria-label="Pagination" class="mb-3">
+<nav aria-label="pagination" class="mb-3">
   <ul class="pagination">
     <li class="page-item">
       <!-- Previous button is disabled when it is the first page -->

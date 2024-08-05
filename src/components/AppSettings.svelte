@@ -78,7 +78,7 @@
   </div>
   <div class="mb-3">
     <button
-      type="button"
+      type="submit"
       class="btn btn-secondary"
       on:click={resetLocalStorage}
     >
